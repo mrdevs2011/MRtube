@@ -1,0 +1,1208 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   ADMIN PANEL — Users bo'limi
+   Barcha variable'lar theme.css bilan mos (--line, --bg2, --blue, ...)
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+.users-admin-hdr {
+  padding: 20px 16px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.users-admin-hdr h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 4px;
+  letter-spacing: -0.3px;
+}
+.users-admin-sub {
+  font-size: 0.82rem;
+  color: var(--text3);
+  margin: 0;
+}
+
+.users-admin-list {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 80px;
+}
+
+/* ── Row ─────────────────────────────────────────────────────────────── */
+.ua-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.15s;
+}
+.ua-row:hover {
+  background: var(--bg3);
+}
+
+/* Delete btn — hover'da chiqadi */
+.ua-delete-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: #200E15;
+  color: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.ua-row:hover .ua-delete-btn { opacity: 1; }
+.ua-delete-btn:hover { background: var(--red-glow); }
+
+/* Actions paneli */
+.ua-actions {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-right: 44px;
+}
+
+/* ── Avatar ──────────────────────────────────────────────────────────── */
+.ua-avi {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  position: relative;
+  border: 1.5px solid var(--line2);
+  background: var(--bg4);
+}
+.ua-avi-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.ua-avi-placeholder {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--blue3), var(--blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ── Info ────────────────────────────────────────────────────────────── */
+.ua-info {
+  flex: 1;
+  min-width: 0;
+}
+.ua-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 1px;
+}
+.ua-uname {
+  font-size: 0.78rem;
+  color: var(--blue);
+  font-family: var(--mono);
+  margin-bottom: 1px;
+  overflow-wrap: anywhere;
+}
+.ua-date {
+  font-size: 0.73rem;
+  color: var(--text3);
+  margin-top: 2px;
+  font-family: var(--mono);
+  overflow-wrap: anywhere;
+}
+.ua-email {
+  font-size: 0.73rem;
+  color: var(--text3);
+  font-family: var(--mono);
+  margin-top: 1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ua-uid {
+  font-size: 0.68rem;
+  color: var(--text4);
+  font-family: var(--mono);
+  margin-top: 1px;
+  overflow-wrap: anywhere;
+}
+.ua-extra {
+  font-size: 0.73rem;
+  color: var(--text3);
+  margin-top: 3px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.ua-last-msg {
+  font-size: 0.72rem;
+  color: var(--text3);
+  margin-top: 2px;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+.ua-status { margin-top: 5px; }
+
+/* ── Badges ──────────────────────────────────────────────────────────── */
+.ua-badge {
+  display: inline-block;
+  font-size: 0.70rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+  letter-spacing: 0.1px;
+}
+.ua-badge--approved {
+  background: #132421;
+  color: var(--green);
+  border: 1px solid #1B392E;
+}
+.ua-badge--pending {
+  background: #291F19;
+  color: var(--amber);
+  border: 1px solid #423021;
+}
+.ua-badge--rejected {
+  background: var(--red-glow);
+  color: var(--red);
+  border: 1px solid #3B1F2C;
+}
+.ua-badge--legacy {
+  background: var(--bg4);
+  color: var(--text3);
+  border: 1px solid var(--line2);
+}
+.ua-badge--blocked {
+  background: var(--red-glow);
+  color: var(--red);
+  border: 1px solid #3B1F2C;
+}
+
+/* ── Action buttons ──────────────────────────────────────────────────── */
+.ua-approve-btn,
+.ua-reject-btn {
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 6px 13px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s, background 0.15s;
+  font-family: var(--font);
+  letter-spacing: -0.1px;
+}
+.ua-approve-btn {
+  background: linear-gradient(135deg, var(--blue3), var(--blue));
+  color: #fff;
+  box-shadow: 0 2px 8px var(--blue-glow2);
+}
+.ua-approve-btn:hover   { opacity: 1; }
+.ua-approve-btn:disabled { opacity: 1; cursor: not-allowed; }
+
+.ua-reject-btn {
+  background: var(--red-glow);
+  color: var(--red);
+  border: 1px solid #371D29;
+}
+.ua-reject-btn:hover    { background: #371D29; }
+.ua-reject-btn:disabled { opacity: 1; cursor: not-allowed; }
+
+/* ── Block / Unblock buttons ─────────────────────────────────────────── */
+.ua-block-btn,
+.ua-unblock-btn {
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 6px 13px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s, background 0.15s;
+  white-space: nowrap;
+  font-family: var(--font);
+}
+.ua-block-btn {
+  background: var(--red-glow);
+  color: var(--red);
+  border: 1px solid #371D29;
+}
+.ua-block-btn:hover { background: #371D29; }
+
+.ua-unblock-btn {
+  background: var(--green-glow);
+  color: var(--green);
+  border: 1px solid #19332A;
+}
+.ua-unblock-btn:hover { background: #19332A; }
+
+/* Bloklangan row */
+.ua-row--blocked { opacity: 1; }
+.ua-avi-blocked-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  font-size: 0.75rem;
+  line-height: 1;
+}
+.ua-date--blocked { color: var(--red) !important; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DELETE CONFIRM MODAL
+   ═══════════════════════════════════════════════════════════════════════ */
+.ua-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #030305;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.ua-modal-overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+.ua-modal {
+  background: var(--bg2);
+  border: 1px solid var(--line2);
+  border-radius: 20px;
+  padding: 28px 24px 22px;
+  max-width: 340px;
+  width: 100%;
+  text-align: center;
+  transform: scale(0.93);
+  transition: transform 0.22s var(--ease, cubic-bezier(.25,.8,.25,1));
+  box-shadow: 0 24px 64px #040407;
+}
+.ua-modal-overlay.show .ua-modal { transform: scale(1); }
+.ua-modal-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+.ua-modal-icon svg { display: block; }
+.ua-modal-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 10px;
+  letter-spacing: -0.2px;
+}
+.ua-modal-body {
+  font-size: 0.88rem;
+  color: var(--text2);
+  line-height: 1.65;
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+}
+.ua-modal-body strong { color: var(--text); overflow-wrap: anywhere; }
+.ua-modal-warn {
+  font-size: 0.78rem;
+  color: var(--red);
+  display: block;
+  margin-top: 6px;
+}
+.ua-modal-btns {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.ua-modal-cancel,
+.ua-modal-confirm {
+  flex: 1;
+  padding: 11px 0;
+  border-radius: 10px;
+  border: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, background 0.15s;
+  font-family: var(--font);
+}
+.ua-modal-cancel {
+  background: var(--bg4);
+  color: var(--text);
+  border: 1px solid var(--line2);
+}
+.ua-modal-cancel:hover { background: var(--bg5); }
+
+.ua-modal-confirm { background: var(--red); color: #fff; }
+.ua-modal-confirm:hover   { opacity: 1; }
+.ua-modal-confirm:disabled { opacity: 1; cursor: not-allowed; }
+
+/* Modal variants */
+.ua-modal-confirm--danger { background: var(--red); color: #fff; }
+.ua-modal-confirm--danger:hover { opacity: 1; }
+.ua-modal-confirm--warn   { background: var(--amber); color: #fff; }
+.ua-modal-confirm--warn:hover   { opacity: 1; }
+.ua-modal-confirm--safe   { background: var(--green); color: #fff; }
+.ua-modal-confirm--safe:hover   { opacity: 1; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ADMIN: PAROL BILAN OCHISH
+   ═══════════════════════════════════════════════════════════════════════ */
+.ua-locked-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  background: var(--bg3);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 13px;
+  color: var(--text2);
+  overflow-wrap: anywhere;
+}
+.ua-unlock-banner-btn {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--blue3), var(--blue));
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: opacity 0.15s;
+}
+.ua-unlock-banner-btn:hover { opacity: 1; }
+
+.ua-row--locked { cursor: pointer; }
+.ua-row--locked:hover { background: var(--bg3); }
+.ua-avi-img--blurred { filter: blur(6px); }
+
+.ua-pwd-input {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--line2);
+  background: var(--bg3);
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
+  font-family: var(--font);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+}
+.ua-pwd-input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-glow2);
+}
+.ua-pwd-input::placeholder { color: var(--text3); }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   USER DETAIL MODAL — "User malumotlari" panel
+   5 bo'lim: 1) Konteyner/o'lcham  2) Sarlavha  3) Tablar
+             4) Tana (maydon kartalari + tarix grid)  5) Footer
+   ═══════════════════════════════════════════════════════════════════════ */
+.ua-history-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--bg4);
+  color: var(--text);
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font);
+  border: 1px solid var(--line2);
+  transition: background 0.15s;
+}
+.ua-history-btn:hover { background: var(--bg5); }
+
+/* ═══ 1/5 — MODAL KONTEYNERI: joylashuv va kenglik (mobil → katta desktop) ═══ */
+.ua-detail-modal {
+  width: min(560px, 94vw);
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#uaDetailModal.ua-modal-overlay {
+  padding-top:    calc(var(--hdr, 52px) + 12px);
+  padding-bottom: calc(var(--nav, 54px) + env(safe-area-inset-bottom) + 12px);
+  padding-left:   14px;
+  padding-right:  14px;
+  align-items: center;
+}
+#uaDetailModal .ua-detail-modal {
+  width: min(560px, 94vw);
+  max-height: calc(100dvh - var(--hdr, 52px) - var(--nav, 54px) - env(safe-area-inset-bottom) - 24px);
+  padding: 22px 20px 16px;
+  border-radius: 20px;
+  text-align: left;
+}
+
+/* Juda kichik telefonlar — joy tejaymiz */
+@media (max-width: 380px) {
+  #uaDetailModal .ua-detail-modal { padding: 18px 16px 14px; border-radius: 16px; }
+}
+
+/* Planshet / kichik oyna */
+@media (min-width: 640px) {
+  #uaDetailModal .ua-detail-modal {
+    width: min(660px, 92vw);
+    padding: 26px 26px 18px;
+  }
+}
+
+/* Desktop — sezilarli darajada kattalashadi va kengayadi */
+@media (min-width: 768px) {
+  #uaDetailModal.ua-modal-overlay {
+    padding-left:   calc(var(--sidebar, 68px) + 24px);
+    padding-right:  24px;
+    padding-top:    28px;
+    padding-bottom: 28px;
+  }
+  #uaDetailModal .ua-detail-modal {
+    width: min(820px, calc(100vw - var(--sidebar, 68px) - 64px));
+    max-height: calc(100dvh - 56px);
+    padding: 32px 36px 22px;
+    border-radius: 24px;
+  }
+}
+
+/* Katta desktop — yanada keng va qulay */
+@media (min-width: 1024px) {
+  #uaDetailModal .ua-detail-modal {
+    width: min(960px, calc(100vw - var(--sidebar, 68px) - 96px));
+    max-height: calc(100dvh - 72px);
+    padding: 36px 40px 24px;
+  }
+}
+@media (min-width: 1280px) {
+  #uaDetailModal .ua-detail-modal {
+    width: min(1080px, calc(100vw - var(--sidebar, 68px) - 140px));
+  }
+}
+
+#uaDetailModal .ua-modal-title { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+@media (min-width: 768px) {
+  #uaDetailModal .ua-modal-title { font-size: 21px; font-weight: 800; }
+}
+
+/* ═══ 2/5 — SARLAVHA: avatar + nom ════════════════════════════════════ */
+.ua-detail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  gap: 12px;
+}
+.ua-detail-avi {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--bg4);
+  border: 2px solid var(--line2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text);
+  overflow: hidden;
+}
+.ua-detail-avi img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (min-width: 768px) {
+  .ua-detail-head {
+    margin-bottom: 6px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  .ua-detail-avi {
+    width: 64px;
+    height: 64px;
+    font-size: 22px;
+    border-width: 3px;
+    box-shadow: 0 4px 14px #07070D;
+  }
+}
+
+/* ═══ 3/5 — TABLAR: mobilda gorizontal scroll, desktopda teng kenglik ═ */
+.ua-detail-tabs {
+  display: flex;
+  gap: 6px;
+  margin: 14px 0 4px;
+  padding: 4px;
+  background: var(--bg3);
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.ua-detail-tabs::-webkit-scrollbar { display: none; }
+.ua-detail-tab {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 9px 13px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text3);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.15s, color 0.15s;
+}
+.ua-detail-tab:hover { background: var(--bg4); color: var(--text2); }
+.ua-detail-tab.active {
+  background: var(--blue);
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px var(--blue-glow2);
+}
+
+@media (min-width: 640px) {
+  .ua-detail-tabs { overflow-x: visible; }
+  .ua-detail-tab { flex: 1; text-align: center; white-space: normal; }
+}
+@media (min-width: 768px) {
+  .ua-detail-tabs { margin: 20px 0 6px; padding: 5px; border-radius: 14px; gap: 8px; }
+  .ua-detail-tab { padding: 12px 16px; font-size: 14px; border-radius: 10px; }
+}
+
+/* ═══ 4/5 — TANA: maydon kartalari (info/status) va tarix bo'limlari ═══
+   Desktopda #uaDetailBody grid'ga aylanadi — keng modal bo'sh qolmaydi:
+   maydonlar kartalarga, "Tarixlar" tab esa 2–3 ustunli panellarga bo'linadi. */
+.ua-detail-body {
+  overflow-y: auto;
+  flex: 1;
+  min-height: 120px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line3) transparent;
+}
+@media (min-width: 768px) {
+  #uaDetailModal .ua-detail-body { min-height: 260px; padding-right: 6px; }
+}
+
+.ua-detail-section { margin-bottom: 16px; min-width: 0; }
+.ua-detail-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+.ua-detail-row {
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  background: var(--bg3);
+  border: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--text);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.ua-post-link {
+  display: block;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  background: var(--bg3);
+  border: 1px solid var(--line);
+  font-size: 13px;
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+.ua-post-link:hover {
+  background: var(--bg4);
+  border-color: var(--line2);
+  color: var(--blue);
+}
+.ua-empty {
+  font-size: 13px;
+  color: var(--text3);
+  padding: 12px 0;
+  text-align: center;
+}
+
+/* Maydon qatori (label + qiymat) — mobilda oddiy ro'yxat ko'rinishi */
+.ua-field-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 4px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13.5px;
+  min-width: 0;
+}
+.ua-field-row:last-child { border-bottom: none; }
+.ua-field-label {
+  color: var(--text3);
+  flex-shrink: 0;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.ua-field-value {
+  text-align: right;
+  font-weight: 500;
+  color: var(--text);
+  overflow-wrap: anywhere;
+  word-break: break-all;
+  min-width: 0;
+}
+.ua-field-value--blue { color: var(--blue); }
+.ua-field-value--mono { font-family: var(--mono); font-size: 12px; color: var(--text2); }
+.ua-field-value--green { color: var(--green); }
+
+#uaDetailModal .ua-field-row { padding: 13px 4px; font-size: 14px; }
+
+/* Desktop: maydonlar HAM, tarix bo'limlari HAM keng grid'ga o'tadi */
+@media (min-width: 768px) {
+  #uaDetailModal #uaDetailBody {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 14px;
+    align-items: start;
+  }
+  #uaDetailModal #uaDetailBody .ua-field-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    background: var(--bg3);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 18px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  #uaDetailModal #uaDetailBody .ua-field-row:hover {
+    background: var(--bg4);
+    border-color: var(--line2);
+  }
+  #uaDetailModal #uaDetailBody .ua-field-row:last-child { border-bottom: 1px solid var(--line); }
+  #uaDetailModal #uaDetailBody .ua-field-label {
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  #uaDetailModal #uaDetailBody .ua-field-value {
+    text-align: left;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  #uaDetailModal #uaDetailBody .ua-detail-section { margin-bottom: 0; }
+}
+
+@media (min-width: 1024px) {
+  #uaDetailModal #uaDetailBody {
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 16px;
+  }
+}
+
+/* ═══ 5/5 — FOOTER va yakuniy responsive nozik sozlamalar ═══════════ */
+#uaDetailModal .ua-modal-btns { margin-top: 14px; }
+
+@media (min-width: 768px) {
+  #uaDetailModal .ua-modal-btns {
+    justify-content: flex-end;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+  #uaDetailModal #uaDetailClose {
+    flex: 0 0 auto;
+    min-width: 160px;
+    padding: 12px 28px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   DARK THEME — Admin Panel Override
+   ═══════════════════════════════════════════════════════════════════════ */
+[data-theme="dark"] .ua-row {
+  border-bottom-color: #1A1A20;
+}
+[data-theme="dark"] .ua-row:hover {
+  background: #121219;
+}
+[data-theme="dark"] .ua-modal {
+  background: #1E1E1D;
+  border-color: #212127;
+  box-shadow: 0 24px 64px #030305;
+}
+[data-theme="dark"] .ua-detail-tabs {
+  background: #121219;
+  border-color: #1A1A20;
+}
+[data-theme="dark"] .ua-detail-tab:hover {
+  background: #1A1A20;
+}
+[data-theme="dark"] .ua-detail-row,
+[data-theme="dark"] .ua-post-link {
+  background: #121219;
+  border-color: #1A1A20;
+}
+[data-theme="dark"] .ua-post-link:hover {
+  background: #1C1C23;
+}
+[data-theme="dark"] .ua-field-row {
+  border-bottom-color: #1A1A20;
+}
+[data-theme="dark"] .ua-modal-cancel {
+  background: #1A1A20;
+  border-color: #212127;
+}
+[data-theme="dark"] .ua-modal-cancel:hover {
+  background: #26262C;
+}
+[data-theme="dark"] .ua-locked-banner {
+  background: #101017;
+  border-color: #1A1A20;
+}
+[data-theme="dark"] .ua-history-btn {
+  background: #1A1A20;
+  border-color: #1F1F25;
+}
+[data-theme="dark"] .ua-history-btn:hover {
+  background: #26262C;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LIGHT THEME — Admin Panel
+   ═══════════════════════════════════════════════════════════════════════ */
+[data-theme="light"] .ua-row:hover {
+  background: #E1E1E5;
+}
+[data-theme="light"] .ua-modal {
+  background: #ffffff;
+  border-color: #D3D3D7;
+  box-shadow: 0 24px 64px #BEBEC2;
+}
+[data-theme="light"] .ua-detail-tabs {
+  background: #DEDEE3;
+  border-color: #D5D5DA;
+}
+[data-theme="light"] .ua-detail-row,
+[data-theme="light"] .ua-post-link {
+  background: #E1E1E5;
+  border-color: #D7D7DC;
+}
+[data-theme="light"] .ua-post-link:hover {
+  background: #DADADE;
+}
+
+/* ── Actions View (birlashtirilgan stats+users) ── */
+/* #actionsView scroll/height .view.on orqali boshqariladi */
+#actionsView {
+  background: var(--bg);
+}
+.actions-divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 16px 10px;
+  margin-top: 4px;
+}
+.actions-divider::before,
+.actions-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.actions-divider-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text2);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  padding: 0 4px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ACTIONS VIEW — MOBILE (default)
+   Bitta ustun, katta bosish nuqtalari, doim ko'rinadigan amallar.
+   ═══════════════════════════════════════════════════════════════════════ */
+#actionsView .ua-row {
+  padding: 14px 14px;
+  gap: 10px;
+}
+#actionsView .ua-delete-btn {
+  opacity: 1;
+  width: 36px;
+  height: 36px;
+  right: 8px;
+}
+#actionsView .ua-actions {
+  margin-right: 48px;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#actionsView .ua-approve-btn,
+#actionsView .ua-reject-btn,
+#actionsView .ua-block-btn,
+#actionsView .ua-unblock-btn,
+#actionsView .ua-history-btn {
+  padding: 9px 14px;
+  font-size: 0.8rem;
+}
+#actionsView .users-admin-hdr {
+  padding: 18px 16px 12px;
+}
+#actionsView .stats-cards-row {
+  grid-template-columns: repeat(2, 1fr);
+}
+#actionsView .stats-overview-inner {
+  grid-template-columns: 1fr;
+}
+#actionsView .stats-legend-panel {
+  border-right: none;
+  border-bottom: 1px solid var(--line);
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+#actionsView .stats-legend-item { flex: 1; min-width: 90px; }
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ACTIONS VIEW — DESKTOP (≥1024px)
+   Ikki ustunli "dashboard" ko'rinishi: chapda statistika, o'ngda
+   yopishqoq (sticky) foydalanuvchilar paneli — mobile dan tubdan farqli.
+   ═══════════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  #actionsView {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 400px;
+    grid-template-rows: auto 1fr;
+    column-gap: 28px;
+    padding: 28px 32px 28px 0;
+    align-items: start;
+  }
+  #actionsStatsSection {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+  #actionsView .users-admin-hdr {
+    grid-column: 2;
+    grid-row: 1;
+    padding: 0 0 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  #actionsView #usersAdminList {
+    grid-column: 2;
+    grid-row: 2;
+    padding: 10px 4px 24px 0;
+  }
+  #actionsView .actions-divider {
+    display: none;
+  }
+
+  /* Foydalanuvchi qatorlarini "karta" ko'rinishiga o'tkazamiz */
+  #actionsView .ua-row {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--bg2);
+    margin-bottom: 8px;
+    padding: 14px 16px;
+    transition: background 0.15s, border-color 0.15s, transform 0.15s;
+  }
+  #actionsView .ua-row:hover {
+    background: var(--bg3);
+    border-color: var(--line2);
+  }
+  #actionsView .ua-delete-btn {
+    opacity: 0; /* sichqoncha bo'lgani uchun hover bilan chiqadi */
+  }
+  #actionsView .ua-row:hover .ua-delete-btn { opacity: 1; }
+  #actionsView .ua-actions {
+    flex-direction: column;
+    gap: 6px;
+    margin-right: 44px;
+  }
+
+  /* Statistika paneli kengroq ekranga moslashadi */
+  #actionsView .stats-cards-row { grid-template-columns: repeat(4, 1fr); }
+  #actionsView .stats-overview-inner { grid-template-columns: 180px 1fr; }
+  #actionsView .stats-donut-wrap { grid-template-columns: 130px 1fr; }
+}
+
+@media (min-width: 1280px) {
+  #actionsView {
+    grid-template-columns: minmax(0, 1fr) 440px;
+    column-gap: 36px;
+    padding: 32px 40px 32px 0;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   ADMIN PANEL — SOLID UI
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Glass variables ── */
+[data-theme="dark"] {
+  --ag-glass:          var(--bg3);
+  --ag-glass-mid:      var(--bg4);
+  --ag-glass-strong:   var(--bg5);
+  --ag-border-top:     #3F3F44;
+  --ag-border-side:    #1C1C23;
+  --ag-border-bot:     #101017;
+  --ag-specular:       none;
+  --ag-blur:           none;
+  --ag-blur-light:     none;
+  --ag-shadow:         0 8px 32px #040408, 0 32px 80px #06060B, 0 0 0 0.5px #17171E;
+  --ag-shadow-hover:   0 12px 40px #040408, 0 40px 100px #05050A, 0 0 0 0.5px #212127;
+  --ag-modal-bg:       var(--bg3);
+  --ag-row-bg:         var(--bg2);
+  --ag-row-hover:      var(--bg4);
+  --ag-badge-glow:     #19233D;
+  --ag-overlay:        #020205;
+}
+[data-theme="light"] {
+  --ag-glass:          var(--bg3);
+  --ag-glass-mid:      var(--bg4);
+  --ag-glass-strong:   var(--bg5);
+  --ag-border-top:     rgba(255,255,255,1.0);
+  --ag-border-side:    #F6F6F8;
+  --ag-border-bot:     #EEEEF2;
+  --ag-specular:       none;
+  --ag-blur:           none;
+  --ag-blur-light:     none;
+  --ag-shadow:         0 8px 32px #CCCCD0, 0 32px 80px #D5D5DA, 0 0 0 0.5px #DADADE;
+  --ag-shadow-hover:   0 12px 40px #C2C2C7, 0 40px 100px #D0D0D5, 0 0 0 0.5px #D5D5DA;
+  --ag-modal-bg:       var(--bg3);
+  --ag-row-bg:         var(--bg2);
+  --ag-row-hover:      var(--bg4);
+  --ag-badge-glow:     #CDD5E9;
+  --ag-overlay:        #96969A;
+}
+
+/* ── Admin row — solid card ── */
+.ua-row {
+  background: var(--ag-row-bg) !important;
+  border-bottom: none !important;
+  border-radius: 16px !important;
+  margin: 4px 8px !important;
+  border: 0.5px solid var(--ag-border-side) !important;
+  box-shadow: var(--ag-specular), 0 2px 12px #07070E;
+  transition: background 0.25s, box-shadow 0.25s, transform 0.2s !important;
+  position: relative;
+  overflow: hidden;
+}
+.ua-row:hover {
+  background: var(--ag-row-hover) !important;
+  box-shadow: var(--ag-specular), var(--ag-shadow-hover) !important;
+  transform: translateY(-1px);
+}
+
+/* ── Modal overlay — solid panel ── */
+.ua-modal-overlay {
+  background: var(--ag-overlay) !important;
+}
+
+/* ── Modal card — solid panel ── */
+.ua-modal {
+  background: var(--ag-modal-bg) !important;
+  border: none !important;
+  border-radius: 28px !important;
+  box-shadow:
+    var(--ag-specular),
+    var(--ag-shadow),
+    inset 0 -1px 0 var(--ag-border-bot) !important;
+  position: relative;
+  overflow: hidden;
+}
+.ua-modal::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--ag-border-top) 30%, var(--ag-border-top) 70%, transparent);
+  pointer-events: none;
+}
+/* Detail modal width tuzatish — keng va tartibli */
+.ua-detail-modal {
+  width: min(600px, 96vw) !important;
+  max-height: 85vh !important;
+}
+#uaDetailModal .ua-detail-modal {
+  width: min(640px, 96vw) !important;
+  padding: 24px 22px 18px !important;
+  border-radius: 28px !important;
+}
+@media (min-width: 640px) {
+  #uaDetailModal .ua-detail-modal {
+    width: min(680px, 94vw) !important;
+    padding: 28px 28px 20px !important;
+  }
+}
+@media (min-width: 768px) {
+  #uaDetailModal .ua-detail-modal {
+    width: min(760px, calc(100vw - var(--sidebar,68px) - 48px)) !important;
+    padding: 34px 36px 24px !important;
+    max-height: calc(100dvh - 60px) !important;
+  }
+}
+@media (min-width: 1024px) {
+  #uaDetailModal .ua-detail-modal {
+    width: min(900px, calc(100vw - var(--sidebar,68px) - 80px)) !important;
+  }
+}
+
+/* ── Tabs — solid pill ── */
+.ua-detail-tabs {
+  background: var(--ag-glass) !important;
+  border: 0.5px solid var(--ag-border-side) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--ag-specular) !important;
+}
+.ua-detail-tab.active {
+  background: var(--blue) !important;
+  box-shadow: 0 2px 12px var(--ag-badge-glow), var(--ag-specular) !important;
+}
+
+/* ── Field rows — solid cards ── */
+.ua-field-row {
+  border-bottom: 1px solid #17171E !important;
+}
+@media (min-width: 768px) {
+  #uaDetailModal #uaDetailBody .ua-field-row {
+    background: var(--ag-glass) !important;
+    border: 0.5px solid var(--ag-border-side) !important;
+    border-radius: 16px !important;
+    box-shadow: var(--ag-specular), 0 2px 8px #08080E !important;
+  }
+  #uaDetailModal #uaDetailBody .ua-field-row:hover {
+    background: var(--ag-glass-mid) !important;
+    border-color: var(--ag-border-top) !important;
+    transform: translateY(-1px);
+    box-shadow: var(--ag-specular), 0 4px 16px #07070D !important;
+  }
+  #uaDetailModal #uaDetailBody .ua-field-row:last-child {
+    border-bottom: 0.5px solid var(--ag-border-side) !important;
+  }
+}
+
+/* ── Buttons — solid style ── */
+.ua-modal-cancel {
+  background: var(--ag-glass-mid) !important;
+  border: 0.5px solid var(--ag-border-side) !important;
+  box-shadow: var(--ag-specular) !important;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important;
+}
+.ua-modal-cancel:hover {
+  background: var(--ag-glass-strong) !important;
+  transform: translateY(-1px);
+  box-shadow: var(--ag-specular), 0 4px 16px #07070E !important;
+}
+
+/* ── Detail rows & post links — glass ── */
+.ua-detail-row,
+.ua-post-link {
+  background: var(--ag-glass) !important;
+  border: 0.5px solid var(--ag-border-side) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--ag-specular), 0 2px 6px #08080E !important;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important;
+}
+.ua-post-link:hover {
+  background: var(--ag-glass-mid) !important;
+  transform: translateY(-1px);
+  box-shadow: var(--ag-specular), 0 4px 14px #07070D !important;
+}
+
+/* ── Locked banner — glass ── */
+.ua-locked-banner {
+  background: var(--ag-glass) !important;
+  border: 0.5px solid var(--ag-border-side) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--ag-specular) !important;
+  margin: 8px 8px 4px !important;
+}
+
+/* ── History & action buttons — glass ── */
+.ua-history-btn {
+  background: var(--ag-glass-mid) !important;
+  border: 0.5px solid var(--ag-border-side) !important;
+  box-shadow: var(--ag-specular) !important;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s !important;
+}
+.ua-history-btn:hover {
+  background: var(--ag-glass-strong) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: var(--ag-specular), 0 3px 12px #07070E !important;
+}
+
+/* ── Password input — glass ── */
+.ua-pwd-input {
+  background: var(--ag-glass) !important;
+  border: 0.5px solid var(--ag-border-side) !important;
+  box-shadow: var(--ag-specular) !important;
+}
+.ua-pwd-input:focus {
+  background: var(--ag-glass-mid) !important;
+  border-color: var(--blue) !important;
+  box-shadow: var(--ag-specular), 0 0 0 3px var(--ag-badge-glow) !important;
+}
+
+/* ── Badges — glass glow ── */
+.ua-badge {
+}
+.ua-badge--approved {
+  box-shadow: 0 0 12px #173028 !important;
+}
+.ua-badge--blocked {
+  box-shadow: 0 0 12px #371D29 !important;
+}
+
+/* ── Actions view desktop — solid cards ── */
+@media (min-width: 1024px) {
+  #actionsView .ua-row {
+    background: var(--ag-glass) !important;
+    border: 0.5px solid var(--ag-border-side) !important;
+    border-radius: 16px !important;
+    box-shadow: var(--ag-specular), 0 2px 12px #08080E !important;
+    margin-bottom: 8px !important;
+  }
+  #actionsView .ua-row:hover {
+    background: var(--ag-glass-mid) !important;
+    border-color: var(--ag-border-top) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--ag-specular), var(--ag-shadow-hover) !important;
+  }
+}
+

@@ -1,0 +1,213 @@
+/* ═══════════════════════════════════════════
+   MRdatabase — Local Utility Classes
+   DEVS UTILITY framework'da yo'q qo'shimcha utility class'lar
+   ═══════════════════════════════════════════ */
+
+/* ── Display ── */
+.d-none { display: none; }
+.d-block { display: block; }
+.d-grid { display: grid; }
+.d-inline-grid { display: inline-grid; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
+
+/* ── Position ── */
+.pos-sticky { position: sticky; }
+.pos-fixed { position: fixed; }
+.pos-absolute { position: absolute; }
+.pos-relative { position: relative; }
+
+/* ── Z-index ── */
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+.z-100 { z-index: 100; }
+.z-1000 { z-index: 1000; }
+.z-9999 { z-index: 9999; }
+
+/* ── Gap (Grid/Flex) ── */
+.gap-4px { gap: 4px; }
+.gap-5px { gap: 5px; }
+.gap-8px { gap: 8px; }
+.gap-10px { gap: 10px; }
+.gap-12px { gap: 12px; }
+.gap-14px { gap: 14px; }
+.gap-15px { gap: 15px; }
+.gap-16px { gap: 16px; }
+.gap-20px { gap: 20px; }
+.gap-24px { gap: 24px; }
+.gap-25px { gap: 25px; }
+.gap-28px { gap: 28px; }
+.gap-30px { gap: 30px; }
+.gap-32px { gap: 32px; }
+.gap-35px { gap: 35px; }
+.gap-40px { gap: 40px; }
+
+/* ── Aspect Ratio ── */
+.aspect-1 { aspect-ratio: 1 / 1; }
+.aspect-4-3 { aspect-ratio: 4 / 3; }
+.aspect-16-9 { aspect-ratio: 16 / 9; }
+.aspect-9-16 { aspect-ratio: 9 / 16; }
+.aspect-3-4 { aspect-ratio: 3 / 4; }
+.aspect-2-1 { aspect-ratio: 2 / 1; }
+.aspect-3-2 { aspect-ratio: 3 / 2; }
+
+/* ── Width ── */
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.w-screen { width: 100vw; }
+
+/* ── Height ── */
+.h-full { height: 100%; }
+.h-auto { height: auto; }
+.h-screen { height: 100vh; }
+
+/* ── Object Fit ── */
+.obj-cover { object-fit: cover; }
+.obj-contain { object-fit: contain; }
+.obj-fill { object-fit: fill; }
+.obj-none { object-fit: none; }
+
+/* ── Overflow ── */
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+.overflow-scroll { overflow: scroll; }
+.overflow-x-auto { overflow-x: auto; }
+.overflow-y-auto { overflow-y: auto; }
+
+/* ── Flex utilities ── */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-row { flex-direction: row; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-nowrap { flex-wrap: nowrap; }
+.flex-1 { flex: 1; }
+.flex-auto { flex: auto; }
+.flex-none { flex: none; }
+.flex-shrink-0 { flex-shrink: 0; }
+.flex-grow-0 { flex-grow: 0; }
+.flex-grow-1 { flex-grow: 1; }
+
+/* ── Justify Content ── */
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-evenly { justify-content: space-evenly; }
+
+/* ── Align Items ── */
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+.items-center { align-items: center; }
+.items-stretch { align-items: stretch; }
+.items-baseline { align-items: baseline; }
+
+/* ── Text utilities ── */
+.text-nowrap { text-wrap: nowrap; }
+.text-balance { text-wrap: balance; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── Cursor ── */
+.cursor-pointer { cursor: pointer; }
+.cursor-default { cursor: default; }
+.cursor-not-allowed { cursor: not-allowed; }
+
+/* ── User Select ── */
+.select-none { user-select: none; }
+.select-all { user-select: all; }
+.select-text { user-select: text; }
+
+/* ── Pointer Events ── */
+.pointer-none { pointer-events: none; }
+.pointer-auto { pointer-events: auto; }
+
+/* ── Visibility ── */
+.visible { visibility: visible; }
+.invisible { visibility: hidden; }
+
+/* ── Opacity ── */
+.opacity-0 { opacity: 0; }
+.opacity-10 { opacity: 1; }
+.opacity-20 { opacity: 1; }
+.opacity-30 { opacity: 1; }
+.opacity-40 { opacity: 1; }
+.opacity-50 { opacity: 1; }
+.opacity-60 { opacity: 1; }
+.opacity-70 { opacity: 1; }
+.opacity-80 { opacity: 1; }
+.opacity-90 { opacity: 1; }
+.opacity-100 { opacity: 1; }
+
+/* ── Transform ── */
+.rotate-45 { transform: rotate(45deg); }
+.rotate-90 { transform: rotate(90deg); }
+.rotate-180 { transform: rotate(180deg); }
+.scale-50 { transform: scale(0.5); }
+.scale-75 { transform: scale(0.75); }
+.scale-100 { transform: scale(1); }
+.scale-125 { transform: scale(1.25); }
+.scale-150 { transform: scale(1.5); }
+
+/* ── Transition ── */
+.transition { transition: all 0.2s ease; }
+.transition-slow { transition: all 0.5s ease; }
+.transition-fast { transition: all 0.1s ease; }
+
+/* ── Box Shadow ── */
+.shadow-sm { box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.shadow { box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06); }
+.shadow-md { box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.06); }
+.shadow-lg { box-shadow: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05); }
+.shadow-xl { box-shadow: 0 20px 25px rgba(0,0,0,0.1), 0 10px 10px rgba(0,0,0,0.04); }
+.shadow-none { box-shadow: none; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   MODAL Z-INDEX TARTIB (global override)
+   Barcha modal layerlar to'g'ri tartibda ko'rinishi uchun.
+   
+   Tartib (pastdan yuqoriga):
+   100  — navigatsiya bar, sidebar
+   200  — .overlay (sheet modals: upload, comment, reelCap, profileEdit...)
+   300  — #detailModal (post detail)
+   360  — #chatThreadModal (chat oynasi)
+   400  — .chat-msg-media-overlay va boshqa chat ichki elementlar
+   500  — #userProfileModal  ← chatThread USTIDA bo'lishi kerak
+   520  — #groupInfoPanel    ← userProfile ustida
+   550  — #detailModal override (nav.css dagi)
+   600  — #zoomModal
+   700  — toast, tooltiplar
+   999999+ — #incomingCallModal
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Chat thread modal */
+#chatThreadModal       { z-index: 360 !important; }
+
+/* User profili — chat thread USTIDA ochilishi kerak */
+#userProfileModal      { z-index: 500 !important; }
+
+/* Guruh info paneli — user profil ustida */
+#grpInfoOverlay,
+#grpCreateChoiceOverlay,
+#grpCreateFormOverlay,
+#grpJoinLinkOverlay,
+#grpAddUserOverlay     { z-index: 520 !important; }
+
+/* Post detail */
+#detailModal           { z-index: 550 !important; }
+
+/* Zoom / media viewer */
+#zoomModal             { z-index: 600 !important; }
+
+/* Qo'ng'iroq — hamma narsadan yuqorida */
+#incomingCallModal,
+#activeCallModal       { z-index: 999999 !important; }
+
+/* ── Guruh overlaylari chatThreadModal (360) ustida bo'lishi uchun ── */
+#grpInfoOverlay,
+#grpCreateChoiceOverlay,
+#grpCreateFormOverlay,
+#grpJoinLinkOverlay,
+#grpAddUserOverlay { z-index: 520 !important; }
+
+/* Chat thread ichidagi .overlay ham ustida tursin */
+#chatThreadModal .overlay { z-index: 520 !important; }

@@ -1,0 +1,1 @@
+// Keyboard shortcuts olib tashlandi

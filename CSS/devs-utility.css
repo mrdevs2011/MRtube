@@ -1,0 +1,2450 @@
+/* Self-hosted bundle of devs-utility (oldin cdn.jsdelivr.net/gh/mrdevs2011/devs-utility orqali 34 ta alohida so'rov bilan yuklanardi — endi 1 ta local fayl) */
+
+/* --- ./utility/fonts/font-family.css --- */
+.ff-arial {
+    font-family: 'Arial';
+}
+/* --- ./utility/fonts/font-size.css --- */
+.fs-5px {
+    font-size: 5px;
+}
+
+.fs-10px {
+    font-size: 10px;
+}
+
+.fs-15px {
+    font-size: 15px;
+}
+
+.fs-20px {
+    font-size: 20px;
+}
+
+.fs-25px {
+    font-size: 25px;
+}
+
+.fs-30px {
+    font-size: 30px;
+}
+
+.fs-35px {
+    font-size: 35px;
+}
+
+.fs-40px {
+    font-size: 40px;
+}
+
+.fs-45px {
+    font-size: 45px;
+}
+
+.fs-50px {
+    font-size: 50px;
+}
+
+.fs-55px {
+    font-size: 55px;
+}
+
+.fs-60px {
+    font-size: 60px;
+}
+
+.fs-65px {
+    font-size: 65px;
+}
+
+.fs-70px {
+    font-size: 70px;
+}
+
+.fs-75px {
+    font-size: 75px;
+}
+
+.fs-80px {
+    font-size: 80px;
+}
+
+.fs-85px {
+    font-size: 85px;
+}
+
+.fs-90px {
+    font-size: 90px;
+}
+
+.fs-95px {
+    font-size: 95px;
+}
+
+.fs-100px {
+    font-size: 100px;
+}
+/* --- ./utility/fonts/font-style.css --- */
+.fsi {
+    font-style: italic;
+}
+
+.fsn {
+    font-style: normal;
+}
+
+.fso {
+    font-style: oblique;
+}
+/* --- ./utility/fonts/font-weight.css --- */
+.fw-100 {
+    font-weight: 100;
+}
+
+.fw-200 {
+    font-weight: 200;
+}
+
+.fw-300 {
+    font-weight: 300;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.fw-700 {
+    font-weight: 700;
+}
+
+.fw-800 {
+    font-weight: 800;
+}
+
+.fw-900 {
+    font-weight: 900;
+}
+/* --- ./utility/texts/text-colors.css --- */
+.c-aliceblue {
+    color: aliceblue;
+}
+
+.c-antiquewhite {
+    color: antiquewhite;
+}
+
+.c-aqua {
+    color: aqua;
+}
+
+.c-aquamarine {
+    color: aquamarine;
+}
+
+.c-azure {
+    color: azure;
+}
+
+.c-beige {
+    color: beige;
+}
+
+.c-bisque {
+    color: bisque;
+}
+
+.c-black {
+    color: black;
+}
+
+.c-blanchedalmond {
+    color: blanchedalmond;
+}
+
+.c-blue {
+    color: blue;
+}
+
+.c-blueviolet {
+    color: blueviolet;
+}
+
+.c-brown {
+    color: brown;
+}
+
+.c-burlywood {
+    color: burlywood;
+}
+
+.c-cadetblue {
+    color: cadetblue;
+}
+
+.c-chartreuse {
+    color: chartreuse;
+}
+
+.c-chocolate {
+    color: chocolate;
+}
+
+.c-coral {
+    color: coral;
+}
+
+.c-cornflowerblue {
+    color: cornflowerblue;
+}
+
+.c-cornsilk {
+    color: cornsilk;
+}
+
+.c-crimson {
+    color: crimson;
+}
+
+.c-cyan {
+    color: cyan;
+}
+
+.c-darkblue {
+    color: darkblue;
+}
+
+.c-darkcyan {
+    color: darkcyan;
+}
+
+.c-darkgoldenrod {
+    color: darkgoldenrod;
+}
+
+.c-darkgray {
+    color: darkgray;
+}
+
+.c-darkgrey {
+    color: darkgrey;
+}
+
+.c-darkgreen {
+    color: darkgreen;
+}
+
+.c-darkkhaki {
+    color: darkkhaki;
+}
+
+.c-darkmagenta {
+    color: darkmagenta;
+}
+
+.c-darkolivegreen {
+    color: darkolivegreen;
+}
+
+.c-darkorange {
+    color: darkorange;
+}
+
+.c-darkorchid {
+    color: darkorchid;
+}
+
+.c-darkred {
+    color: darkred;
+}
+
+.c-darksalmon {
+    color: darksalmon;
+}
+
+.c-darkseagreen {
+    color: darkseagreen;
+}
+
+.c-darkslateblue {
+    color: darkslateblue;
+}
+
+.c-darkslategray {
+    color: darkslategray;
+}
+
+.c-darkslategrey {
+    color: darkslategrey;
+}
+
+.c-darkturquoise {
+    color: darkturquoise;
+}
+
+.c-darkviolet {
+    color: darkviolet;
+}
+
+.c-deeppink {
+    color: deeppink;
+}
+
+.c-deepskyblue {
+    color: deepskyblue;
+}
+
+.c-dimgray {
+    color: dimgray;
+}
+
+.c-dimgrey {
+    color: dimgrey;
+}
+
+.c-dodgerblue {
+    color: dodgerblue;
+}
+
+.c-firebrick {
+    color: firebrick;
+}
+
+.c-floralwhite {
+    color: floralwhite;
+}
+
+.c-forestgreen {
+    color: forestgreen;
+}
+
+.c-fuchsia {
+    color: fuchsia;
+}
+
+.c-gainsboro {
+    color: gainsboro;
+}
+
+.c-ghostwhite {
+    color: ghostwhite;
+}
+
+.c-gold {
+    color: gold;
+}
+
+.c-goldenrod {
+    color: goldenrod;
+}
+
+.c-gray {
+    color: gray;
+}
+
+.c-honeydew {
+    color: honeydew;
+}
+
+.c-hotpink {
+    color: hotpink;
+}
+
+.c-indianred {
+    color: indianred;
+}
+
+.c-indigo {
+    color: indigo;
+}
+
+.c-ivory {
+    color: ivory;
+}
+
+.c-khaki {
+    color: khaki;
+}
+
+.c-lavender {
+    color: lavender;
+}
+
+.c-lavenderblush {
+    color: lavenderblush;
+}
+
+.c-lawngreen {
+    color: lawngreen;
+}
+
+.c-lemonchiffon {
+    color: lemonchiffon;
+}
+
+.c-lightblue {
+    color: lightblue;
+}
+
+.c-lightcoral {
+    color: lightcoral;
+}
+
+.c-lightcyan {
+    color: lightcyan;
+}
+
+.c-lightgoldenrodyellow {
+    color: lightgoldenrodyellow;
+}
+
+.c-lightgray {
+    color: lightgray;
+}
+
+.c-lightgrey {
+    color: lightgrey;
+}
+
+.c-lightgreen {
+    color: lightgreen;
+}
+
+.c-lightpink {
+    color: lightpink;
+}
+
+.c-lightsalmon {
+    color: lightsalmon;
+}
+
+.c-lightseagreen {
+    color: lightseagreen;
+}
+
+.c-lightskyblue {
+    color: lightskyblue;
+}
+
+.c-lightslategray {
+    color: lightslategray;
+}
+
+.c-lightslategrey {
+    color: lightslategrey;
+}
+
+.c-lightsteelblue {
+    color: lightsteelblue;
+}
+
+.c-lightyellow {
+    color: lightyellow;
+}
+
+.c-lime {
+    color: lime;
+}
+
+.c-limegreen {
+    color: limegreen;
+}
+
+.c-linen {
+    color: linen;
+}
+
+.c-magenta {
+    color: magenta;
+}
+
+.c-maroon {
+    color: maroon;
+}
+
+.c-mediumaquamarine {
+    color: mediumaquamarine;
+}
+
+.c-mediumblue {
+    color: mediumblue;
+}
+
+.c-mediumorchid {
+    color: mediumorchid;
+}
+
+.c-mediumpurple {
+    color: mediumpurple;
+}
+
+.c-mediumseagreen {
+    color: mediumseagreen;
+}
+
+.c-mediumturquoise {
+    color: mediumturquoise;
+}
+
+.c-mediumvioletred {
+    color: mediumvioletred;
+}
+
+.c-midnightblue {
+    color: midnightblue;
+}
+
+.c-mintcream {
+    color: mintcream;
+}
+
+.c-mistyrose {
+    color: mistyrose;
+}
+
+.c-moccasin {
+    color: moccasin;
+}
+
+.c-navajowhite {
+    color: navajowhite;
+}
+
+.c-navy {
+    color: navy;
+}
+
+.c-oldlace {
+    color: oldlace;
+}
+
+.c-olive {
+    color: olive;
+}
+
+.c-olivedrab {
+    color: olivedrab;
+}
+
+.c-orange {
+    color: orange;
+}
+
+.c-orangered {
+    color: orangered;
+}
+
+.c-orchid {
+    color: orchid;
+}
+
+.c-palegoldenrod {
+    color: palegoldenrod;
+}
+
+.c-palegreen {
+    color: palegreen;
+}
+
+.c-paleturquoise {
+    color: paleturquoise;
+}
+
+.c-palevioletred {
+    color: palevioletred;
+}
+
+.c-papayawhip {
+    color: papayawhip;
+}
+
+.c-peachpuff {
+    color: peachpuff;
+}
+
+.c-peru {
+    color: peru;
+}
+
+.c-pink {
+    color: pink;
+}
+
+.c-plum {
+    color: plum;
+}
+
+.c-powderblue {
+    color: powderblue;
+}
+
+.c-purple {
+    color: purple;
+}
+
+.c-rebeccapurple {
+    color: rebeccapurple;
+}
+
+.c-red {
+    color: red;
+}
+
+.c-rosybrown {
+    color: rosybrown;
+}
+
+.c-royalblue {
+    color: royalblue;
+}
+
+.c-saddlebrown {
+    color: saddlebrown;
+}
+
+.c-salmon {
+    color: salmon;
+}
+
+.c-sandybrown {
+    color: sandybrown;
+}
+
+.c-seagreen {
+    color: seagreen;
+}
+
+.c-seashell {
+    color: seashell;
+}
+
+.c-sienna {
+    color: sienna;
+}
+
+.c-silver {
+    color: silver;
+}
+
+.c-skyblue {
+    color: skyblue;
+}
+
+.c-slateblue {
+    color: slateblue;
+}
+
+.c-slategray {
+    color: slategray;
+}
+
+.c-slategrey {
+    color: slategrey;
+}
+
+.c-snow {
+    color: snow;
+}
+
+.c-springgreen {
+    color: springgreen;
+}
+
+.c-steelblue {
+    color: steelblue;
+}
+
+.c-tan {
+    color: tan;
+}
+
+.c-teal {
+    color: teal;
+}
+
+.c-thistle {
+    color: thistle;
+}
+
+.c-tomato {
+    color: tomato;
+}
+
+.c-turquoise {
+    color: turquoise;
+}
+
+.c-violet {
+    color: violet;
+}
+
+.c-white {
+    color: white;
+}
+
+.c-whitesmoke {
+    color: whitesmoke;
+}
+
+.c-yellow {
+    color: yellow;
+}
+/* --- ./utility/texts/text-decoration.css --- */
+.td-dashed {
+    text-decoration: dashed;
+}
+
+.td-dotted {
+    text-decoration: dotted;
+}
+
+.td-double {
+    text-decoration: double;
+}
+
+.td-lt {
+    text-decoration: line-through;
+}
+
+.td-none {
+    text-decoration: none;
+}
+
+.td-overline {
+    text-decoration: overline;
+}
+
+.td-solid {
+    text-decoration: solid;
+}
+
+.td-underline {
+    text-decoration: underline;
+}
+
+.td-wavy {
+    text-decoration: wavy;
+}
+/* --- ./utility/texts/text-transform.css --- */
+.ttc {
+    text-transform: capitalize;
+}
+
+.ttl {
+    text-transform: lowercase;
+}
+
+.ttn {
+    text-transform: none;
+}
+
+.ttu {
+    text-transform: uppercase;
+}
+/* --- ./utility/texts/text-align.css --- */
+.tal {
+    text-align: left;
+}
+
+.tac {
+    text-align: center;
+}
+
+.tar {
+    text-align: right;
+}
+/* --- ./utility/padding/general-padding.css --- */
+.p-5px {
+    padding: 5px;
+}
+
+.p-10px {
+    padding: 10px;
+}
+
+.p-15px {
+    padding: 15px;
+}
+
+.p-20px {
+    padding: 20px;
+}
+
+.p-25px {
+    padding: 25px;
+}
+
+.p-30px {
+    padding: 30px;
+}
+
+.p-35px {
+    padding: 35px;
+}
+
+.p-40px {
+    padding: 40px;
+}
+
+.p-45px {
+    padding: 45px;
+}
+
+.p-50px {
+    padding: 50px;
+}
+
+.p-55px {
+    padding: 55px;
+}
+
+.p-60px {
+    padding: 60px;
+}
+
+.p-65px {
+    padding: 65px;
+}
+
+.p-70px {
+    padding: 70px;
+}
+
+.p-75px {
+    padding: 75px;
+}
+
+.p-80px {
+    padding: 80px;
+}
+
+.p-85px {
+    padding: 85px;
+}
+
+.p-90px {
+    padding: 90px;
+}
+
+.p-95px {
+    padding: 95px;
+}
+
+.p-100px {
+    padding: 100px;
+}
+/* --- ./utility/padding/padding-bottom.css --- */
+.pb-5px {
+    padding-bottom: 5px;
+}
+
+.pb-10px {
+    padding-bottom: 10px;
+}
+
+.pb-15px {
+    padding-bottom: 15px;
+}
+
+.pb-20px {
+    padding-bottom: 20px;
+}
+
+.pb-25px {
+    padding-bottom: 25px;
+}
+
+.pb-30px {
+    padding-bottom: 30px;
+}
+
+.pb-35px {
+    padding-bottom: 35px;
+}
+
+.pb-40px {
+    padding-bottom: 40px;
+}
+
+.pb-45px {
+    padding-bottom: 45px;
+}
+
+.pb-50px {
+    padding-bottom: 50px;
+}
+
+.pb-55px {
+    padding-bottom: 55px;
+}
+
+.pb-60px {
+    padding-bottom: 60px;
+}
+
+.pb-65px {
+    padding-bottom: 65px;
+}
+
+.pb-70px {
+    padding-bottom: 70px;
+}
+
+.pb-75px {
+    padding-bottom: 75px;
+}
+
+.pb-80px {
+    padding-bottom: 80px;
+}
+
+.pb-85px {
+    padding-bottom: 85px;
+}
+
+.pb-90px {
+    padding-bottom: 90px;
+}
+
+.pb-95px {
+    padding-bottom: 95px;
+}
+
+.pb-100px {
+    padding-bottom: 100px;
+}
+/* --- ./utility/padding/padding-left.css --- */
+.pl-5px {
+    padding-left: 5px;
+}
+
+.pl-10px {
+    padding-left: 10px;
+}
+
+.pl-15px {
+    padding-left: 15px;
+}
+
+.pl-20px {
+    padding-left: 20px;
+}
+
+.pl-25px {
+    padding-left: 25px;
+}
+
+.pl-30px {
+    padding-left: 30px;
+}
+
+.pl-35px {
+    padding-left: 35px;
+}
+
+.pl-40px {
+    padding-left: 40px;
+}
+
+.pl-45px {
+    padding-left: 45px;
+}
+
+.pl-50px {
+    padding-left: 50px;
+}
+
+.pl-55px {
+    padding-left: 55px;
+}
+
+.pl-60px {
+    padding-left: 60px;
+}
+
+.pl-65px {
+    padding-left: 65px;
+}
+
+.pl-70px {
+    padding-left: 70px;
+}
+
+.pl-75px {
+    padding-left: 75px;
+}
+
+.pl-80px {
+    padding-left: 80px;
+}
+
+.pl-85px {
+    padding-left: 85px;
+}
+
+.pl-90px {
+    padding-left: 90px;
+}
+
+.pl-95px {
+    padding-left: 95px;
+}
+
+.pl-100px {
+    padding-left: 100px;
+}
+/* --- ./utility/padding/padding-right.css --- */
+.pr-5px {
+    padding-right: 5px;
+}
+
+.pr-10px {
+    padding-right: 10px;
+}
+
+.pr-15px {
+    padding-right: 15px;
+}
+
+.pr-20px {
+    padding-right: 20px;
+}
+
+.pr-25px {
+    padding-right: 25px;
+}
+
+.pr-30px {
+    padding-right: 30px;
+}
+
+.pr-35px {
+    padding-right: 35px;
+}
+
+.pr-40px {
+    padding-right: 40px;
+}
+
+.pr-45px {
+    padding-right: 45px;
+}
+
+.pr-50px {
+    padding-right: 50px;
+}
+
+.pr-55px {
+    padding-right: 55px;
+}
+
+.pr-60px {
+    padding-right: 60px;
+}
+
+.pr-65px {
+    padding-right: 65px;
+}
+
+.pr-70px {
+    padding-right: 70px;
+}
+
+.pr-75px {
+    padding-right: 75px;
+}
+
+.pr-80px {
+    padding-right: 80px;
+}
+
+.pr-85px {
+    padding-right: 85px;
+}
+
+.pr-90px {
+    padding-right: 90px;
+}
+
+.pr-95px {
+    padding-right: 95px;
+}
+
+.pr-100px {
+    padding-right: 100px;
+}
+/* --- ./utility/padding/padding-top.css --- */
+.pt-5px {
+    padding-top: 5px;
+}
+
+.pt-10px {
+    padding-top: 10px;
+}
+
+.pt-15px {
+    padding-top: 15px;
+}
+
+.pt-20px {
+    padding-top: 20px;
+}
+
+.pt-25px {
+    padding-top: 25px;
+}
+
+.pt-30px {
+    padding-top: 30px;
+}
+
+.pt-35px {
+    padding-top: 35px;
+}
+
+.pt-40px {
+    padding-top: 40px;
+}
+
+.pt-45px {
+    padding-top: 45px;
+}
+
+.pt-50px {
+    padding-top: 50px;
+}
+
+.pt-55px {
+    padding-top: 55px;
+}
+
+.pt-60px {
+    padding-top: 60px;
+}
+
+.pt-65px {
+    padding-top: 65px;
+}
+
+.pt-70px {
+    padding-top: 70px;
+}
+
+.pt-75px {
+    padding-top: 75px;
+}
+
+.pt-80px {
+    padding-top: 80px;
+}
+
+.pt-85px {
+    padding-top: 85px;
+}
+
+.pt-90px {
+    padding-top: 90px;
+}
+
+.pt-95px {
+    padding-top: 95px;
+}
+
+.pt-100px {
+    padding-top: 100px;
+}
+/* --- ./utility/margin/margin-bottom.css --- */
+.mb-5px {
+    margin-bottom: 5px;
+}
+
+.mb-10px {
+    margin-bottom: 10px;
+}
+
+.mb-15px {
+    margin-bottom: 15px;
+}
+
+.mb-20px {
+    margin-bottom: 20px;
+}
+
+.mb-25px {
+    margin-bottom: 25px;
+}
+
+.mb-30px {
+    margin-bottom: 30px;
+}
+
+.mb-35px {
+    margin-bottom: 35px;
+}
+
+.mb-40px {
+    margin-bottom: 40px;
+}
+
+.mb-45px {
+    margin-bottom: 45px;
+}
+
+.mb-50px {
+    margin-bottom: 50px;
+}
+
+.mb-55px {
+    margin-bottom: 55px;
+}
+
+.mb-60px {
+    margin-bottom: 60px;
+}
+
+.mb-65px {
+    margin-bottom: 65px;
+}
+
+.mb-70px {
+    margin-bottom: 70px;
+}
+
+.mb-75px {
+    margin-bottom: 75px;
+}
+
+.mb-80px {
+    margin-bottom: 80px;
+}
+
+.mb-85px {
+    margin-bottom: 85px;
+}
+
+.mb-90px {
+    margin-bottom: 90px;
+}
+
+.mb-95px {
+    margin-bottom: 95px;
+}
+
+.mb-100px {
+    margin-bottom: 100px;
+}
+/* --- ./utility/margin/margin-left.css --- */
+.ml-5px {
+    margin-left: 5px;
+}
+
+.ml-10px {
+    margin-left: 10px;
+}
+
+.ml-15px {
+    margin-left: 15px;
+}
+
+.ml-20px {
+    margin-left: 20px;
+}
+
+.ml-25px {
+    margin-left: 25px;
+}
+
+.ml-30px {
+    margin-left: 30px;
+}
+
+.ml-35px {
+    margin-left: 35px;
+}
+
+.ml-40px {
+    margin-left: 40px;
+}
+
+.ml-45px {
+    margin-left: 45px;
+}
+
+.ml-50px {
+    margin-left: 50px;
+}
+
+.ml-55px {
+    margin-left: 55px;
+}
+
+.ml-60px {
+    margin-left: 60px;
+}
+
+.ml-65px {
+    margin-left: 65px;
+}
+
+.ml-70px {
+    margin-left: 70px;
+}
+
+.ml-75px {
+    margin-left: 75px;
+}
+
+.ml-80px {
+    margin-left: 80px;
+}
+
+.ml-85px {
+    margin-left: 85px;
+}
+
+.ml-90px {
+    margin-left: 90px;
+}
+
+.ml-95px {
+    margin-left: 95px;
+}
+
+.ml-100px {
+    margin-left: 100px;
+}
+/* --- ./utility/margin/margin-right.css --- */
+.mr-5px {
+    margin-right: 5px;
+}
+
+.mr-10px {
+    margin-right: 10px;
+}
+
+.mr-15px {
+    margin-right: 15px;
+}
+
+.mr-20px {
+    margin-right: 20px;
+}
+
+.mr-25px {
+    margin-right: 25px;
+}
+
+.mr-30px {
+    margin-right: 30px;
+}
+
+.mr-35px {
+    margin-right: 35px;
+}
+
+.mr-40px {
+    margin-right: 40px;
+}
+
+.mr-45px {
+    margin-right: 45px;
+}
+
+.mr-50px {
+    margin-right: 50px;
+}
+
+.mr-55px {
+    margin-right: 55px;
+}
+
+.mr-60px {
+    margin-right: 60px;
+}
+
+.mr-65px {
+    margin-right: 65px;
+}
+
+.mr-70px {
+    margin-right: 70px;
+}
+
+.mr-75px {
+    margin-right: 75px;
+}
+
+.mr-80px {
+    margin-right: 80px;
+}
+
+.mr-85px {
+    margin-right: 85px;
+}
+
+.mr-90px {
+    margin-right: 90px;
+}
+
+.mr-95px {
+    margin-right: 95px;
+}
+
+.mr-100px {
+    margin-right: 100px;
+}
+/* --- ./utility/margin/margin-top.css --- */
+.mt-5px {
+    margin-top: 5px;
+}
+
+.mt-10px {
+    margin-top: 10px;
+}
+
+.mt-15px {
+    margin-top: 15px;
+}
+
+.mt-20px {
+    margin-top: 20px;
+}
+
+.mt-25px {
+    margin-top: 25px;
+}
+
+.mt-30px {
+    margin-top: 30px;
+}
+
+.mt-35px {
+    margin-top: 35px;
+}
+
+.mt-40px {
+    margin-top: 40px;
+}
+
+.mt-45px {
+    margin-top: 45px;
+}
+
+.mt-50px {
+    margin-top: 50px;
+}
+
+.mt-55px {
+    margin-top: 55px;
+}
+
+.mt-60px {
+    margin-top: 60px;
+}
+
+.mt-65px {
+    margin-top: 65px;
+}
+
+.mt-70px {
+    margin-top: 70px;
+}
+
+.mt-75px {
+    margin-top: 75px;
+}
+
+.mt-80px {
+    margin-top: 80px;
+}
+
+.mt-85px {
+    margin-top: 85px;
+}
+
+.mt-90px {
+    margin-top: 90px;
+}
+
+.mt-95px {
+    margin-top: 95px;
+}
+
+.mt-100px {
+    margin-top: 100px;
+}
+/* --- ./utility/border-radius/border-bottom-left-radius.css --- */
+.br-bl-5px {
+    border-bottom-left-radius: 5px
+}
+
+.br-bl-10px {
+    border-bottom-left-radius: 10px
+}
+
+.br-bl-15px {
+    border-bottom-left-radius: 15px
+}
+
+.br-bl-20px {
+    border-bottom-left-radius: 20px
+}
+
+.br-bl-25px {
+    border-bottom-left-radius: 25px
+}
+
+.br-bl-30px {
+    border-bottom-left-radius: 30px
+}
+
+.br-bl-35px {
+    border-bottom-left-radius: 35px
+}
+
+.br-bl-40px {
+    border-bottom-left-radius: 40px
+}
+
+.br-bl-45px {
+    border-bottom-left-radius: 45px
+}
+
+.br-bl-50px {
+    border-bottom-left-radius: 50px
+}
+
+.br-bl-55px {
+    border-bottom-left-radius: 55px
+}
+
+.br-bl-60px {
+    border-bottom-left-radius: 60px
+}
+
+.br-bl-65px {
+    border-bottom-left-radius: 65px
+}
+
+.br-bl-70px {
+    border-bottom-left-radius: 70px
+}
+
+.br-bl-75px {
+    border-bottom-left-radius: 75px
+}
+
+.br-bl-80px {
+    border-bottom-left-radius: 80px
+}
+
+.br-bl-85px {
+    border-bottom-left-radius: 85px
+}
+
+.br-bl-90px {
+    border-bottom-left-radius: 90px
+}
+
+.br-bl-95px {
+    border-bottom-left-radius: 95px
+}
+
+.br-bl-100px {
+    border-bottom-left-radius: 100px
+}
+/* --- ./utility/border-radius/border-bottom-right-radius.css --- */
+.br-br-5px {
+    border-bottom-right-radius: 5px
+}
+
+.br-br-10px {
+    border-bottom-right-radius: 10px
+}
+
+.br-br-15px {
+    border-bottom-right-radius: 15px
+}
+
+.br-br-20px {
+    border-bottom-right-radius: 20px
+}
+
+.br-br-25px {
+    border-bottom-right-radius: 25px
+}
+
+.br-br-30px {
+    border-bottom-right-radius: 30px
+}
+
+.br-br-35px {
+    border-bottom-right-radius: 35px
+}
+
+.br-br-40px {
+    border-bottom-right-radius: 40px
+}
+
+.br-br-45px {
+    border-bottom-right-radius: 45px
+}
+
+.br-br-50px {
+    border-bottom-right-radius: 50px
+}
+
+.br-br-55px {
+    border-bottom-right-radius: 55px
+}
+
+.br-br-60px {
+    border-bottom-right-radius: 60px
+}
+
+.br-br-65px {
+    border-bottom-right-radius: 65px
+}
+
+.br-br-70px {
+    border-bottom-right-radius: 70px
+}
+
+.br-br-75px {
+    border-bottom-right-radius: 75px
+}
+
+.br-br-80px {
+    border-bottom-right-radius: 80px
+}
+
+.br-br-85px {
+    border-bottom-right-radius: 85px
+}
+
+.br-br-90px {
+    border-bottom-right-radius: 90px
+}
+
+.br-br-95px {
+    border-bottom-right-radius: 95px
+}
+
+.br-br-100px {
+    border-bottom-right-radius: 100px
+}
+/* --- ./utility/border-radius/border-top-left-radius.css --- */
+.br-tl-5px {
+    border-top-left-radius: 5px
+}
+
+.br-tl-10px {
+    border-top-left-radius: 10px
+}
+
+.br-tl-15px {
+    border-top-left-radius: 15px
+}
+
+.br-tl-20px {
+    border-top-left-radius: 20px
+}
+
+.br-tl-25px {
+    border-top-left-radius: 25px
+}
+
+.br-tl-30px {
+    border-top-left-radius: 30px
+}
+
+.br-tl-35px {
+    border-top-left-radius: 35px
+}
+
+.br-tl-40px {
+    border-top-left-radius: 40px
+}
+
+.br-tl-45px {
+    border-top-left-radius: 45px
+}
+
+.br-tl-50px {
+    border-top-left-radius: 50px
+}
+
+.br-tl-55px {
+    border-top-left-radius: 55px
+}
+
+.br-tl-60px {
+    border-top-left-radius: 60px
+}
+
+.br-tl-65px {
+    border-top-left-radius: 65px
+}
+
+.br-tl-70px {
+    border-top-left-radius: 70px
+}
+
+.br-tl-75px {
+    border-top-left-radius: 75px
+}
+
+.br-tl-80px {
+    border-top-left-radius: 80px
+}
+
+.br-tl-85px {
+    border-top-left-radius: 85px
+}
+
+.br-tl-90px {
+    border-top-left-radius: 90px
+}
+
+.br-tl-95px {
+    border-top-left-radius: 95px
+}
+
+.br-tl-100px {
+    border-top-left-radius: 100px
+}
+/* --- ./utility/border-radius/border-top-right-radius.css --- */
+.br-tr-5px {
+    border-top-right-radius: 5px
+}
+
+.br-tr-10px {
+    border-top-right-radius: 10px
+}
+
+.br-tr-15px {
+    border-top-right-radius: 15px
+}
+
+.br-tr-20px {
+    border-top-right-radius: 20px
+}
+
+.br-tr-25px {
+    border-top-right-radius: 25px
+}
+
+.br-tr-30px {
+    border-top-right-radius: 30px
+}
+
+.br-tr-35px {
+    border-top-right-radius: 35px
+}
+
+.br-tr-40px {
+    border-top-right-radius: 40px
+}
+
+.br-tr-45px {
+    border-top-right-radius: 45px
+}
+
+.br-tr-50px {
+    border-top-right-radius: 50px
+}
+
+.br-tr-55px {
+    border-top-right-radius: 55px
+}
+
+.br-tr-60px {
+    border-top-right-radius: 60px
+}
+
+.br-tr-65px {
+    border-top-right-radius: 65px
+}
+
+.br-tr-70px {
+    border-top-right-radius: 70px
+}
+
+.br-tr-75px {
+    border-top-right-radius: 75px
+}
+
+.br-tr-80px {
+    border-top-right-radius: 80px
+}
+
+.br-tr-85px {
+    border-top-right-radius: 85px
+}
+
+.br-tr-90px {
+    border-top-right-radius: 90px
+}
+
+.br-tr-95px {
+    border-top-right-radius: 95px
+}
+
+.br-tr-100px {
+    border-top-right-radius: 100px
+}
+/* --- ./utility/border-radius/general-border-radius.css --- */
+.brr-5px {
+    border-radius: 5px
+}
+
+.brr-10px {
+    border-radius: 10px
+}
+
+.brr-15px {
+    border-radius: 15px
+}
+
+.brr-20px {
+    border-radius: 20px
+}
+
+.brr-25px {
+    border-radius: 25px
+}
+
+.brr-30px {
+    border-radius: 30px
+}
+
+.brr-35px {
+    border-radius: 35px
+}
+
+.brr-40px {
+    border-radius: 40px
+}
+
+.brr-45px {
+    border-radius: 45px
+}
+
+.brr-50px {
+    border-radius: 50px
+}
+
+.brr-55px {
+    border-radius: 55px
+}
+
+.brr-60px {
+    border-radius: 60px
+}
+
+.brr-65px {
+    border-radius: 65px
+}
+
+.brr-70px {
+    border-radius: 70px
+}
+
+.brr-75px {
+    border-radius: 75px
+}
+
+.brr-80px {
+    border-radius: 80px
+}
+
+.brr-85px {
+    border-radius: 85px
+}
+
+.brr-90px {
+    border-radius: 90px
+}
+
+.brr-95px {
+    border-radius: 95px
+}
+
+.brr-100px {
+    border-radius: 100px
+}
+/* --- ./utility/bg-colors/bg-colors.css --- */
+.bg-aliceblue {
+    background-color: aliceblue;
+}
+
+.bg-antiquewhite {
+    background-color: antiquewhite;
+}
+
+.bg-aqua {
+    background-color: aqua;
+}
+
+.bg-aquamarine {
+    background-color: aquamarine;
+}
+
+.bg-azure {
+    background-color: azure;
+}
+
+.bg-beige {
+    background-color: beige;
+}
+
+.bg-bisque {
+    background-color: bisque;
+}
+
+.bg-black {
+    background-color: black;
+}
+
+.bg-blanchedalmond {
+    background-color: blanchedalmond;
+}
+
+.bg-blue {
+    background-color: blue;
+}
+
+.bg-blueviolet {
+    background-color: blueviolet;
+}
+
+.bg-brown {
+    background-color: brown;
+}
+
+.bg-burlywood {
+    background-color: burlywood;
+}
+
+.bg-cadetblue {
+    background-color: cadetblue;
+}
+
+.bg-chartreuse {
+    background-color: chartreuse;
+}
+
+.bg-chocolate {
+    background-color: chocolate;
+}
+
+.bg-coral {
+    background-color: coral;
+}
+
+.bg-cornflowerblue {
+    background-color: cornflowerblue;
+}
+
+.bg-cornsilk {
+    background-color: cornsilk;
+}
+
+.bg-crimson {
+    background-color: crimson;
+}
+
+.bg-cyan {
+    background-color: cyan;
+}
+
+.bg-darkblue {
+    background-color: darkblue;
+}
+
+.bg-darkcyan {
+    background-color: darkcyan;
+}
+
+.bg-darkgoldenrod {
+    background-color: darkgoldenrod;
+}
+
+.bg-darkgray {
+    background-color: darkgray;
+}
+
+.bg-darkgrey {
+    background-color: darkgrey;
+}
+
+.bg-darkgreen {
+    background-color: darkgreen;
+}
+
+.bg-darkkhaki {
+    background-color: darkkhaki;
+}
+
+.bg-darkmagenta {
+    background-color: darkmagenta;
+}
+
+.bg-darkolivegreen {
+    background-color: darkolivegreen;
+}
+
+.bg-darkorange {
+    background-color: darkorange;
+}
+
+.bg-darkorchid {
+    background-color: darkorchid;
+}
+
+.bg-darkred {
+    background-color: darkred;
+}
+
+.bg-darksalmon {
+    background-color: darksalmon;
+}
+
+.bg-darkseagreen {
+    background-color: darkseagreen;
+}
+
+.bg-darkslateblue {
+    background-color: darkslateblue;
+}
+
+.bg-darkslategray {
+    background-color: darkslategray;
+}
+
+.bg-darkslategrey {
+    background-color: darkslategrey;
+}
+
+.bg-darkturquoise {
+    background-color: darkturquoise;
+}
+
+.bg-darkviolet {
+    background-color: darkviolet;
+}
+
+.bg-deeppink {
+    background-color: deeppink;
+}
+
+.bg-deepskyblue {
+    background-color: deepskyblue;
+}
+
+.bg-dimgray {
+    background-color: dimgray;
+}
+
+.bg-dimgrey {
+    background-color: dimgrey;
+}
+
+.bg-dodgerblue {
+    background-color: dodgerblue;
+}
+
+.bg-firebrick {
+    background-color: firebrick;
+}
+
+.bg-floralwhite {
+    background-color: floralwhite;
+}
+
+.bg-forestgreen {
+    background-color: forestgreen;
+}
+
+.bg-fuchsia {
+    background-color: fuchsia;
+}
+
+.bg-gainsboro {
+    background-color: gainsboro;
+}
+
+.bg-ghostwhite {
+    background-color: ghostwhite;
+}
+
+.bg-gold {
+    background-color: gold;
+}
+
+.bg-goldenrod {
+    background-color: goldenrod;
+}
+
+.bg-gray {
+    background-color: gray;
+}
+
+.bg-green {
+    background-color: green;
+}
+
+.bg-honeydew {
+    background-color: honeydew;
+}
+
+.bg-hotpink {
+    background-color: hotpink;
+}
+
+.bg-indianred {
+    background-color: indianred;
+}
+
+.bg-indigo {
+    background-color: indigo;
+}
+
+.bg-ivory {
+    background-color: ivory;
+}
+
+.bg-khaki {
+    background-color: khaki;
+}
+
+.bg-lavender {
+    background-color: lavender;
+}
+
+.bg-lavenderblush {
+    background-color: lavenderblush;
+}
+
+.bg-lawngreen {
+    background-color: lawngreen;
+}
+
+.bg-lemonchiffon {
+    background-color: lemonchiffon;
+}
+
+.bg-lightblue {
+    background-color: lightblue;
+}
+
+.bg-lightcoral {
+    background-color: lightcoral;
+}
+
+.bg-lightcyan {
+    background-color: lightcyan;
+}
+
+.bg-lightgoldenrodyellow {
+    background-color: lightgoldenrodyellow;
+}
+
+.bg-lightgray {
+    background-color: lightgray;
+}
+
+.bg-lightgrey {
+    background-color: lightgrey;
+}
+
+.bg-lightgreen {
+    background-color: lightgreen;
+}
+
+.bg-lightpink {
+    background-color: lightpink;
+}
+
+.bg-lightsalmon {
+    background-color: lightsalmon;
+}
+
+.bg-lightseagreen {
+    background-color: lightseagreen;
+}
+
+.bg-lightskyblue {
+    background-color: lightskyblue;
+}
+
+.bg-lightslategray {
+    background-color: lightslategray;
+}
+
+.bg-lightslategrey {
+    background-color: lightslategrey;
+}
+
+.bg-lightsteelblue {
+    background-color: lightsteelblue;
+}
+
+.bg-lightyellow {
+    background-color: lightyellow;
+}
+
+.bg-lime {
+    background-color: lime;
+}
+
+.bg-limegreen {
+    background-color: limegreen;
+}
+
+.bg-linen {
+    background-color: linen;
+}
+
+.bg-magenta {
+    background-color: magenta;
+}
+
+.bg-maroon {
+    background-color: maroon;
+}
+
+.bg-mediumaquamarine {
+    background-color: mediumaquamarine;
+}
+
+.bg-mediumblue {
+    background-color: mediumblue;
+}
+
+.bg-mediumorchid {
+    background-color: mediumorchid;
+}
+
+.bg-mediumpurple {
+    background-color: mediumpurple;
+}
+
+.bg-mediumseagreen {
+    background-color: mediumseagreen;
+}
+
+.bg-mediumturquoise {
+    background-color: mediumturquoise;
+}
+
+.bg-mediumvioletred {
+    background-color: mediumvioletred;
+}
+
+.bg-midnightblue {
+    background-color: midnightblue;
+}
+
+.bg-mintcream {
+    background-color: mintcream;
+}
+
+.bg-mistyrose {
+    background-color: mistyrose;
+}
+
+.bg-moccasin {
+    background-color: moccasin;
+}
+
+.bg-navajowhite {
+    background-color: navajowhite;
+}
+
+.bg-navy {
+    background-color: navy;
+}
+
+.bg-oldlace {
+    background-color: oldlace;
+}
+
+.bg-olive {
+    background-color: olive;
+}
+
+.bg-olivedrab {
+    background-color: olivedrab;
+}
+
+.bg-orange {
+    background-color: orange;
+}
+
+.bg-orangered {
+    background-color: orangered;
+}
+
+.bg-orchid {
+    background-color: orchid;
+}
+
+.bg-palegoldenrod {
+    background-color: palegoldenrod;
+}
+
+.bg-palegreen {
+    background-color: palegreen;
+}
+
+.bg-paleturquoise {
+    background-color: paleturquoise;
+}
+
+.bg-palevioletred {
+    background-color: palevioletred;
+}
+
+.bg-papayawhip {
+    background-color: papayawhip;
+}
+
+.bg-peachpuff {
+    background-color: peachpuff;
+}
+
+.bg-peru {
+    background-color: peru;
+}
+
+.bg-pink {
+    background-color: pink;
+}
+
+.bg-plum {
+    background-color: plum;
+}
+
+.bg-powderblue {
+    background-color: powderblue;
+}
+
+.bg-purple {
+    background-color: purple;
+}
+
+.bg-rebeccapurple {
+    background-color: rebeccapurple;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.bg-rosybrown {
+    background-color: rosybrown;
+}
+
+.bg-royalblue {
+    background-color: royalblue;
+}
+
+.bg-saddlebrown {
+    background-color: saddlebrown;
+}
+
+.bg-salmon {
+    background-color: salmon;
+}
+
+.bg-sandybrown {
+    background-color: sandybrown;
+}
+
+.bg-seagreen {
+    background-color: seagreen;
+}
+
+.bg-seashell {
+    background-color: seashell;
+}
+
+.bg-sienna {
+    background-color: sienna;
+}
+
+.bg-silver {
+    background-color: silver;
+}
+
+.bg-skyblue {
+    background-color: skyblue;
+}
+
+.bg-slateblue {
+    background-color: slateblue;
+}
+
+.bg-slategray {
+    background-color: slategray;
+}
+
+.bg-slategrey {
+    background-color: slategrey;
+}
+
+.bg-snow {
+    background-color: snow;
+}
+
+.bg-springgreen {
+    background-color: springgreen;
+}
+
+.bg-steelblue {
+    background-color: steelblue;
+}
+
+.bg-tan {
+    background-color: tan;
+}
+
+.bg-teal {
+    background-color: teal;
+}
+
+.bg-thistle {
+    background-color: thistle;
+}
+
+.bg-tomato {
+    background-color: tomato;
+}
+
+.bg-turquoise {
+    background-color: turquoise;
+}
+
+.bg-violet {
+    background-color: violet;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.bg-whitesmoke {
+    background-color: whitesmoke;
+}
+
+.bg-yellow {
+    background-color: yellow;
+}

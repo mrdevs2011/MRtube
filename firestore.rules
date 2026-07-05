@@ -1,0 +1,400 @@
+rules_version = '2';
+
+// ═══════════════════════════════════════════════════════════════════════════
+//  MRgram — Firestore Security Rules
+// ═══════════════════════════════════════════════════════════════════════════
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  YORDAMCHI FUNKSIYALAR
+    // ─────────────────────────────────────────────────────────────────────
+
+    function isAuthed() {
+      return request.auth != null;
+    }
+
+    function myUid() {
+      return request.auth.uid;
+    }
+
+    function isAdmin() {
+      return isAuthed() && myUid() == 'cS9Riz2K4xgW1i4PVboWoQfhGok2';
+    }
+
+    function userDoc(uid) {
+      return get(/databases/$(database)/documents/users/$(uid)).data;
+    }
+
+    function isApproved() {
+      let u = get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+      return isAuthed()
+        && u.approved == true
+        && u.blocked != true
+        && (
+          !('blockedUntil' in u)
+          || u.blockedUntil == null
+          || u.blockedUntil.toMillis() < request.time.toMillis()
+        );
+    }
+
+    function onlyFields(allowed) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly(allowed);
+    }
+
+    function groupDoc(groupId) {
+      return get(/databases/$(database)/documents/groups/$(groupId)).data;
+    }
+
+    function isGroupAdmin(groupId) {
+      return isAuthed() && (
+        myUid() == groupDoc(groupId).ownerId
+        || (groupDoc(groupId).adminIds != null && myUid() in groupDoc(groupId).adminIds)
+      );
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  1. USERS  /users/{uid}
+    // ─────────────────────────────────────────────────────────────────────
+    match /users/{uid} {
+
+      // Endi faqat tizimga kirgan (autentifikatsiyadan o'tgan) foydalanuvchilar
+      // o'qiy oladi. Login/username qidiruvi FAQAT /usernames (pastda, alohida,
+      // minimal hujjat) orqali ishlaydi va bunga bog'liq emas — shuning uchun
+      // bu yerni qattiqlashtirish login oqimini (shu jumladan eski domen
+      // mrtube.uz/mrspace.uz fallback'ini) buzmaydi.
+      allow read: if isAuthed();
+
+      allow create: if isAuthed()
+        && myUid() == uid
+        && request.resource.data.keys().hasAll(['uid','username','fullName','email','bio','avatar','followers','following','createdAt','approved'])
+        && request.resource.data.keys().hasOnly(['uid','username','fullName','email','bio','avatar','followers','following','createdAt','approved','authProvider','pushToken','fcmTokens'])
+        && request.resource.data.uid == uid;
+
+      allow update: if (
+          (isAuthed() && myUid() == uid && isApproved()
+            && onlyFields(['fullName','bio','avatar','pushToken','fcmTokens','following','followers','lastSeen','typing','website','location','coverUrl','username']))
+
+          || (isAuthed() && myUid() == uid
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['aiViolations'])
+            && request.resource.data.aiViolations.size() >= resource.data.get('aiViolations', []).size())
+
+          || (isAuthed() && myUid() == uid
+            && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['aiViolations', 'aiPendingBlock'])
+            && request.resource.data.aiPendingBlock == true)
+
+          || (isAuthed() && myUid() == uid
+            && onlyFields(['lastLogin','pushToken','fcmTokens','lastSeen','lastSeenAt','lastUserAgent','lastPlatform']))
+
+          || isAdmin()
+        );
+
+      allow delete: if isAdmin();
+
+      match /contacts/{contactId} {
+        allow read:   if isAuthed() && myUid() == uid;
+        // O'z kontaktini yozish — har doim ruxsat (approved bo'lsa)
+        allow write:  if isApproved() && myUid() == uid;
+        // Boshqa user seni o'z kontaktiga qo'shishi — faqat contactId == myUid() bo'lsa
+        allow create: if isApproved() && myUid() == contactId;
+        allow delete: if isAuthed() && myUid() == uid;
+      }
+
+      match /loginHistory/{logId} {
+        allow read:   if isAuthed() && (myUid() == uid || isAdmin());
+        allow create: if isAuthed() && myUid() == uid;
+        allow update, delete: if isAdmin();
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  1b. USERNAMES  /usernames/{username}  — MINIMAL, ochiq xarita
+    //      Faqat { uid, email } saqlaydi. Login paytida (autentifikatsiyasiz)
+    //      username -> email topish uchun. Bu — to'liq /users/{uid} hujjatini
+    //      (bio, push-token va h.k.) hammaga ochiq qilishning oldini oladi.
+    // ─────────────────────────────────────────────────────────────────────
+    match /usernames/{username} {
+      allow read: if true;
+
+      allow create: if isAuthed()
+        && request.resource.data.keys().hasOnly(['uid','email'])
+        && request.resource.data.uid == myUid();
+
+      // Faqat o'zining yozuvini yangilashi/o'chirishi mumkin (username
+      // o'zgartirilganda eski kalit o'chirilib, yangisi yaratiladi)
+      allow update: if isAuthed()
+        && resource.data.uid == myUid()
+        && request.resource.data.keys().hasOnly(['uid','email'])
+        && request.resource.data.uid == myUid();
+
+      allow delete: if isAuthed() && resource.data.uid == myUid();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  2. POSTS  /posts/{postId}
+    // ─────────────────────────────────────────────────────────────────────
+    match /posts/{postId} {
+
+      allow read: if isAuthed() && (
+        isAdmin()
+        || resource.data.userId == myUid()
+        || resource.data.isPublic == true
+      );
+
+      allow create: if isApproved()
+        && request.resource.data.userId == myUid()
+        && request.resource.data.keys().hasAll(['userId','createdAt','views','likes','commentCount'])
+        && request.resource.data.views == 0
+        && request.resource.data.likes == 0
+        && request.resource.data.commentCount == 0;
+
+      allow update: if
+        (isApproved() && resource.data.userId == myUid()
+          && onlyFields(['text','isPublic','isMaxPrivate']))
+        || (isApproved() && resource.data.userId == myUid()
+          && onlyFields(['aiHidden','aiChecked','aiReason','aiFlaggedAt']))
+        || (isApproved() && onlyFields(['views','likes','commentCount']))
+        || isAdmin();
+
+      allow delete: if isAuthed() && (
+        resource.data.userId == myUid()
+        || isAdmin()
+      );
+
+      match /likes/{likeId} {
+        allow read:   if isApproved();
+        allow create: if isApproved() && likeId == myUid();
+        allow delete: if isAuthed() && likeId == myUid();
+      }
+
+      match /comments/{commentId} {
+        allow read:   if isApproved();
+        allow create: if isApproved()
+          && request.resource.data.userId == myUid()
+          && request.resource.data.keys().hasAll(['userId','text','createdAt']);
+        allow update: if isAuthed()
+          && resource.data.userId == myUid()
+          && onlyFields(['text']);
+        allow delete: if isAuthed() && (
+          resource.data.userId == myUid()
+          || isAdmin()
+        );
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  3. CHATS (DM)  /chats/{chatId}
+    // ─────────────────────────────────────────────────────────────────────
+    match /chats/{chatId} {
+
+      allow read: if isAuthed()
+        && myUid() in resource.data.participants;
+
+      allow create: if isApproved()
+        && myUid() in request.resource.data.participants
+        && request.resource.data.participants.size() == 2;
+
+      allow update: if isAuthed()
+        && myUid() in resource.data.participants
+        && onlyFields(['unreadCount','typing','lastMessage','lastMessageAt','lastSenderId','lastSeenAt']);
+
+      allow delete: if isAdmin();
+
+      match /messages/{msgId} {
+        allow read: if isAuthed()
+          && myUid() in get(/databases/$(database)/documents/chats/$(chatId)).data.participants;
+
+        allow create: if isApproved()
+          && myUid() in get(/databases/$(database)/documents/chats/$(chatId)).data.participants
+          && request.resource.data.senderId == myUid()
+          && request.resource.data.keys().hasAll(['senderId','createdAt']);
+
+        allow update: if (
+            // O'z xabarini tahrirlash
+            isAuthed()
+            && resource.data.senderId == myUid()
+            && onlyFields(['text','status','editedAt'])
+          ) || (
+            // Qabul qiluvchi xabarni o'qilgan deb belgilashi
+            isAuthed()
+            && myUid() in get(/databases/$(database)/documents/chats/$(chatId)).data.participants
+            && resource.data.senderId != myUid()
+            && onlyFields(['status','readAt'])
+          );
+
+        allow delete: if isAuthed() && (
+          resource.data.senderId == myUid()
+          || isAdmin()
+        );
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  4. GROUPS & CHANNELS  /groups/{groupId}
+    // ─────────────────────────────────────────────────────────────────────
+    match /groups/{groupId} {
+
+      allow read: if isAuthed() && (
+        isAdmin()
+        || myUid() == resource.data.ownerId
+        || (resource.data.adminIds != null && myUid() in resource.data.adminIds)
+        || (resource.data.memberIds != null && myUid() in resource.data.memberIds)
+        || (resource.data.participants != null && myUid() in resource.data.participants)
+        || resource.data.isPublic == true
+      );
+
+      allow create: if isApproved()
+        && request.resource.data.ownerId == myUid()
+        && request.resource.data.keys().hasAll(['ownerId','name','type','createdAt']);
+
+      allow update: if isAuthed() && (
+        myUid() == resource.data.ownerId
+        || (resource.data.adminIds != null && myUid() in resource.data.adminIds)
+        || isAdmin()
+        || (isApproved()
+          && (resource.data.memberIds != null && myUid() in resource.data.memberIds)
+          && onlyFields(['unreadCount','memberIds','participants']))
+      );
+
+      allow delete: if isAuthed() && (
+        myUid() == resource.data.ownerId || isAdmin()
+      );
+
+      match /messages/{msgId} {
+        allow read: if isAuthed() && (
+          isAdmin()
+          || myUid() == groupDoc(groupId).ownerId
+          || (groupDoc(groupId).adminIds != null && myUid() in groupDoc(groupId).adminIds)
+          || (groupDoc(groupId).memberIds != null && myUid() in groupDoc(groupId).memberIds)
+          || (groupDoc(groupId).participants != null && myUid() in groupDoc(groupId).participants)
+        );
+
+        allow create: if isApproved()
+          && request.resource.data.senderId == myUid()
+          && (
+            (groupDoc(groupId).type == 'group' && (
+              myUid() == groupDoc(groupId).ownerId
+              || (groupDoc(groupId).adminIds != null && myUid() in groupDoc(groupId).adminIds)
+              || (groupDoc(groupId).memberIds != null && myUid() in groupDoc(groupId).memberIds)
+              || (groupDoc(groupId).participants != null && myUid() in groupDoc(groupId).participants)
+            ))
+            || (groupDoc(groupId).type == 'channel' && (
+              myUid() == groupDoc(groupId).ownerId
+              || (groupDoc(groupId).adminIds != null && myUid() in groupDoc(groupId).adminIds)
+            ))
+            || isAdmin()
+          );
+
+        allow update: if isAuthed()
+          && resource.data.senderId == myUid()
+          && onlyFields(['text','editedAt']);
+
+        allow delete: if isAuthed() && (
+          resource.data.senderId == myUid()
+          || isGroupAdmin(groupId)
+          || isAdmin()
+        );
+      }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  5. CALLS (WebRTC signaling)  /calls/{callId}
+    // ─────────────────────────────────────────────────────────────────────
+    match /calls/{callId} {
+
+      allow read: if isAuthed() && (
+        myUid() == resource.data.callerId
+        || myUid() == resource.data.calleeId
+        || isAdmin()
+      );
+
+      allow create: if isApproved()
+        && request.resource.data.callerId == myUid()
+        && request.resource.data.keys().hasAll(['callerId','calleeId','type','status','offer','createdAt']);
+
+      allow update: if isAuthed() && (
+        isAdmin()
+        || (myUid() == resource.data.callerId && onlyFields(['callerCandidates','status']))
+        || (myUid() == resource.data.calleeId && onlyFields(['answer','calleeCandidates','status']))
+      );
+
+      allow delete: if isAuthed() && (
+        myUid() == resource.data.callerId
+        || myUid() == resource.data.calleeId
+        || isAdmin()
+      );
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  6. ADMIN KONFIGURATSIYA  /spbs-collection/{docId}
+    //     MUHIM: 'secrets' hujjati (masalan groqkey) faqat ADMIN o'qiy oladi —
+    //     boshqa hujjatlar (masalan 'controller') hammaga (login bo'lsa) ochiq,
+    //     chunki ular maxfiy emas (bucket url, project anonKey va h.k.).
+    //     Eslatma: Firestore'da bir xil yo'l uchun bir nechta alohida match
+    //     bloki OR qilinadi (istalgan biri ruxsat bersa ruxsat beriladi) —
+    //     shuning uchun buni ALOHIDA bloklar bilan emas, BITTA blokdagi
+    //     shart orqali yozish kerak.
+    // ─────────────────────────────────────────────────────────────────────
+    match /spbs-collection/{docId} {
+      allow read: if (docId == 'secrets' && isAdmin())
+                  || (docId != 'secrets' && isAuthed());
+      allow write: if isAdmin();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  7. ADMIN NOTICE  /adminNotice/{docId}
+    // ─────────────────────────────────────────────────────────────────────
+    match /adminNotice/{docId} {
+      allow read:  if isAuthed();
+      allow write: if isAdmin();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  8. SERVER VAQT SINXRONIZATSIYASI  /_servertime_sync/{docId}
+    // ─────────────────────────────────────────────────────────────────────
+    match /_servertime_sync/{docId} {
+      allow read, write, delete: if isAuthed() && myUid() == docId.split('_')[0];
+      allow read, write, delete: if isAdmin();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  9. PUSH TOKENS  /pushTokens/{uid}
+    // ─────────────────────────────────────────────────────────────────────
+    match /pushTokens/{uid} {
+      allow read:  if isAuthed() && (myUid() == uid || isAdmin());
+      allow write: if isAuthed() && myUid() == uid;
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  10. ADMIN TASKS  /adminTasks/{taskId}
+    // ─────────────────────────────────────────────────────────────────────
+    match /adminTasks/{taskId} {
+      allow create: if isAuthed()
+        && request.resource.data.uid == myUid()
+        && request.resource.data.done == false
+        && request.resource.data.type is string;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  AI RATE LIMIT  /ai_rate/{uid}
+    //  Har bir foydalanuvchi faqat o'z hujjatini o'qiy/yoza oladi.
+    //  timestamps maydoni — son massivi (epoch ms), updatedAt — raqam.
+    // ─────────────────────────────────────────────────────────────────────
+    match /ai_rate/{uid} {
+      allow read, write: if isAuthed() && myUid() == uid
+        && request.resource.data.keys().hasOnly(['timestamps', 'updatedAt'])
+        && request.resource.data.timestamps is list
+        && request.resource.data.updatedAt is number;
+    }
+
+    // ─────────────────────────────────────────────────────────────────────
+    //  DEFAULT: boshqa hamma narsaga taqiq
+    // ─────────────────────────────────────────────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+  }
+}

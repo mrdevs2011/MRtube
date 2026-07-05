@@ -1,0 +1,11 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/modules/:path+",           "destination": "/modules/:path+" },
+    { "source": "/CSS/:path+",               "destination": "/CSS/:path+" },
+    { "source": "/svg/:path+",               "destination": "/svg/:path+" },
+    { "source": "/icons/:path+",             "destination": "/icons/:path+" },
+    { "source": "/((?!api/).*)",             "destination": "/index.html" }
+  ]
+}
