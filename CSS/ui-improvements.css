@@ -1902,12 +1902,12 @@
 
 /* ── 1. Header — header, shimmer, border gradient ── */
 .app-hdr {
-  background: var(--glass-mid) !important;
-  border-bottom: 0.5px solid var(--glass-border) !important;
+  background: var(--glass-mid);
+  border-bottom: 0.5px solid var(--glass-border);
   box-shadow:
     inset 0 1px 0 var(--glass-border-top),
     inset 0 -0.5px 0 #17171E,
-    0 2px 20px #07070D !important;
+    0 2px 20px #07070D;
 }
 
 /* specular shimmer — yuqori chiziq */
@@ -1942,10 +1942,10 @@
   transition: all 0.38s var(--ease-back) !important;
 }
 .nav-btn:hover {
-  transform: scale(1.10) !important;
-  background: var(--glass-mid) !important;
-  border: 0.5px solid var(--glass-border) !important;
-  box-shadow: var(--specular-top), var(--liquid-shadow-sm) !important;
+  transform: scale(1.10);
+  background: var(--glass-mid);
+  border: 0.5px solid var(--glass-border);
+  box-shadow: var(--specular-top), var(--liquid-shadow-sm);
 }
 .nav-btn.on {
   transform: scale(1.04) !important;
