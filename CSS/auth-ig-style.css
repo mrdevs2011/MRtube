@@ -27,25 +27,32 @@
   margin-bottom: 10px;
 }
 
-.ig-field .ig-input {
-  width: 100%;
-  height: 56px;
-  padding: 22px 16px 8px;
-  margin-bottom: 0;
+#authWrap .ig-field .ig-input,
+#authWrap .ig-field input.ig-input,
+[data-theme="dark"] #authWrap .ig-field .ig-input {
+  width: 100% !important;
+  height: 56px !important;
+  min-height: 56px !important;
+  padding: 22px 16px 8px !important;
+  margin-bottom: 0 !important;
   border-radius: 10px !important;
   background: var(--glass) !important;
   border: 1px solid var(--glass-border) !important;
   color: var(--text) !important;
-  font-size: 15px;
-  font-family: var(--font);
-  outline: none;
+  font-size: 15px !important;
+  font-family: var(--font) !important;
+  outline: none !important;
   box-shadow: none !important;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transform: none !important;
+  transition: border-color 0.15s ease, background 0.15s ease !important;
 }
 
-.ig-field .ig-input:focus {
+#authWrap .ig-field .ig-input:focus,
+[data-theme="dark"] #authWrap .ig-field .ig-input:focus {
   border-color: var(--blue) !important;
   background: var(--glass-mid) !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
 
 .ig-field .ig-input::placeholder { color: transparent; }
