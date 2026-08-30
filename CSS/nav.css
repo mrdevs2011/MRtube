@@ -8,14 +8,13 @@
   width: 100%;
   padding: 13px 16px;
   background: var(--glass);
-  border: 0.5px solid var(--glass-border);
+  /* border/box-shadow → borderless.css:262 guruhida 'none' bilan yengiladi, o'lik */
   border-radius: 14px;
   color: var(--text);
   font-family: var(--font);
   outline: none;
   margin-bottom: 10px;
   transition: all 0.2s var(--ease);
-  box-shadow: var(--specular-top);
 }
 
 .field:focus {
@@ -397,7 +396,8 @@
   border-radius: 16px;
   margin: 10px 0 2px;
   cursor: pointer;
-  transition: all 0.2s var(--ease-spring);
+  /* transition → ui-improvements.css:1947 bilan bir xil specificity, keyinroq
+     yuklanadi, shu yerdagi qiymat o'lik */
   text-decoration: none;
 }
 
@@ -1513,4 +1513,3 @@
 .md-li-ol {
   font-variant-numeric: tabular-nums;
 }
-
