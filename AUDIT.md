@@ -429,10 +429,113 @@ qayta ishga tushirilganda hech qanday o'lik qator topilmaydi (0/0/0).
 | `00-components.core.css` / `loading.css` | 1 |
 | qolganlari | 0 |
 
-### C7 — Keyingi navbat
+### C7 — BAJARILDI ✅
 
 `.post`/`.file-card`/`.field`/`#userProfileModal`/`.bot-nav`/`.btn-primary`
-klasterlari (§C3) — bular `dark-theme-fix.css` bilan emas, balki
-`borderless.css`/`feed.css`/`nav.css`/`ui-improvements.css`/`theme.css`
-o'rtasida, C1 metodologiyasi (property-darajasida) bilan tekshirilishi
-kerak.
+klasterlari `borderless.css`/`feed.css`/`nav.css`/`ui-improvements.css`/
+`theme.css` orasida C1 metodologiyasi (property-darajasida, cascade-aware
+skript `/home/claude/c7_check.py`) bilan tekshirildi.
+
+**Muhim ogohlantirish (naiv skript xatolari haqida):** birinchi avtomatik
+o'tishda skript bir nechta **false positive** berdi — sabab, u
+`[data-theme="dark"] .post` va `[data-theme="light"] .post` kabi turli
+theme-scoped selektorlarni bir-birining raqibi deb hisobladi, holbuki ular
+DOM'da hech qachon bir vaqtda faol bo'lmaydi (faqat bittasi ishlaydi).
+Shuningdek, theme-scoped selektor (masalan `[data-theme="light"] .file-card`)
+bare selektorni (`.file-card`) **faqat o'z temasida** yutadi, boshqa temada
+bare qator hali ham tirik qoladi — buni ham skript avval hisobga olmagan
+edi. Har bir topilma qo'lda, ikkala faylning to'liq kontekstini o'qib
+tasdiqlandi, faqat shundan keyin o'chirildi.
+
+**Tasdiqlangan va o'chirilgan (4 ta joy, 2 faylda):**
+
+| Fayl | O'chirilgan | Sabab |
+|---|---|---|
+| `feed.css` (~1185) | `[data-theme="light"] .post { box-shadow: 0 2px 8px #DADADE }` | `borderless.css:43` guruhida bir xil specificity (0,1,1), keyinroq yuklanadi, `box-shadow:none` g'olib chiqadi |
+| `feed.css` (~359) | `.post { position: relative }` | `ui-improvements.css:70` bir xil qiymatni beradi, keyinroq yuklanadi — amaliy farq yo'q edi |
+| `nav.css` (~397) | `.file-card { transition: all 0.2s var(--ease-spring) }` | `ui-improvements.css:1947` bare `.file-card` bilan bir xil specificity, keyinroq yuklanadi, boshqa qiymat beradi va g'olib chiqadi |
+| `nav.css` (~10-11) | `.field { border: 0.5px solid var(--glass-border); box-shadow: var(--specular-top); }` | `borderless.css:262` guruhida bare `.field` bilan bir xil specificity, keyinroq yuklanadi, `none` qiladi |
+
+**Tegilmagan (tekshirildi, lekin tirik yoki konfliktsiz deb topildi):**
+- `[data-theme="dark"] .post` (feed.css) — `box-shadow` tirik, chunki
+  `borderless.css` faqat light temani yopadi.
+- `.file-card { background: var(--glass) }` (nav.css) — dark temada tirik,
+  `borderless.css:1010` faqat `[data-theme="light"] .file-card`ni yopadi.
+- `.bot-nav`, `.btn-primary`, `#userProfileModal` — hech qanday haqiqiy
+  konflikt topilmadi (turli property'larni belgilaydi yoki yagona joyda
+  ta'riflangan); C3 ro'yxatiga noto'g'ri kiritilgan yoki A/B bosqichida
+  allaqachon tozalangan bo'lishi mumkin.
+
+`{`/`}` balansi va tinycss2 parse tekshiruvi: `feed.css` (328/328, 0 xato),
+`nav.css` (273/273, 0 xato).
+
+### C8 — `profile.css` ↔ `ui-improvements.css` grid klasteri — BAJARILDI ✅
+
+**Muhim ogohlantirish — AUDIT.md eskirgan edi:** C6 jadvalida `profile.css`
+47 ta, `ui-improvements.css` 50 ta `!important` deb yozilgan edi, lekin bu
+zip yuklanganda haqiqiy fayllarda ikkalasida ham **faqat 9 tadan** chiqdi.
+Demak, ushbu ikki faylda AUDIT.md'da hujjatlashtirilmagan qo'shimcha
+`!important` tozalash ishi allaqachon qilingan (boshqa sessiyada yoki
+qo'lda). **Xulosa:** har doim faylni tahrirlashdan oldin haqiqiy holatni
+(`grep -c`) tekshiring — hujjatga ko'r-ko'rona ishonmang, u eskirishi
+mumkin.
+
+`profile.css` va `ui-improvements.css` orasidagi to'liq selector-darajasidagi
+qoplanish (`/home/claude/c8_grid_check.py`, property-darajasida, cascade-aware)
+tekshirildi. Natija — butun `.grid-cell`/`.up-grid-cell` klasteri ikkala
+faylda deyarli bir xil strukturada ikki marta yozilgan (`profile.css` order_idx=3,
+`ui-improvements.css` order_idx=8 — keyinroq yuklanadi, bir xil specificity,
+`!important` yo'q ikkala tomonda ham):
+
+| Selector (profile.css) | Holat |
+|---|---|
+| `.grid-cell` | To'liq o'lik — o'chirildi |
+| `.grid-cell img, .grid-cell video` | To'liq o'lik — o'chirildi |
+| `.grid-cell:hover img/video` | To'liq o'lik — o'chirildi |
+| `.grid-cell-overlay` | Qisman — faqat `align-items`, `border-radius` tirik, qoldi |
+| `.grid-cell:hover .grid-cell-overlay` | Bir xil qiymat, o'lik — o'chirildi |
+| `.grid-cell-txt` | Qisman — faqat `height`, `background` tirik, qoldi |
+| `.grid-stat` | To'liq o'lik — o'chirildi |
+| `.grid-play-badge` | Qisman — faqat `padding` tirik, qoldi |
+| `.profile-grid` | Qisman — faqat `margin-top`, `padding` tirik, qoldi |
+| `.up-grid` | Qisman — faqat `margin`, `width`, `padding-bottom` tirik, qoldi |
+| `.up-grid-cell` | Qisman — faqat `transition` tirik, qoldi |
+| `.up-grid-cell img/video` | To'liq o'lik — o'chirildi |
+| `.up-grid-cell-overlay` | Qisman — faqat `align-items`, `border-radius` tirik, qoldi |
+| `.up-grid-cell-txt` | Qisman — faqat `height`, `background` tirik, qoldi |
+| `#userProfileModal` | Konflikt yo'q (turli property) — tegilmadi |
+
+**Muhim uslubiy eslatma:** "qisman" holatlarda faqat ikkinchi faylda
+umuman belgilanmagan property'lar qoldirildi (masalan `align-items`,
+`border-radius`, `height`, `background`, `margin`, `padding`, `transition`)
+— bular cascade orqali hech qachon yengilmaydi, chunki raqib qoida ularni
+umuman o'z ichiga olmaydi. Bir xil qiymatli ("cosmetic-dead") qatorlar ham
+o'chirildi — ular vizual jihatdan hech narsani o'zgartirmaydi, lekin
+takrorlanishni yo'qotadi.
+
+**Qo'shimcha topilma (borderless.css bilan, loyihaning "borderless" maqsadiga
+mos):** `profile.css` ichidagi quyidagi `border`/`background`/`border-top`/
+`border-bottom` qatorlari `borderless.css` (order_idx=11, keyinroq yuklanadi)
+tomonidan doim yengiladi edi:
+
+| Selector | O'chirilgan | Sabab |
+|---|---|---|
+| `.profile-avi` (pg-blok, ~952-qator) | `border: 1px solid var(--pg-border-side)` | `borderless.css:191` guruhida `none` bilan yengiladi |
+| `.edit-btn` (pg-blok, ~973-qator) | `border: 0.5px solid var(--pg-border-side)` | `borderless.css:206` guruhida `none` bilan yengiladi |
+| `.up-stat` (~534-qator) | `border-right: 1px solid var(--line)` | `borderless.css:234` bilan yengiladi |
+| `.profile-grid-hdr` (~995-qator) | Butun blok (`background`, `border-top`, `border-bottom`) | `borderless.css:1124` guruhida barcha 3 property ham yengiladi |
+
+Bularning barchasi loyihaning umumiy "borderless/flat" maqsadiga mos —
+komментариylar ("flat ring", "flat strip") eskirgan, chunki keyinroq
+`borderless.css` bosqichi ularni allaqachon nolga tushirgan edi.
+
+`{`/`}` balansi va tinycss2 parse tekshiruvi: `profile.css` 202/202, 0 xato.
+
+### C9 — Keyingi navbat
+
+- `ui-improvements.css`ning o'zida hali chuqur tekshirilmagan qismlar bor
+  (grid klasteridan tashqari, 9 ta `!important` qayerda ekanini aniqlash).
+- `chat.css` (79 `!important`) — eng zich qolgan fayl, hali C1 metodologiyasi
+  bilan boshqa fayllar bilan (faqat `chat-dark-redesign.css` bilan emas)
+  solishtirilmagan.
+- `nav.css` (21) va `auth-ig-style.css` (19) — hali tekshirilmagan.
