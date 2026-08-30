@@ -599,19 +599,7 @@ body:has(.search-overlay.open) .app-hdr {
 .cap-expanded .cap-full  { display: inline; }
 
 /* ── File Card ── */
-.file-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  background: var(--glass);
-  border: 0.5px solid var(--glass-border);
-  border-radius: 14px;
-  margin: 0 0 2px;
-  transition: all 0.2s var(--ease-spring);
-  cursor: pointer;
-  box-shadow: var(--specular-top);
-}
+/* .file-card bazaviy blok → CSS/nav.css'ga ko'chirilgan (yagona manba, borderless.css bilan ziddiyatsiz) */
 
 .file-card:hover {
   background: var(--glass-mid);
@@ -1401,51 +1389,14 @@ body:has(.search-overlay.open) .app-hdr {
    ENHANCED POST CARD STYLES
    ═══════════════════════════════════════════ */
 
-/* Gradient border animation on hover */
-.post {
-  position: relative;
-  overflow: hidden;
-}
+/* Gradient border hover + zoom o'chirildi (flat X.com uslubi, 2026) */
 
-.post::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 16px;
-  padding: 2px;
-  background: var(--blue);
-  background-size: 200% 200%;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  pointer-events: none;
-  animation: gradientRotate 3s ease infinite;
-}
-
-.post:hover::before {
-  opacity: 1;
-}
-
-@keyframes gradientRotate {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Post media zoom on hover */
 .post-media {
   overflow: hidden;
 }
 
 .post-media img {
-  transition: transform 0.2s var(--ease), filter .4s ease;
-}
-
-.post:hover .post-media img {
-  transform: scale(1.02);
+  transition: filter .4s ease;
 }
 
 /* Video post indicator */

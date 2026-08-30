@@ -10,9 +10,7 @@
   --bg3:          #121212;   /* Surface — headers, panels, sheets */
   --bg4:          #1c1c1e;   /* Inputs / hover / search fields */
   --bg5:          #262626;   /* Elevated hover / heavy surface */
-  --line:         #000000;
-  --line2:        #1f1f1f;
-  --line3:        #2a2a2a;
+  /* --line/--line2/--line3 → CSS/borderless.css'da yengiladi (yagona manba) */
   --text:         #ffffff;   /* Main Text */
   --text2:        #8a8a8a;   /* Muted / Secondary Text */
   --text3:        #6b6b6b;

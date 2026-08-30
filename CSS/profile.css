@@ -5,17 +5,14 @@
 
 .profile-hdr {
   padding: 68px 16px 16px;
-  background: var(--glass);
-  border-bottom: 0.5px solid var(--glass-border);
+  /* background/border-bottom → pastdagi --pg-* blok (1000-qator atrofida) !important bilan yengiladi */
   position: relative;
 }
 
 .profile-grid-hdr {
   display: flex;
-  border-top: 0.5px solid var(--glass-border);
-  border-bottom: 0.5px solid var(--glass-border);
+  /* border-top/border-bottom/background → --pg-* blok !important bilan yengiladi */
   margin: 0;
-  background: var(--glass);
 }
 
 .profile-grid-tab {
@@ -37,12 +34,8 @@
 }
 
 .profile-hdr::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 200px;
-  background: #0D0F1B;
-  pointer-events: none;
+  /* content/position/right/height/background/pointer-events → --pg-* blok !important bilan yengiladi */
+  top: 0; left: 0;
 }
 
 .profile-top {
@@ -62,23 +55,14 @@
 .profile-avi {
   width: 76px; height: 76px;
   border-radius: 50%;
-  background: var(--glass-mid);
+  /* background/border/box-shadow → --pg-* blok !important bilan yengiladi */
   position: relative;
   cursor: pointer;
   flex-shrink: 0;
-  border: 0.5px solid var(--glass-border-top);
-  box-shadow: var(--specular-top), 0 6px 20px #06060B;
   transition: all 0.40s var(--ease-spring);
 }
 
-.profile-avi:hover {
-  border-color: #324B82;
-  box-shadow:
-    var(--specular-top),
-    0 0 0 4px #161E34,
-    0 8px 28px #05050A;
-  transform: scale(1.04);
-}
+/* .profile-avi:hover border-color/box-shadow/transform → --pg-* blok !important bilan yengiladi (pastda) */
 
 .profile-avi img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
@@ -87,11 +71,10 @@
   bottom: 2px; right: 2px;
   width: 22px; height: 22px;
   border-radius: 50%;
-  background: var(--blue);
+  /* background/border → --pg-* blok !important bilan yengiladi */
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--bg3);
 }
 
 .profile-stats {
@@ -345,16 +328,13 @@
 .edit-btn {
   width: 100%;
   padding: 10px;
-  background: #121219;
-  border: 1px solid var(--line2);
-  border-radius: 12px;
+  /* background/border/border-radius/transition → --pg-* blok !important bilan yengiladi */
   color: var(--text);
   font-size: 13px;
   font-weight: 500;
   font-family: var(--font);
   cursor: pointer;
   margin-top: 14px;
-  transition: var(--transition);
 }
 
 .edit-btn:hover {
@@ -453,7 +433,7 @@
   position: fixed;
   inset: 0;
   background: var(--bg);
-  z-index: 350;
+  /* z-index → CSS/local-utility.css'da 500 !important bilan yengiladi, shu yerda o'lik */
   display: none;
   overflow-y: auto;
   scrollbar-width: none;
@@ -868,36 +848,7 @@
 .stat:nth-child(3) .stat-val.animate { animation-delay: 0.3s; }
 .stat:nth-child(4) .stat-val.animate { animation-delay: 0.4s; }
 
-/* Profile avatar pulse on hover */
-.profile-avi {
-  position: relative;
-}
-
-.profile-avi::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 2px solid var(--blue);
-  opacity: 0;
-  transition: opacity 0.3s;
-  animation: avatarPulse 2s ease infinite;
-}
-
-.profile-avi:hover::after {
-  opacity: 1;
-}
-
-@keyframes avatarPulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.3;
-  }
-}
+/* Avatar pulse-ring o'chirildi (flat X.com uslubi, 2026) */
 
 /* Profile grid cell play icon for videos */
 .grid-cell-is-video {

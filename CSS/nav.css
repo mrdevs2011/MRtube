@@ -393,13 +393,12 @@
   gap: 12px;
   padding: 12px 16px;
   background: var(--glass);
-  border: 0.5px solid var(--glass-border);
+  /* border/box-shadow → CSS/borderless.css'da 'none' bilan yengiladi, shu yerda o'lik */
   border-radius: 16px;
   margin: 10px 0 2px;
   cursor: pointer;
   transition: all 0.2s var(--ease-spring);
   text-decoration: none;
-  box-shadow: var(--specular-top);
 }
 
 .file-card:hover {
