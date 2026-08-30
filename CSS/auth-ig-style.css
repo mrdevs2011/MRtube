@@ -1,55 +1,56 @@
 /* ═══════════════════════════════════════════
-   AUTH SCREEN — Instagram-style layout
-   Faqat KO'RINISH (layout/tipografiya) o'zgardi —
-   ranglar mavjud tema o'zgaruvchilaridan (--bg, --text,
-   --blue va h.k.), logika (auth.js) BUTUNLAY tegilmagan.
+   AUTH SCREEN — Instagram-style layout (Extended)
+   Qo'shimcha elementlar (xatolar, parolni unutish, 
+   ikonkalar va animatsiyalar) uchun mukammal moslashgan style.
    ═══════════════════════════════════════════ */
 
 .auth-card.ig-style {
-  padding: 32px 28px 28px;
+  padding: 36px 28px 28px;
+  background: var(--bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
 
-/* Sarlavha — Instagram'dagi kabi qalin, chapga tekislangan */
+/* Sarlavha — Instagram'dagi kabi qalin, markazda yoki chapda */
 .auth-card.ig-style .auth-title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 22px;
-  letter-spacing: -0.3px;
+  margin-bottom: 24px;
+  letter-spacing: -0.4px;
+  text-align: center;
 }
 
-/* ── Floating-label input qutisi ──
-   Label doim ko'rinadi: bo'sh holatda input ichida markazda,
-   fokus/qiymat bor holatda yuqoriga "suzib chiqadi" — CSS-only,
-   auth.js hech narsaga tegmaydi (faqat placeholder=" " ishlatiladi). */
+/* ── Floating-label input qutisi ── */
 .ig-field {
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 #authWrap .ig-field .ig-input,
 #authWrap .ig-field input.ig-input,
 [data-theme="dark"] #authWrap .ig-field .ig-input {
   width: 100% !important;
-  height: 56px !important;
-  min-height: 56px !important;
-  padding: 22px 16px 8px !important;
+  height: 54px !important;
+  min-height: 54px !important;
+  padding: 20px 16px 6px !important;
   margin-bottom: 0 !important;
-  border-radius: 10px !important;
+  border-radius: 8px !important;
   background: var(--glass) !important;
   border: 1px solid var(--glass-border) !important;
   color: var(--text) !important;
-  font-size: 15px !important;
+  font-size: 14px !important;
   font-family: var(--font) !important;
   outline: none !important;
   box-shadow: none !important;
   transform: none !important;
-  transition: border-color 0.15s ease, background 0.15s ease !important;
+  transition: border-color 0.2s ease, background 0.2s ease !important;
 }
 
 #authWrap .ig-field .ig-input:focus,
 [data-theme="dark"] #authWrap .ig-field .ig-input:focus {
-  border-color: var(--blue) !important;
+  border-color: var(--text3) !important;
   background: var(--glass-mid) !important;
   box-shadow: none !important;
   transform: none !important;
@@ -63,7 +64,7 @@
   top: 50%;
   transform: translateY(-50%);
   color: var(--text3);
-  font-size: 15px;
+  font-size: 13px;
   font-family: var(--font);
   pointer-events: none;
   transition: all 0.15s ease;
@@ -71,32 +72,78 @@
 
 .ig-field .ig-input:focus + label,
 .ig-field .ig-input:not(:placeholder-shown) + label {
-  top: 12px;
+  top: 10px;
   transform: translateY(0);
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: 600;
   color: var(--text3);
+  letter-spacing: 0.2px;
 }
 
-/* ── Asosiy tugma — to'liq eni, pill shakli ── */
+/* Parolni ko'rsatish/yashirish tugmasi uchun */
+.ig-field .ig-password-toggle {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 2;
+}
+
+/* ── Asosiy tugma — Instagram ko'k/gradient uslubi ── */
 .ig-style .ig-btn-primary {
   width: 100%;
   height: 44px;
   padding: 0;
+  border: none;
   border-radius: 8px;
-  margin-top: 6px;
+  margin-top: 8px;
+  background: var(--blue);
+  color: #fff;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
 }
 
-/* ── Divider — "OR" chizig'i o'rniga brend belgisi ── */
+.ig-style .ig-btn-primary:hover {
+  opacity: 0.9;
+}
+
+.ig-style .ig-btn-primary:active {
+  opacity: 0.8;
+}
+
+/* ── Parolni unutdingizmi havolasi ── */
+.ig-forgot-link {
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  color: var(--text2);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.ig-forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* ── Divider — "YOKI" chizig'i ── */
 .ig-divider {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin: 22px 0 18px;
+  gap: 16px;
+  margin: 24px 0 20px;
   color: var(--text3);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .ig-divider::before,
@@ -107,31 +154,51 @@
   background: var(--glass-border);
 }
 
-/* ── Pastki "Ro'yxatdan o'tish / Kirish" qatori — outline pill tugma ── */
+/* ── Pastki "Ro'yxatdan o'tish" bloki ── */
 .auth-switch.ig-switch {
   margin-top: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   text-align: center;
+  padding: 20px 0 0;
+  border-top: 1px solid var(--glass-border);
 }
 
-.ig-switch #authSwitchText { color: var(--text2); font-size: 13px; }
+.ig-switch #authSwitchText { 
+  color: var(--text); 
+  font-size: 14px; 
+}
 
+.ig-switch #authSwitchBtn,
 .ig-switch .ig-create-btn {
   display: inline-block;
-  width: 100%;
-  padding: 11px;
-  border: 1px solid var(--blue);
-  border-radius: 8px;
+  width: auto;
+  padding: 0;
+  border: none;
+  background: none;
   color: var(--blue);
   font-weight: 600;
   font-size: 14px;
-  box-sizing: border-box;
+  text-decoration: none;
 }
 
+.ig-switch #authSwitchBtn:hover,
 .ig-switch .ig-create-btn:hover {
-  background: var(--blue-glow2);
-  text-decoration: none;
+  background: none;
+  text-decoration: underline;
+}
+
+/* ── Xatolik xabarlari uchun alert box (agar ishlatilsa) ── */
+.ig-error-msg {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 14px;
+  text-align: center;
 }
