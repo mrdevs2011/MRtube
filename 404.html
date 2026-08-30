@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#000000">
+<title>404 · MRgram</title>
+
+<!-- Theme: localStorage dan o'qiladi, toggle yo'q -->
+<script>
+  (function(){
+    var t = localStorage.getItem('mrdatabase_theme') ||
+            (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', t);
+  })();
+</script>
+
+<link rel="icon" type="image/svg+xml" href="/svg/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── Reset ── */
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── Theme tokens — loyiha bilan bir xil ── */
+[data-theme="dark"] {
+  --bg:         #000000;
+  --bg2:        #0d0d0d;
+  --line:       rgba(255,255,255,0.08);
+  --line2:      rgba(255,255,255,0.14);
+  --text:       #f0f0f0;
+  --text2:      #666666;
+  --text3:      #2a2a2a;
+  --blue:       #5b8ef5;
+  --blue2:      #7ba5ff;
+  --blue-glow:  rgba(91,142,245,0.18);
+  --blue-glow2: rgba(91,142,245,0.10);
+  --glass-mid:        rgba(255,255,255,0.08);
+  --glass-heavy:      rgba(255,255,255,0.12);
+  --glass-border:     rgba(255,255,255,0.14);
+  --glass-border-top: rgba(255,255,255,0.22);
+  --glass-blur:       saturate(200%) blur(40px);
+  --specular-top:     inset 0 1px 0 rgba(255,255,255,0.20);
+  --specular-edge:    inset 0 0 0 0.5px rgba(255,255,255,0.12);
+  --liquid-shadow-lg: 0 16px 60px rgba(0,0,0,0.45), 0 4px 16px rgba(0,0,0,0.30);
+}
+[data-theme="dark"] body {
+  background-color: rgba(91,142,245,0.07);
+}
+
+[data-theme="light"] {
+  --bg:         #ffffff;
+  --bg2:        #f5f5f5;
+  --line:       rgba(0,0,0,0.08);
+  --line2:      rgba(0,0,0,0.14);
+  --text:       #111111;
+  --text2:      #666666;
+  --text3:      #dddddd;
+  --blue:       #4070e8;
+  --blue2:      #6090ff;
+  --blue-glow:  rgba(64,112,232,0.18);
+  --blue-glow2: rgba(64,112,232,0.10);
+  --glass-mid:        rgba(255,255,255,0.55);
+  --glass-heavy:      rgba(255,255,255,0.70);
+  --glass-border:     rgba(0,0,0,0.08);
+  --glass-border-top: rgba(255,255,255,0.65);
+  --glass-blur:       saturate(180%) blur(40px);
+  --specular-top:     inset 0 1px 0 rgba(255,255,255,0.60);
+  --specular-edge:    inset 0 0 0 0.5px rgba(255,255,255,0.40);
+  --liquid-shadow-lg: 0 16px 50px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06);
+}
+[data-theme="light"] body {
+  background-color: rgba(64,112,232,0.08);
+}
+
+/* ── Base ── */
+html { background: var(--bg); height: 100%; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+/* ── Wrap ── */
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: up 0.55s cubic-bezier(0.33,1,0.68,1) both;
+}
+
+/* ── Glass card ── */
+.err-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 44px 40px;
+  border-radius: 32px;
+  overflow: hidden;
+  background: var(--glass-mid);
+  border: 0.5px solid var(--glass-border-top);
+  box-shadow: var(--specular-top), var(--specular-edge), var(--liquid-shadow-lg);
+}
+
+/* glass sheen sweep */
+.err-card::after {
+  content: '';
+  position: absolute;
+  top: -60%; left: -160%;
+  width: 70%; height: 220%;
+  background: rgba(255,255,255,0.30);
+  transform: rotate(22deg);
+  animation: errSheen 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes errSheen {
+  0%, 40%   { left: -160%; }
+  70%, 100% { left: 170%; }
+}
+
+/* top-left specular glow inside the glass */
+.err-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.16);
+  pointer-events: none;
+}
+
+/* ── 404 raqam ── */
+.err-code {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(96px, 18vw, 180px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -6px;
+  color: var(--blue);
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+  background: var(--blue);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 40px var(--blue-glow));
+}
+
+/* ── Matn ── */
+.err-desc {
+  position: relative;
+  z-index: 1;
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.65;
+  max-width: 260px;
+  margin-top: 14px;
+}
+
+/* ── Brand (pastki) ── */
+.err-brand {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  color: var(--text2);
+  opacity: 0.45;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  text-transform: uppercase;
+}
+
+/* ── Animation ── */
+@keyframes up {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); filter: blur(6px); }
+  to   { opacity: 1; transform: translateY(0) scale(1);       filter: blur(0); }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="err-card">
+    <!-- 404 raqam -->
+    <div class="err-code">404</div>
+
+    <!-- Matn -->
+    <p class="err-desc">Siz izlagan sahifa mavjud emas yoki boshqa manzilga ko'chirilgan.</p>
+  </div>
+
+</div>
+
+<!-- Brand -->
+<div class="err-brand">private database · mrdatabase</div>
+
+</body>
+</html>

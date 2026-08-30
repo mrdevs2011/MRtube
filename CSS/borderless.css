@@ -1,0 +1,1149 @@
+/* ═══════════════════════════════════════════
+   MRgram — Borderless / Minimal Override
+   Zamonaviy flat dizayn: border yo'q, shadow minimal
+   ═══════════════════════════════════════════ */
+
+/* ── CSS token override: border va shadow tokenlarini o'chiramiz ── */
+:root,
+[data-theme="dark"],
+[data-theme="light"] {
+  --specular-top:    none;
+  --specular-edge:   none;
+
+  --liquid-shadow-sm: none;
+  --liquid-shadow-md: none;
+  --liquid-shadow-lg: none;
+
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+
+  --glass-border:      transparent;
+  --glass-border-top:  transparent;
+}
+
+/* ── Dark: line tokenlar ham yo'qolsin ── */
+[data-theme="dark"] {
+  --line:  #17171E;
+  --line2: transparent;
+  --line3: transparent;
+}
+
+[data-theme="light"] {
+  --line:  #E2E2E8;
+  --line2: transparent;
+  --line3: transparent;
+}
+
+/* ════════════════════════════════
+   GLOBAL — hamma border lar off
+   ════════════════════════════════ */
+
+/* Post kartochkalar */
+.post,
+[data-theme="dark"] .post,
+[data-theme="light"] .post {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.post:hover,
+[data-theme="dark"] .post:hover,
+[data-theme="light"] .post:hover {
+  box-shadow: none !important;
+}
+
+/* Header — top bar */
+.app-hdr,
+[data-theme="dark"] .app-hdr,
+[data-theme="light"] .app-hdr {
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+
+/* Mobile: frosted glass blur */
+@media (max-width: 767px) {
+  .app-hdr,
+  [data-theme="dark"] .app-hdr,
+  [data-theme="light"] .app-hdr {
+    background: rgba(14, 14, 18, 0.72) !important;
+  }
+  [data-theme="light"] .app-hdr {
+    background: rgba(242, 242, 247, 0.78) !important;
+  }
+}
+
+/* Desktop: shaffof qolsin */
+@media (min-width: 768px) {
+  .app-hdr,
+  [data-theme="dark"] .app-hdr,
+  [data-theme="light"] .app-hdr {
+    background: transparent !important;
+  }
+}
+
+/* Header gradient line o'chirish */
+.app-hdr::after,
+[data-theme="dark"] .app-hdr::after {
+  display: none !important;
+}
+
+/* Bottom nav */
+.bot-nav,
+[data-theme="dark"] .bot-nav,
+[data-theme="light"] .bot-nav {
+  border-top: none !important;
+  border-right: none !important;
+  box-shadow: none !important;
+}
+
+/* Mobile: frosted glass blur */
+@media (max-width: 767px) {
+  .bot-nav,
+  [data-theme="dark"] .bot-nav,
+  [data-theme="light"] .bot-nav {
+    background: rgba(14, 14, 18, 0.72) !important;
+  }
+  [data-theme="light"] .bot-nav {
+    background: rgba(242, 242, 247, 0.78) !important;
+  }
+}
+
+/* Desktop: shaffof qolsin */
+@media (min-width: 768px) {
+  .bot-nav,
+  [data-theme="dark"] .bot-nav,
+  [data-theme="light"] .bot-nav {
+    background: transparent !important;
+  }
+}
+
+/* Desktop sidebar ::before gradient line o'chirish */
+@media (min-width: 768px) {
+  .bot-nav::before {
+    display: none !important;
+    background: none !important;
+  }
+}
+
+
+/* Nav buttons */
+.nav-btn,
+[data-theme="dark"] .nav-btn:hover,
+[data-theme="dark"] .nav-btn.on,
+[data-theme="light"] .nav-btn:hover,
+[data-theme="light"] .nav-btn.on {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Sheet (bottom panel) */
+.sheet,
+[data-theme="dark"] .sheet,
+[data-theme="light"] .sheet {
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+/* Modal */
+.modal-content,
+[data-theme="dark"] .modal-content,
+[data-theme="light"] .modal-content {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Glass components */
+.glass,
+.glass-heavy {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Theme button */
+.theme-btn,
+[data-theme="dark"] .theme-btn:hover,
+[data-theme="light"] .theme-btn:hover {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Auth card */
+.auth-card,
+[data-theme="dark"] .auth-card,
+[data-theme="light"] .auth-card {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Avatar (avi) */
+.avi,
+[data-theme="dark"] .avi,
+[data-theme="light"] .avi {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .avi:hover,
+[data-theme="light"] .avi:hover {
+  box-shadow: none !important;
+}
+
+/* Profile avatar */
+.profile-avi,
+[data-theme="dark"] .profile-avi,
+[data-theme="light"] .profile-avi {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .profile-avi:hover,
+[data-theme="light"] .profile-avi:hover {
+  box-shadow: none !important;
+}
+
+/* Edit button */
+.edit-btn,
+[data-theme="dark"] .edit-btn,
+[data-theme="light"] .edit-btn {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Profile header */
+.profile-hdr,
+[data-theme="dark"] .profile-hdr {
+  border-bottom: none !important;
+}
+
+/* Profile grid */
+[data-theme="dark"] .grid-cell,
+[data-theme="light"] .grid-cell {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .grid-cell:hover {
+  box-shadow: none !important;
+}
+
+/* Profile stats box */
+.up-stat-box,
+[data-theme="dark"] .up-stat-box {
+  border: none !important;
+  box-shadow: none !important;
+}
+.up-stat { border-right: none !important; }
+
+/* Profile grid header */
+.profile-grid-hdr,
+[data-theme="dark"] .profile-grid-hdr {
+  border-color: transparent !important;
+}
+
+/* Post stats separator */
+.post-stats,
+[data-theme="dark"] .post-stats {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* Post action buttons */
+.act-btn,
+[data-theme="dark"] .act-btn {
+  border-right: none !important;
+}
+
+/* Post head separator */
+.post-head,
+[data-theme="dark"] .post-head {
+  border-bottom: none !important;
+}
+
+/* Input fields */
+.field,
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+[data-theme="dark"] .field,
+[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]),
+[data-theme="dark"] textarea,
+[data-theme="light"] .field,
+[data-theme="light"] input:not([type="checkbox"]):not([type="radio"]),
+[data-theme="light"] textarea {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.field:focus,
+input:focus,
+textarea:focus,
+[data-theme="dark"] .field:focus,
+[data-theme="dark"] input:focus,
+[data-theme="dark"] textarea:focus,
+[data-theme="light"] .field:focus,
+[data-theme="light"] input:focus,
+[data-theme="light"] textarea:focus {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Chat input */
+.chat-input-bar,
+[data-theme="dark"] .chat-input-bar {
+  border-top: none !important;
+  box-shadow: none !important;
+}
+
+.chat-input-wrap,
+[data-theme="dark"] .chat-input-wrap,
+[data-theme="dark"] .chat-input-wrap:focus-within {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Chat list rows */
+.chat-row,
+[data-theme="dark"] .chat-thread {
+  border-bottom: 1px solid var(--line) !important;
+}
+
+/* Chat thread header separator */
+.chat-thread-hdr,
+[data-theme="dark"] .chat-thread-hdr {
+  border-bottom: none !important;
+}
+
+/* Message bubbles */
+[data-theme="dark"] .msg-in .msg-bubble {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .msg-out .msg-bubble {
+  box-shadow: none !important;
+}
+
+/* File card */
+.file-card,
+[data-theme="dark"] .file-card,
+[data-theme="light"] .file-card {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .file-card:hover {
+  box-shadow: none !important;
+}
+
+.file-dl,
+[data-theme="dark"] .file-dl,
+[data-theme="dark"] .file-dl:hover {
+  border: none !important;
+}
+
+/* Toast */
+#toast,
+[data-theme="dark"] #toast {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Badges */
+.badge-pub,
+.badge-priv,
+[data-theme="dark"] .badge-pub,
+[data-theme="dark"] .badge-priv {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-primary:hover {
+  box-shadow: none !important;
+}
+
+.btn-danger,
+.btn-danger:hover {
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .hdr-new-post-btn {
+  box-shadow: none !important;
+}
+
+/* Sidebar */
+.sb-wrap,
+[data-theme="dark"] .sb-wrap {
+  border-right: none !important;
+}
+
+/* Search overlay */
+.search-overlay-box,
+[data-theme="dark"] .search-overlay-box {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.search-overlay-close,
+[data-theme="dark"] .search-overlay-close {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Upload float bar */
+.upload-float-bar,
+[data-theme="dark"] .upload-float-bar {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Visibility row */
+.visibility-row,
+[data-theme="dark"] .visibility-row,
+[data-theme="dark"] .visibility-row.is-public {
+  border: none !important;
+}
+
+/* Upload drop zone */
+.upload-drop,
+[data-theme="dark"] .upload-drop,
+[data-theme="dark"] .upload-drop:hover,
+[data-theme="dark"] .upload-drop.drag-over {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Empty state icons */
+.feed-empty-icon,
+.empty-icon,
+.empty-search-icon,
+[data-theme="dark"] .feed-empty-icon,
+[data-theme="dark"] .empty-icon,
+[data-theme="dark"] .empty-search-icon {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Comments */
+.cmt-body,
+[data-theme="dark"] .cmt-body,
+[data-theme="dark"] .cmt-body:hover {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.cmt-input,
+[data-theme="dark"] .cmt-input,
+[data-theme="dark"] .cmt-input:focus {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.cmt-input-row,
+[data-theme="dark"] .cmt-input-row {
+  border-top: none !important;
+}
+
+/* Onboarding / Admin / Verify cards */
+.onb-card,
+.admin-card,
+.verify-card,
+[data-theme="dark"] .onb-card,
+[data-theme="dark"] .admin-card,
+[data-theme="dark"] .verify-card {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .admin-card:hover {
+  box-shadow: none !important;
+}
+
+/* Detail modal */
+#detailContent,
+[data-theme="dark"] #detailContent {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.dm-close,
+[data-theme="dark"] .dm-close {
+  border: none !important;
+}
+
+/* Skeleton */
+.skeleton-post,
+[data-theme="dark"] .skeleton-post {
+  border: none !important;
+}
+
+/* Reel */
+.reel-avi,
+[data-theme="dark"] .reel-avi {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.reel-top-btn,
+.reel-vol-top,
+[data-theme="dark"] .reel-top-btn,
+[data-theme="dark"] .reel-vol-top {
+  border: none !important;
+}
+
+/* Offline indicator */
+#offlineIndicator {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Cached badge */
+.cached-badge {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Card hover — shadow olib tashlash */
+.card-hover:hover {
+  box-shadow: none !important;
+}
+
+/* Sidebar desktop — chegarasiz */
+@media (min-width: 768px) {
+  .bot-nav {
+    border-right: none !important;
+    border-top: none !important;
+  }
+}
+
+/* Nav ring/glow animatsiyalari — shadow yo'q */
+.nav-btn:hover,
+.nav-btn.on {
+  box-shadow: none !important;
+}
+
+/* Feed buttons */
+.follow-btn,
+.unfollow-btn {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Story/reel ring */
+.story-ring,
+.reel-ring {
+  box-shadow: none !important;
+}
+
+/* Profile cover-photo separator */
+.profile-cover {
+  border-bottom: none !important;
+}
+
+/* Splash bar */
+[data-theme="dark"] .splash-bar {
+  border: none !important;
+}
+
+[data-theme="dark"] .splash-fill {
+  box-shadow: none !important;
+}
+
+/* Offline indicator pulse dot */
+#offlineIndicator::before {
+  box-shadow: none !important;
+}
+
+/* Groups */
+.group-card,
+.group-hdr {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Admin */
+[data-theme="dark"] .admin-card {
+  border: none !important;
+}
+
+/* ════════════════════════════════════════════
+   LIGHT THEME — Xatolarni tuzatish
+   ════════════════════════════════════════════ */
+
+/* 1. act-btn hover — dark background light temada */
+.act-btn:hover {
+  background: var(--bg3) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="light"] .act-btn:hover {
+  background: var(--bg3) !important;
+  color: var(--text) !important;
+}
+
+/* 2. AI reply bubble — light temada ham to'g'ri rang */
+.ai-reply-bubble {
+  background: var(--bg3) !important;
+  border: none !important;
+}
+
+[data-theme="light"] .ai-reply-bubble {
+  background: var(--bg3) !important;
+  border: none !important;
+}
+
+[data-theme="light"] .ai-reply-header {
+  color: var(--blue) !important;
+  border-bottom: none !important;
+}
+
+[data-theme="light"] .ai-reply-body {
+  color: var(--text) !important;
+}
+
+[data-theme="light"] .ai-reply-close:hover {
+  background: var(--bg4) !important;
+  color: var(--text) !important;
+}
+
+/* 3. Sidebar nav-btn aktiv holat — dark styled light temada */
+[data-theme="light"] .nav-btn.on {
+  background: var(--bg3) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Desktop sidebar nav-btn */
+@media (min-width: 768px) {
+  [data-theme="light"] .nav-btn.on {
+    background: var(--bg3) !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  [data-theme="light"] .nav-btn:hover {
+    background: var(--bg3) !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* 4. Visibility buttons (Private/Public) — light temada dark styled */
+[data-theme="light"] .vis-btn--active[data-mode="private"] {
+  background: var(--blue-glow3) !important;
+  border: none !important;
+  color: var(--blue) !important;
+}
+
+[data-theme="light"] .vis-btn--active[data-mode="public"] {
+  background: var(--green-glow) !important;
+  border: none !important;
+  color: var(--green) !important;
+}
+
+/* 5. Input focus — light temada dark border/outline chiqib qolishi */
+[data-theme="light"] input:focus,
+[data-theme="light"] textarea:focus,
+[data-theme="light"] .field:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 6. nav-center-btn (+ tugma) — light temada shadow o'chish */
+[data-theme="light"] .nav-center-btn {
+  box-shadow: none !important;
+}
+
+/* 7. Sidebar top/bottom border — light temada */
+[data-theme="light"] .sb-top,
+[data-theme="light"] .sb-bottom {
+  border: none !important;
+}
+
+/* 8. Sheet handle — light temada */
+[data-theme="light"] .sheet-handle {
+  background: var(--line3) !important;
+}
+
+/* ════════════════════════════════════════════
+   CHAT — Audio xabar (voice message) tuzatish
+   ════════════════════════════════════════════ */
+
+/* Incoming (theirs) — play button light temada ko'rinsin */
+[data-theme="light"] .chat-msg.theirs .cvm-play {
+  background: var(--bg4) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="light"] .chat-msg.theirs .cvm-play:hover {
+  background: var(--bg5) !important;
+}
+
+/* Incoming waveform bars — light temada ko'rinsin */
+[data-theme="light"] .chat-msg.theirs .cvm-bar {
+  background: var(--text3) !important;
+}
+
+[data-theme="light"] .chat-msg.theirs .cvm-bar.played {
+  background: var(--blue) !important;
+}
+
+/* Incoming duration text */
+[data-theme="light"] .chat-msg.theirs .cvm-dur {
+  color: var(--text2) !important;
+}
+
+/* Dark theme — incoming play button kontrast yaxshilash */
+[data-theme="dark"] .chat-msg.theirs .cvm-play {
+  background: var(--bg4) !important;
+  color: var(--text) !important;
+}
+
+[data-theme="dark"] .chat-msg.theirs .cvm-bar {
+  background: var(--text3) !important;
+}
+
+/* ════════════════════════════════════════════
+   THEME BUTTON — sidebar pastida border o'chish
+   ════════════════════════════════════════════ */
+.theme-btn {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+[data-theme="light"] .theme-btn {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ════════════════════════════════════════════
+   AVATAR — light temada placeholder background
+   ════════════════════════════════════════════ */
+[data-theme="light"] .avi {
+  background: var(--bg3) !important;
+  box-shadow: none !important;
+}
+
+[data-theme="light"] .avi:hover {
+  box-shadow: none !important;
+}
+
+/* avi base — shadow olib tashlash */
+.avi {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.avi:hover {
+  box-shadow: none !important;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   LIGHT THEME — GLOBAL DARK COLOR OVERRIDE
+   Barcha hard-coded dark hex larni light theme uchun tuzatish
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── CHAT THREAD ── */
+[data-theme="light"] .chat-thread-messages {
+  background: var(--bg) !important;
+}
+
+/* Incoming bubble */
+[data-theme="light"] .chat-msg.theirs .chat-bubble {
+  background: var(--bg3) !important;
+  color: var(--text) !important;
+}
+
+/* Chat input area */
+[data-theme="light"] .chat-input-bar,
+[data-theme="light"] .chat-thread-input-row {
+  background: var(--bg2) !important;
+}
+
+[data-theme="light"] .chat-input-wrap,
+[data-theme="light"] .chat-thread-input {
+  background: var(--bg3) !important;
+  color: var(--text) !important;
+}
+
+/* Chat list row hover */
+[data-theme="light"] .chat-row:hover { background: var(--bg3) !important; }
+[data-theme="light"] .chat-row:active { background: var(--bg4) !important; }
+
+/* Chat header */
+[data-theme="light"] .chat-thread-hdr {
+  background: var(--bg) !important;
+}
+
+/* Chat back button */
+[data-theme="light"] .chat-thread-back:hover {
+  background: var(--bg3) !important;
+}
+
+/* Reply preview */
+[data-theme="light"] .chat-reply-preview {
+  background: var(--bg3) !important;
+}
+[data-theme="light"] .chat-msg.theirs .chat-reply-preview:hover {
+  background: var(--bg4) !important;
+}
+
+/* File preview bar */
+[data-theme="light"] .chat-file-preview {
+  background: var(--bg3) !important;
+}
+[data-theme="light"] .cfp-remove:hover {
+  background: var(--bg4) !important;
+}
+
+/* File message */
+[data-theme="light"] .cfm-name { color: var(--text) !important; }
+[data-theme="light"] .chat-msg.theirs .cfm-dl {
+  background: var(--bg4) !important;
+  color: var(--text2) !important;
+}
+
+/* Voice message bubble */
+[data-theme="light"] .chat-voice-msg { background: transparent !important; }
+[data-theme="light"] .chat-msg.theirs .cvm-play {
+  background: var(--bg4) !important;
+  color: var(--text) !important;
+}
+[data-theme="light"] .cvm-play:hover {
+  background: var(--bg5) !important;
+}
+[data-theme="light"] .chat-msg.theirs .cvm-bar {
+  background: var(--text3) !important;
+}
+[data-theme="light"] .chat-msg.theirs .cvm-bar.played {
+  background: var(--blue) !important;
+}
+[data-theme="light"] .chat-msg.theirs .cvm-dur {
+  color: var(--text2) !important;
+}
+
+/* Call modal */
+[data-theme="light"] #callActiveModal {
+  background: var(--bg) !important;
+}
+[data-theme="light"] .call-ctrl-btn {
+  background: var(--bg3) !important;
+  color: var(--text2) !important;
+}
+[data-theme="light"] .call-ctrl-btn.active {
+  background: var(--blue-glow2) !important;
+  color: var(--blue) !important;
+}
+
+/* Chat photo viewer */
+[data-theme="light"] .chat-photo-viewer {
+  background: rgba(240,240,245,0.95) !important;
+}
+
+/* ── FEED ── */
+/* Header search/mute hover */
+[data-theme="light"] .hdr-mute-btn:hover {
+  background: var(--bg3) !important;
+  color: var(--text) !important;
+}
+
+/* Follow/like buttons */
+[data-theme="light"] .follow-btn {
+  background: var(--bg3) !important;
+}
+
+/* Comment body */
+[data-theme="light"] .cmt-body {
+  background: var(--bg3) !important;
+}
+[data-theme="light"] .cmt-body:hover {
+  background: var(--bg4) !important;
+}
+[data-theme="light"] .cmt-input {
+  background: var(--bg3) !important;
+  color: var(--text) !important;
+}
+
+/* AI reply bubble — all moods */
+[data-theme="light"] .ai-reply-bubble,
+[data-theme="light"] .ai-reply-bubble.ai-mood-funny,
+[data-theme="light"] .ai-reply-bubble.ai-mood-serious,
+[data-theme="light"] .ai-reply-bubble.ai-mood-amazed,
+[data-theme="light"] .ai-reply-bubble.ai-mood-sad,
+[data-theme="light"] .ai-reply-bubble.ai-mood-angry {
+  background: var(--bg3) !important;
+  border: none !important;
+}
+
+[data-theme="light"] .ai-reply-body {
+  color: var(--text) !important;
+}
+
+[data-theme="light"] .ai-reply-close:hover {
+  background: var(--bg4) !important;
+  color: var(--text) !important;
+}
+
+/* Reel overlays */
+[data-theme="light"] .reel {
+  background: var(--bg) !important;
+}
+[data-theme="light"] .reel-top-btn,
+[data-theme="light"] .reel-vol-top {
+  background: var(--bg3) !important;
+}
+[data-theme="light"] .reel-top-btn:hover,
+[data-theme="light"] .reel-vol-top:hover {
+  background: var(--bg4) !important;
+}
+
+/* Post gradient overlay (media) */
+[data-theme="light"] .post-media-overlay,
+[data-theme="light"] .reel-gradient-bot {
+  background: rgba(200,200,210,0.85) !important;
+}
+
+/* ── PROFILE ── */
+[data-theme="light"] .profile-hdr {
+  background: var(--bg) !important;
+}
+
+/* Profile cover gradient */
+[data-theme="light"] .profile-cover-gradient {
+  background: var(--bg3) !important;
+}
+
+/* Stats edit box */
+[data-theme="light"] .up-stat-box {
+  background: var(--bg3) !important;
+}
+
+/* Profile grid cell */
+[data-theme="light"] .grid-cell,
+[data-theme="light"] .up-grid-cell {
+  background: var(--bg3) !important;
+}
+
+/* Profile actions bar */
+[data-theme="light"] .profile-actions {
+  background: var(--bg) !important;
+}
+
+/* Profile tab header */
+[data-theme="light"] .profile-grid-hdr {
+  background: var(--bg) !important;
+}
+
+/* Avatar cover bg (cover-crop) */
+[data-theme="light"] .avatar-crop-container {
+  background: var(--bg3) !important;
+}
+
+/* ── NAV / SIDEBAR ── */
+/* Notification badge */
+[data-theme="light"] .nav-notif-dot {
+  background: var(--red) !important;
+}
+
+/* Sidebar */
+[data-theme="light"] .sb-panel-input-wrap {
+  background: var(--bg3) !important;
+}
+[data-theme="light"] .sb-panel-input-wrap:focus-within {
+  background: var(--bg4) !important;
+}
+
+/* Search overlay */
+[data-theme="light"] .search-overlay {
+  background: rgba(220,220,228,0.95) !important;
+}
+[data-theme="light"] .search-overlay-box {
+  background: var(--bg2) !important;
+}
+[data-theme="light"] .search-overlay-close {
+  background: var(--bg3) !important;
+  color: var(--text2) !important;
+}
+[data-theme="light"] .search-overlay-close:hover {
+  background: var(--bg4) !important;
+}
+
+/* Sheet */
+[data-theme="light"] .sheet {
+  background: var(--bg2) !important;
+}
+
+/* Modal */
+[data-theme="light"] .modal-content,
+[data-theme="light"] #detailContent {
+  background: var(--bg2) !important;
+}
+[data-theme="light"] .overlay {
+  background: rgba(100,100,108,0.6) !important;
+}
+
+/* Upload drop zone */
+[data-theme="light"] .upload-drop {
+  background: var(--bg3) !important;
+}
+[data-theme="light"] .upload-drop:hover {
+  background: var(--bg4) !important;
+}
+[data-theme="light"] .upload-drop.drag-over {
+  background: var(--blue-glow3) !important;
+}
+
+/* Upload float bar */
+[data-theme="light"] .upload-float-bar {
+  background: var(--bg3) !important;
+}
+
+/* Toast */
+[data-theme="light"] #toast {
+  background: var(--bg3) !important;
+  color: var(--text) !important;
+}
+
+/* Skeleton shimmer */
+[data-theme="light"] .skeleton-post {
+  background: var(--bg3) !important;
+}
+[data-theme="light"] .skel-avi,
+[data-theme="light"] .skel-line,
+[data-theme="light"] .skel-media {
+  background: var(--bg3) !important;
+  background-size: 200% 100% !important;
+}
+
+/* File card */
+[data-theme="light"] .file-card {
+  background: var(--bg3) !important;
+}
+[data-theme="light"] .file-card:hover {
+  background: var(--bg4) !important;
+}
+[data-theme="light"] .file-dl {
+  background: var(--blue-glow3) !important;
+  color: var(--blue) !important;
+}
+[data-theme="light"] .file-dl:hover {
+  background: var(--blue-glow2) !important;
+}
+
+/* Empty state icons */
+[data-theme="light"] .feed-empty-icon,
+[data-theme="light"] .empty-icon,
+[data-theme="light"] .empty-search-icon {
+  background: var(--bg3) !important;
+}
+
+/* Dm-close button */
+[data-theme="light"] .dm-close {
+  background: var(--bg3) !important;
+}
+[data-theme="light"] .dm-close:hover {
+  background: var(--bg4) !important;
+}
+
+/* del-btn hover */
+[data-theme="light"] .del-btn:hover {
+  background: var(--bg4) !important;
+  color: var(--red) !important;
+}
+
+/* cmt-del hover */
+[data-theme="light"] .cmt-del:hover {
+  background: var(--bg4) !important;
+  color: var(--red) !important;
+}
+
+/* Groups */
+[data-theme="light"] .group-card {
+  background: var(--bg3) !important;
+}
+
+/* Sidebar items active */
+[data-theme="light"] .sb-item.active {
+  background: var(--blue-glow3) !important;
+  color: var(--blue) !important;
+}
+[data-theme="light"] .sb-item:hover {
+  background: var(--bg3) !important;
+  color: var(--text) !important;
+}
+
+/* hdr-icon-btn hover */
+[data-theme="light"] .hdr-icon-btn:hover {
+  background: var(--bg3) !important;
+}
+
+/* nav-btn.on — active sidebar item */
+[data-theme="light"] .nav-btn.on {
+  background: var(--blue-glow3) !important;
+}
+
+/* Post background */
+[data-theme="light"] .post {
+  background: var(--bg2) !important;
+}
+
+/* Reels dark gradient — light temada oq */
+[data-theme="light"] .reel-avi {
+  border: none !important;
+}
+
+/* ══════════════════════════════════════════
+   BARCHA BARLAR — TRANSPARENT (SEAMLESS)
+   Top bar, bottom bar, left bar, chat hdr,
+   profile hdr — hammasi body bg bilan bir xil
+   ══════════════════════════════════════════ */
+
+/* Chat thread header */
+.chat-thread-hdr,
+[data-theme="dark"] .chat-thread-hdr {
+  background: transparent !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+}
+.chat-thread-hdr::after,
+[data-theme="dark"] .chat-thread-hdr::after {
+  display: none !important;
+}
+
+/* Chat input row */
+.chat-thread-input-row,
+[data-theme="dark"] .chat-thread-input-row {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-top: none !important;
+}
+
+/* Profile header */
+.profile-hdr,
+[data-theme="dark"] .profile-hdr {
+  background: transparent !important;
+  border-bottom: none !important;
+}
+.profile-hdr::before,
+[data-theme="dark"] .profile-hdr::before {
+  display: none !important;
+}
+
+/* Profile grid tab bar */
+.profile-grid-hdr,
+[data-theme="dark"] .profile-grid-hdr {
+  background: transparent !important;
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
+/* Chats list view header */
+.chats-hdr {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}

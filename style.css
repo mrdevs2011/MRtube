@@ -1,0 +1,188 @@
+/* ═══════════════════════════════════════════
+   MRgram — Master Stylesheet
+   iOS 27 Liquid Glass Edition — Step 3
+   ═══════════════════════════════════════════ */
+
+@import url('./CSS/splash.css');
+@import url('./CSS/loading.css');
+@import url('./CSS/feed.css');
+@import url('./CSS/profile.css');
+@import url('./CSS/nav.css');
+@import url('./CSS/chat.css');
+@import url('./CSS/groups.css');
+@import url('./CSS/theme.css');
+@import url('./CSS/ui-improvements.css');
+@import url('./CSS/local-utility.css');
+@import url('./CSS/dark-theme-fix.css');
+@import url('./CSS/borderless.css');
+@import url('./CSS/chat-dark-redesign.css');
+
+/* ── Global Reset ── */
+*, *::before, *::after {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── CSS Variables — struktural, tema-neytral ── */
+:root {
+  --font:        -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'DM Sans', system-ui, sans-serif;
+  --mono:        'SF Mono', 'DM Mono', ui-monospace, monospace;
+  --r:           16px;
+  --r2:          12px;
+  --r3:          10px;
+  --nav:         56px;
+  --hdr:         52px;
+
+  /* iOS 27 Spring easings */
+  --ease:        cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-back:   cubic-bezier(0.22, 1, 0.36, 1);   /* calm decelerate, no overshoot */
+  --ease-out:    cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);   /* calm decelerate, no overshoot */
+  --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Transition shorthands */
+  --transition:  all 0.28s var(--ease);
+  --transition-spring: all 0.40s var(--ease-spring);
+  --transition-fast:   all 0.12s ease;
+
+  /* Content safe zone */
+  --content-top:    var(--hdr);
+  --content-bottom: var(--nav);
+  --content-left:   0px;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--line3); }
+
+/* ── HTML root ── */
+html {
+  /* iOS 27 rubber-band overscroll — elastik, bloklash yo'q */
+  overscroll-behavior-y: auto;
+  scroll-behavior: smooth;
+}
+
+/* ── Body — wallopaper ko'rinib tursin ── */
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  min-height: 100dvh;
+  -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Offline Indicator — liquid glass ── */
+#offlineIndicator {
+  position: fixed;
+  bottom: calc(var(--nav) + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--glass-mid);
+  color: var(--text);
+  padding: 10px 20px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 0.5px solid var(--glass-border);
+  box-shadow: var(--specular-top), var(--liquid-shadow-md);
+  animation: slideUpLiquid 0.45s var(--ease-spring) both;
+}
+
+#offlineIndicator::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #f59e0b;
+  border-radius: 50%;
+  animation: pulse-dot 1.5s ease infinite;
+  box-shadow: 0 0 8px #96620D;
+}
+
+@keyframes slideUpLiquid {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(24px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ── Cached Badge — liquid glass ── */
+.cached-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #172039;
+  color: var(--blue2);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 10;
+  border: 0.5px solid #1D2A49;
+  box-shadow: var(--specular-top);
+}
+
+.cached-badge::before {
+  content: '↓';
+  font-size: 10px;
+}
+
+/* ── Global interactive tap feedback ── */
+button:active,
+[role="button"]:active {
+  transform: scale(0.94);
+  transition: transform 0.08s ease;
+}
+
+/* ── iOS 27 Haptic Flash — visual touch confirmation ── */
+@keyframes hapticFlash {
+  0%   { }
+  40%  { }
+  100% { }
+}
+.haptic-flash { animation: hapticFlash 0.14s ease; }
+
+/* ── iOS 27 Rubber-band pull-to-refresh hint ── */
+@keyframes pullBounce {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(6px); }
+  100% { transform: translateY(0); }
+}
+
+/* ── SF Pro letter-spacing — iOS native feel ── */
+body, button, input, textarea {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.015em;  /* SF Pro default tight spacing */
+}
+
+h1, h2, h3, .hdr-brand, .auth-brand, .splash-wordmark {
+  letter-spacing: -0.025em; /* SF Pro display — daha qalin harflar */
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}

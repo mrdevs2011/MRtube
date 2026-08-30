@@ -1,0 +1,10 @@
+{
+  "name": "mrdatabase",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "firebase-admin": "^12.7.0",
+    "msedge-tts": "^2.0.6"
+  }
+}

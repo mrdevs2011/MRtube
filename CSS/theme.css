@@ -1,0 +1,334 @@
+/* ═══════════════════════════════════════════
+   MRgram — Theme System
+   MRgram — Theme System
+   ═══════════════════════════════════════════ */
+
+/* ── DARK theme — Telegram Dark Palette ── */
+[data-theme="dark"] {
+  --bg:           #0e1621;   /* Main App/Page Background (Primary) */
+  --bg2:          #0e1621;   /* Primary — chat list rows, frost */
+  --bg3:          #17212b;   /* Surface — headers, panels, sheets */
+  --bg4:          #24303f;   /* Inputs / hover / search fields */
+  --bg5:          #2b3d4f;   /* Elevated hover / heavy surface */
+  --line:         #0a0f16;
+  --line2:        #1c2733;
+  --line3:        #2b3d4f;
+  --text:         #ffffff;   /* Main Text */
+  --text2:        #7f91a4;   /* Muted / Secondary Text */
+  --text3:        #5b6b7a;
+  --text4:        #3e4c59;
+  --blue:         #5288c1;   /* Primary Telegram Blue */
+  --blue2:        #6fa0d3;
+  --blue3:        #3f6f96;
+  --blue-glow:    #1c2f42;
+  --blue-glow2:   #16283a;
+  --blue-glow3:   #101f2e;
+  --red:          #ec5e6f;
+  --red-glow:     #371A29;
+  --green:        #5acb8c;
+  --green-glow:   #172B26;
+  --amber:        #f0a855;
+
+  /* ── Telegram Dark — exact spec colors, dedicated names ── */
+  --tg-bg:        #0e1621;   /* Main Page/App Background */
+  --tg-surface:   #17212b;   /* Chat Area/Header/Panels Background */
+  --tg-input:     #24303f;   /* Inputs / Search Fields Background */
+  --tg-blue:      #5288c1;   /* Primary Telegram Blue */
+  --tg-out:       #2b5278;   /* Outgoing Message Bubble */
+  --tg-in:        #182533;   /* Incoming Message Bubble */
+  --tg-text:      #ffffff;   /* Main Text Color */
+  --tg-muted:     #7f91a4;   /* Muted / Secondary Text Color */
+
+  /* ── Icon system aliases ── */
+  --tg-text-muted:   #7f91a4;  /* default icon color */
+  --tg-primary-blue: #5288c1;  /* active / selected icon color */
+  --tg-text-main:    #ffffff;  /* active icon color on filled/dark surfaces */
+
+  /* ── Glass o'chirildi — solid panel ranglar ── */
+  --glass:              var(--bg3);
+  --glass-mid:          var(--bg4);
+  --glass-heavy:        var(--bg5);
+  --glass-border:       var(--line2);
+  --glass-border-top:   var(--line3);
+  --glass-shine:        var(--bg4);
+  --glass-blur:         none;
+  --glass-blur-heavy:   none;
+  --glass-blur-light:   none;
+
+  /* iOS 27 Extended — refraction & tint (glass o'chirildi) */
+  --glass-refract:      var(--bg3);
+  --glass-tint:         var(--bg3);
+  --glass-frost:        var(--bg2);
+  --glass-inner-glow:   none;
+
+  /* Specular inset highlights */
+  --specular-top:    inset 0 1px 0 #3A3A3F;
+  --specular-edge:   inset 0 0 0 0.5px #26262C;
+
+  /* Liquid shadows */
+  --liquid-shadow-sm: 0 4px 16px #06060B, 0 1px 4px #07070C;
+  --liquid-shadow-md: 0 8px 32px #05050A, 0 2px 8px #06060C;
+  --liquid-shadow-lg: 0 16px 60px #040408, 0 4px 16px #06060B;
+
+  /* Legacy shadows */
+  --shadow-sm:    var(--liquid-shadow-sm);
+  --shadow-md:    var(--liquid-shadow-md);
+  --shadow-lg:    var(--liquid-shadow-lg);
+}
+
+[data-theme="dark"] body {
+  background-color: #0e1621;
+  background-image: none;
+}
+
+[data-theme="dark"] .app {
+  background: transparent;
+}
+
+/* Dark — glass element overrides */
+[data-theme="dark"] .post {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+  box-shadow: var(--specular-top), var(--liquid-shadow-sm);
+}
+
+[data-theme="dark"] .bot-nav {
+  background: #17212b;
+  border-top: none;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .sheet {
+  background: #17212b;
+  border-top: 0.5px solid #24303f;
+  box-shadow: inset 0 1px 0 #24303f, 0 -8px 40px #06060B;
+}
+
+[data-theme="dark"] .modal-content {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+  box-shadow: var(--specular-top), var(--liquid-shadow-lg);
+}
+
+/* Light mode brand text */
+
+/* ═══════════════════════════════════════════
+   Smooth Theme Transitions
+   ═══════════════════════════════════════════ */
+
+body,
+.app,
+.post,
+.sheet,
+.modal-content,
+.bot-nav,
+.app-hdr,
+.profile-hdr,
+.grid-cell,
+.up-grid-cell,
+.field,
+.ta,
+.cmt-body,
+.cmt-input,
+.upload-drop,
+.file-card,
+.profile-avi,
+.up-avi,
+.dm-avi,
+.cmt-avi,
+.rcap-avi,
+.avatar-crop-container {
+  transition:
+    background-color 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.theme-transition-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.theme-transition-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ═══════════════════════════════════════════
+   Theme Toggle Button
+   ═══════════════════════════════════════════ */
+.theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--glass);
+  border: 0.5px solid var(--glass-border);
+  box-shadow: var(--specular-top);
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.35s var(--ease-back);
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.theme-btn:hover {
+  background: var(--glass-mid);
+  color: var(--text);
+  transform: scale(1.08);
+  box-shadow: var(--specular-top), var(--liquid-shadow-sm);
+}
+
+.theme-btn:active {
+  transform: scale(0.92);
+  transition: transform 0.08s ease;
+}
+
+.theme-btn svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.theme-btn .icon-sun  { display: block; }
+.theme-btn .icon-moon { display: none;  }
+
+[data-theme="dark"] .theme-btn:hover .icon-sun {
+  filter: drop-shadow(0 0 8px #B5872E);
+}
+
+@media (min-width: 768px) {
+  .theme-btn { position: relative; }
+  .theme-btn::after {
+    content: attr(data-tip);
+    position: absolute;
+    left: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--glass-mid);
+    border: 0.5px solid var(--glass-border);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 8px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s var(--ease);
+    z-index: 200;
+    box-shadow: var(--liquid-shadow-sm);
+  }
+  .theme-btn:hover::after { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════
+   Global Solid Component Classes
+   ═══════════════════════════════════════════ */
+
+/* Base glass class — use anywhere */
+.glass {
+  background: var(--glass);
+  border: 0.5px solid var(--glass-border);
+  box-shadow: var(--specular-top), var(--liquid-shadow-md);
+}
+
+.glass-heavy {
+  background: var(--glass-heavy);
+  border: 0.5px solid var(--glass-border-top);
+  box-shadow: var(--specular-top), var(--liquid-shadow-lg);
+}
+
+/* Gradient buttons — liquid style */
+.btn-primary {
+  background: var(--blue);
+  box-shadow: 0 4px 16px var(--blue-glow), var(--specular-top);
+  transition: all 0.35s var(--ease-back);
+}
+
+.btn-primary:hover {
+  background: var(--blue2);
+  box-shadow: 0 8px 28px var(--blue-glow), var(--specular-top);
+  transform: translateY(-2px) scale(1.01);
+}
+
+.btn-primary:active {
+  transform: scale(0.93);
+  transition: transform 0.08s ease;
+}
+
+.btn-danger {
+  background: var(--red);
+  box-shadow: 0 4px 16px var(--red-glow), var(--specular-top);
+}
+
+.btn-danger:hover {
+  background: #ff4466;
+  box-shadow: 0 8px 28px var(--red-glow), var(--specular-top);
+}
+
+.success-glow { box-shadow: 0 4px 16px var(--green-glow); }
+
+/* Card hover — liquid lift */
+.card-hover { transition: all 0.40s var(--ease-back); }
+.card-hover:hover {
+  transform: translateY(-5px) scale(1.005);
+  box-shadow: var(--liquid-shadow-lg);
+}
+
+/* Input fields */
+input, textarea {
+  background: var(--glass);
+  border: 0.5px solid var(--glass-border);
+  color: var(--text);
+  transition: all 0.25s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--blue);
+  background: var(--glass-mid);
+  box-shadow: 0 0 0 3px var(--blue-glow2), var(--specular-top);
+}
+
+input::placeholder, textarea::placeholder { color: var(--text3); }
+
+::selection { background: var(--blue); color: #fff; }
+
+/* ═══════════════════════════════════════════
+   Unified Icon System — 2026 minimalist line icons
+   All inline SVGs use stroke="currentColor" and inherit
+   their color from the parent element below, so a single
+   set of rules themes every icon in the app consistently.
+   ═══════════════════════════════════════════ */
+svg { color: inherit; }
+
+.act-btn, .nav-btn, .hdr-icon-btn, .hdr-new-post-btn,
+.edit-btn, .del-btn, .dm-act, .dm-close,
+.chat-attach-btn, .chat-call-btn, .chat-search-btn,
+.chat-thread-back, .chat-voice-btn, .crb-close,
+.cfp-icon, .cfp-remove, .search-overlay-close,
+.profile-grid-tab, .tab-btn, .admin-tab, .icon-btn {
+  color: var(--tg-text-muted);
+}
+
+.nav-btn.on, .nav-btn.active,
+.act-btn.liked, .act-btn.active,
+.profile-grid-tab.active, .tab-btn.active, .admin-tab.active,
+.chat-search-btn.active, .icon-btn.active, .icon-btn.selected {
+  color: var(--tg-primary-blue);
+}
+
+.nav-center-btn, .btn-primary, .chat-voice-btn,
+.hdr-new-post-btn, .fab {
+  color: var(--tg-text-main);
+}

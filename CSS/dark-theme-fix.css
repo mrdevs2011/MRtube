@@ -1,0 +1,707 @@
+/* ═══════════════════════════════════════════════════════════
+   MRgram — Solid UI Override
+   dark-theme-fix.css — solid rang tizimi
+   Solid panel ranglar (glassmorphism o'chirilgan)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════
+   1. DARK THEME — Rang Tokenlari
+   ══════════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg:           #0e1621;
+  --bg2:          #0e1621;
+  --bg3:          #17212b;
+  --bg4:          #24303f;
+  --bg5:          #2b3d4f;
+
+  --line:         #0a0f16;
+  --line2:        #1c2733;
+  --line3:        #2b3d4f;
+
+  --text:         #ffffff;
+  --text2:        #7f91a4;
+  --text3:        #5b6b7a;
+  --text4:        #3e4c59;
+
+  --blue:         #5288c1;
+  --blue2:        #6fa0d3;
+  --blue3:        #3f6f96;
+  --blue-glow:    #1c2f42;
+  --blue-glow2:   #16283a;
+  --blue-glow3:   #101f2e;
+
+  --red:          #ec5e6f;
+  --red-glow:     #3B1C2C;
+  --green:        #5acb8c;
+  --green-glow:   #172B26;
+  --amber:        #f0a855;
+
+  /* ── Glass o'chirildi — solid panel ranglar ── */
+  --glass:             var(--bg3);
+  --glass-mid:         var(--bg4);
+  --glass-heavy:       var(--bg5);
+  --glass-border:      #24303f;
+  --glass-border-top:  #2b3d4f;
+  --glass-shine:       var(--bg4);
+  --glass-blur:        none;
+  --glass-blur-heavy:  none;
+  --glass-blur-light:  none;
+
+  --specular-top:   inset 0 1px 0 #2b3d4f;
+  --specular-edge:  inset 0 0 0 0.5px #1c2733;
+
+  --liquid-shadow-sm: 0 4px 20px #05050A, 0 1px 4px #06060C;
+  --liquid-shadow-md: 0 8px 36px #0e1621, 0 2px 10px #06060B;
+  --liquid-shadow-lg: 0 20px 64px #030307, 0 4px 20px #05050A;
+
+  --shadow-sm: var(--liquid-shadow-sm);
+  --shadow-md: var(--liquid-shadow-md);
+  --shadow-lg: var(--liquid-shadow-lg);
+}
+
+/* ══════════════════════════════════════════
+   2. DARK — Body wallopaper
+   ══════════════════════════════════════════ */
+[data-theme="dark"] body {
+  background-color: #0e1621;
+  background-image:
+    #17212b,
+    #0D1216,
+    #0C0B17;
+}
+
+[data-theme="dark"] .app {
+  background: transparent;
+}
+
+/* ══════════════════════════════════════════
+   3. HEADER — Solid bar
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .app-hdr {
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .app-hdr::after {
+  display: none;
+}
+
+[data-theme="dark"] .hdr-brand {
+  background: #6fa0d3;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ══════════════════════════════════════════
+   4. POST CARD — True Solid
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .post {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 4px 20px #06060A,
+    0 1px 4px #07070C;
+  border-radius: 20px;
+}
+
+[data-theme="dark"] .post:hover {
+  background: #182533;
+  border-color: #2b3d4f;
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 8px 36px #0e1621,
+    0 2px 8px #06060B;
+  transform: translateY(-3px) scale(1.002);
+}
+
+/* Post head subtle separator */
+[data-theme="dark"] .post-head {
+  border-bottom: 0.5px solid #17212b;
+}
+
+/* Post gradient border on hover — more subtle */
+[data-theme="dark"] .post::before {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+[data-theme="dark"] .post:hover::before {
+  opacity: 1;
+}
+
+/* ── Post action buttons ── */
+[data-theme="dark"] .post-stats {
+  border-top: 0.5px solid #17212b;
+  border-bottom: 0.5px solid #17212b;
+  color: var(--text3);
+}
+
+[data-theme="dark"] .act-btn {
+  color: var(--text2);
+  border-right: 0.5px solid #17212b;
+  transition: all 0.2s var(--ease);
+}
+
+[data-theme="dark"] .act-btn:hover {
+  background: #17212b;
+  color: var(--text);
+}
+
+[data-theme="dark"] .act-btn.liked { color: var(--red); }
+
+/* ══════════════════════════════════════════
+   5. AVATAR — Avatar halqasi
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .avi {
+  border: 0.5px solid #24303f;
+  box-shadow: inset 0 1px 0 #24303f, 0 2px 8px #06060B;
+  background: #17212b;
+}
+
+[data-theme="dark"] .avi:hover {
+  border-color: #3f6f96;
+  box-shadow: inset 0 1px 0 #2b3d4f, 0 0 0 3px #1c2f42;
+}
+
+/* ══════════════════════════════════════════
+   6. BOTTOM NAV — Pastki navigatsiya paneli
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .bot-nav {
+  background: transparent;
+  border-top: none;
+  box-shadow: none;
+}
+
+[data-theme="dark"] .nav-btn:hover {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+}
+
+[data-theme="dark"] .nav-btn.on {
+  background: #1c2f42;
+  border: 0.5px solid #24303f;
+  box-shadow: inset 0 1px 0 #2b3d4f, 0 0 0 2px #101f2e;
+}
+
+/* ══════════════════════════════════════════
+   7. SHEET — Panel
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .sheet {
+  background: #0e1621;
+  border-top: 0.5px solid #2b3d4f;
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 -12px 56px #05050A;
+}
+
+[data-theme="dark"] .sheet-handle {
+  background: #2b3d4f;
+}
+
+/* ══════════════════════════════════════════
+   8. MODAL — Overlay
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .modal-content {
+  background: #0e1621;
+  border: 0.5px solid #24303f;
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 24px 72px #040407;
+}
+
+[data-theme="dark"] .overlay {
+  background: #0e1621;
+}
+
+/* ══════════════════════════════════════════
+   9. INPUT FIELDS — Inputs
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .field,
+[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]),
+[data-theme="dark"] textarea {
+  background: #182533;
+  border: 0.5px solid #24303f;
+  box-shadow: inset 0 1px 0 #24303f;
+  color: var(--text);
+  caret-color: var(--blue);
+}
+
+[data-theme="dark"] .field:focus,
+[data-theme="dark"] input:not([type="checkbox"]):not([type="radio"]):focus,
+[data-theme="dark"] textarea:focus {
+  background: #182533;
+  border-color: #3f6f96;
+  box-shadow:
+    inset 0 1px 0 #24303f,
+    0 0 0 3px #1c2f42;
+  outline: none;
+}
+
+[data-theme="dark"] .field::placeholder,
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: var(--text3);
+}
+
+/* ══════════════════════════════════════════
+   10. AUTH CARD — Panel
+   ══════════════════════════════════════════ */
+[data-theme="dark"] #authWrap {
+  background: #0e1621;
+  background-image:
+    #16283a;
+}
+
+[data-theme="dark"] .auth-card {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 24px 72px #0e1621;
+}
+
+[data-theme="dark"] .auth-brand {
+  background: #6fa0d3;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+[data-theme="dark"] .auth-title { color: var(--text2); }
+
+/* ══════════════════════════════════════════
+   11. PROFILE — Header
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .profile-hdr {
+  background: transparent;
+  border-bottom: none;
+}
+
+[data-theme="dark"] .profile-avi {
+  border: 0.5px solid #2D2D33;
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 6px 20px #05050A;
+}
+
+[data-theme="dark"] .profile-avi:hover {
+  border-color: #3f6f96;
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 0 0 4px #161E34,
+    0 8px 28px #0e1621;
+}
+
+[data-theme="dark"] .edit-btn {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+  box-shadow: inset 0 1px 0 #24303f;
+  color: var(--text);
+}
+
+[data-theme="dark"] .edit-btn:hover {
+  background: #24303f;
+  border-color: #2b3d4f;
+}
+
+/* Profile grid tabs */
+[data-theme="dark"] .profile-grid-hdr {
+  background: transparent;
+  border-color: transparent;
+}
+
+[data-theme="dark"] .profile-grid-tab { color: var(--text3); }
+[data-theme="dark"] .profile-grid-tab.active {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
+
+/* Profile grid cells */
+[data-theme="dark"] .grid-cell {
+  background: #17212b;
+  border: 0.5px solid #17212b;
+}
+
+[data-theme="dark"] .grid-cell:hover {
+  opacity: 1;
+  box-shadow: inset 0 0 0 1px #2b3d4f;
+}
+
+/* ══════════════════════════════════════════
+   12. FILE CARD — Panel
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .file-card {
+  background: #17212b;
+  border: 0.5px solid #1F1F25;
+  box-shadow: inset 0 1px 0 #24303f;
+}
+
+[data-theme="dark"] .file-card:hover {
+  background: #17212b;
+  border-color: #2D2D33;
+  transform: translateY(-2px) scale(1.005);
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 6px 24px #05050A;
+}
+
+[data-theme="dark"] .file-dl {
+  background: #16283a;
+  border: 0.5px solid #24303f;
+  color: var(--blue2);
+  box-shadow: inset 0 1px 0 #24303f;
+}
+
+[data-theme="dark"] .file-dl:hover {
+  background: #1c2f42;
+  border-color: #263862;
+}
+
+/* ══════════════════════════════════════════
+   13. CHAT — Xabar pufakchalari
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .chat-row:hover {
+  background: #17212b;
+}
+
+[data-theme="dark"] .chat-row:active {
+  background: #17212b;
+}
+
+[data-theme="dark"] .msg-out .msg-bubble {
+  background: var(--blue2);
+  box-shadow: 0 4px 16px var(--blue-glow), inset 0 1px 0 #2b3d4f;
+  color: #fff;
+  border: none;
+}
+
+[data-theme="dark"] .msg-in .msg-bubble {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+  box-shadow: inset 0 1px 0 #24303f;
+  color: var(--text);
+}
+
+[data-theme="dark"] .chat-input-bar {
+  background: #0e1621;
+  border-top: 0.5px solid #24303f;
+  box-shadow: inset 0 1px 0 #17212b;
+}
+
+[data-theme="dark"] .chat-input-wrap {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+  box-shadow: inset 0 1px 0 #24303f;
+}
+
+[data-theme="dark"] .chat-input-wrap:focus-within {
+  border-color: #3f6f96;
+  box-shadow:
+    inset 0 1px 0 #24303f,
+    0 0 0 3px #16283a;
+}
+
+/* ══════════════════════════════════════════
+   14. SEARCH OVERLAY — Qidiruv overlay
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .search-overlay {
+  background: #0e1621;
+}
+
+[data-theme="dark"] .search-overlay-box {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+  box-shadow:
+    inset 0 1px 0 #2D2D33,
+    0 8px 40px #0e1621;
+}
+
+[data-theme="dark"] .search-overlay-close {
+  background: #24303f;
+  border: 0.5px solid #24303f;
+  color: var(--text2);
+  box-shadow: inset 0 1px 0 #24303f;
+}
+
+[data-theme="dark"] .search-overlay-close:hover {
+  background: #24303f;
+  color: var(--text);
+}
+
+/* ══════════════════════════════════════════
+   15. TOAST — Pill
+   ══════════════════════════════════════════ */
+[data-theme="dark"] #toast {
+  background: #17212b;
+  border: 0.5px solid #2b3d4f;
+  color: var(--text);
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 8px 36px #0e1621;
+}
+
+/* ══════════════════════════════════════════
+   16. BADGES — Pills
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .badge-pub {
+  background: #16283a;
+  color: var(--blue2);
+  border: 0.5px solid #24303f;
+  box-shadow: inset 0 1px 0 #24303f;
+}
+
+[data-theme="dark"] .badge-priv {
+  background: #17212b;
+  color: var(--text3);
+  border: 0.5px solid #24303f;
+}
+
+/* ══════════════════════════════════════════
+   17. BUTTONS — Gradient
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .del-btn { color: var(--text3); }
+[data-theme="dark"] .del-btn:hover {
+  color: var(--red);
+  background: #20111C;
+}
+
+[data-theme="dark"] .hdr-new-post-btn {
+  background: var(--blue3);
+  box-shadow:
+    0 4px 16px var(--blue-glow),
+    inset 0 1px 0 #4D4D52;
+}
+
+[data-theme="dark"] .hdr-icon-btn:hover {
+  background: #17212b;
+}
+
+/* ══════════════════════════════════════════
+   18. DETAIL MODAL (#detailContent) — Panel
+   ══════════════════════════════════════════ */
+[data-theme="dark"] #detailContent {
+  background: #090911;
+  border: 0.5px solid #24303f;
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 -12px 56px #0e1621;
+}
+
+[data-theme="dark"] .dm-act:hover {
+  background: #17212b;
+}
+
+[data-theme="dark"] .dm-close {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+}
+
+[data-theme="dark"] .dm-close:hover {
+  background: #1F1F25;
+}
+
+/* ══════════════════════════════════════════
+   19. SKELETON LOADING — Shimmer
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .skeleton-post {
+  background: #0e1621;
+  border: 0.5px solid #17212b;
+}
+
+[data-theme="dark"] .skel-avi,
+[data-theme="dark"] .skel-line,
+[data-theme="dark"] .skel-media {
+  background: #17212b;
+  background-size: 200% 100%;
+}
+
+/* ══════════════════════════════════════════
+   20. SPLASH SCREEN — Panel
+   ══════════════════════════════════════════ */
+[data-theme="dark"] #splash {
+  background: #0e1621;
+  background-image:
+    #17212b;
+}
+
+[data-theme="dark"] .splash-wordmark { color: var(--text); }
+
+[data-theme="dark"] .splash-bar {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .splash-fill {
+  background: var(--blue2);
+  box-shadow: 0 0 16px var(--blue-glow);
+}
+
+/* ══════════════════════════════════════════
+   21. ONBOARDING & CARDS — Panel
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .onb-card,
+[data-theme="dark"] .admin-card,
+[data-theme="dark"] .verify-card {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+  box-shadow:
+    inset 0 1px 0 #24303f,
+    0 4px 20px #06060A;
+}
+
+[data-theme="dark"] .admin-card:hover {
+  border-color: #1F2E50;
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 8px 32px #0e1621,
+    0 0 0 3px #101f2e;
+}
+
+/* ══════════════════════════════════════════
+   22. SIDEBAR BUTTONS — Panel
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .sb-item { color: var(--text2); }
+[data-theme="dark"] .sb-item:hover {
+  background: #17212b;
+  color: var(--text);
+}
+[data-theme="dark"] .sb-item.active {
+  background: #16283a;
+  color: var(--blue2);
+}
+
+/* ══════════════════════════════════════════
+   23. SCROLL — Thin glass
+   ══════════════════════════════════════════ */
+[data-theme="dark"] ::-webkit-scrollbar { width: 3px; height: 3px; }
+[data-theme="dark"] ::-webkit-scrollbar-track { background: transparent; }
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #24303f;
+  border-radius: 3px;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #2b3d4f;
+}
+
+/* ══════════════════════════════════════════
+   24. SELECTION
+   ══════════════════════════════════════════ */
+[data-theme="dark"] ::selection {
+  background: #283B67;
+  color: #fff;
+}
+
+/* ══════════════════════════════════════════
+   25. REEL — Overlays
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .reel { background: #080810; }
+
+[data-theme="dark"] .reel-avi {
+  border: 1.5px solid #2b3d4f;
+  box-shadow: 0 2px 12px #0e1621;
+}
+
+[data-theme="dark"] .reel-top-btn,
+[data-theme="dark"] .reel-vol-top {
+  background: #0e1621;
+  border: 0.5px solid #24303f;
+}
+
+/* ══════════════════════════════════════════
+   26. THEME BUTTON — Panel
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .theme-btn { color: var(--text2); }
+
+[data-theme="dark"] .theme-btn:hover {
+  background: #17212b;
+  color: var(--text);
+}
+
+/* ══════════════════════════════════════════
+   27. FLOATING UPLOAD BAR — Pill
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .upload-float-bar {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+  box-shadow:
+    inset 0 1px 0 #2b3d4f,
+    0 8px 36px #0e1621;
+}
+
+/* ══════════════════════════════════════════
+   28. VISIBILITY ROW & UPLOAD SHEET — Panel
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .visibility-row {
+  background: #17212b;
+  border: 0.5px solid #1F1F25;
+}
+
+[data-theme="dark"] .visibility-row.is-public {
+  border-color: #1F2E50;
+  background: #0e1621;
+}
+
+[data-theme="dark"] .upload-drop {
+  background: #0e1621;
+  border: 1px dashed #24303f;
+}
+
+[data-theme="dark"] .upload-drop:hover {
+  border-color: #3f6f96;
+  background: #0e1621;
+}
+
+[data-theme="dark"] .upload-drop.drag-over {
+  border-color: var(--blue);
+  background: #17212b;
+  box-shadow: 0 0 0 3px #1c2f42, inset 0 1px 0 #24303f;
+}
+
+/* ══════════════════════════════════════════
+   29. EMPTY STATES — Icon
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .feed-empty-title { color: var(--text2); }
+[data-theme="dark"] .feed-empty-text { color: var(--text3); }
+[data-theme="dark"] .empty { color: var(--text3); }
+
+[data-theme="dark"] .feed-empty-icon,
+[data-theme="dark"] .empty-icon,
+[data-theme="dark"] .empty-search-icon {
+  background: #17212b;
+  border: 0.5px solid #172039;
+  box-shadow: inset 0 1px 0 #24303f;
+}
+
+/* ══════════════════════════════════════════
+   30. COMMENTS MODAL — Panel
+   ══════════════════════════════════════════ */
+[data-theme="dark"] .cmt-body {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+}
+
+[data-theme="dark"] .cmt-body:hover {
+  background: #17212b;
+  border-color: #24303f;
+}
+
+[data-theme="dark"] .cmt-input {
+  background: #17212b;
+  border: 0.5px solid #24303f;
+}
+
+[data-theme="dark"] .cmt-input:focus {
+  background: #17212b;
+  border-color: #3f6f96;
+  box-shadow: 0 0 0 3px #16283a;
+}
+
+[data-theme="dark"] .cmt-input-row {
+  border-top: 0.5px solid #24303f;
+}
+

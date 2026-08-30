@@ -1,0 +1,28 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "functions": {
+    "api/groq-chat.js": { "maxDuration": 60 },
+    "api/tts.js": { "maxDuration": 60 }
+  },
+  "headers": [
+    {
+      "source": "/.well-known/assetlinks.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/:path*" },
+    { "source": "/modules/:path*", "destination": "/modules/:path*" },
+    { "source": "/CSS/:path*", "destination": "/CSS/:path*" },
+    { "source": "/svg/:path*", "destination": "/svg/:path*" },
+    { "source": "/icons/:path*", "destination": "/icons/:path*" },
+    { "source": "/img/:path*", "destination": "/img/:path*" },
+    { "source": "/audio/:path*", "destination": "/audio/:path*" },
+    { "source": "/.well-known/:path*", "destination": "/.well-known/:path*" },
+    { "source": "/README.md", "destination": "/README.md" },
+    { "source": "/((?!api/|modules/|CSS/|svg/|icons/|img/|audio/|\\.well-known/).*)", "destination": "/index.html" }
+  ]
+}
