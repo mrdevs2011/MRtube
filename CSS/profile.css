@@ -344,68 +344,35 @@
 }
 
 .profile-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
+  /* display/grid-template-columns/gap → ui-improvements.css:603 (yagona manba), o'lik */
   margin-top: 4px;
   padding: 0 0 12px;
 }
 
-.grid-cell {
-  aspect-ratio: 1;
-  background: var(--bg3);
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-  border-radius: 6px;
-}
-
-.grid-cell img, .grid-cell video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s var(--ease);
-}
-
-.grid-cell:hover img,
-.grid-cell:hover video { transform: scale(1.05); }
+/* .grid-cell, .grid-cell img/video, .grid-cell:hover img/video → to'liq
+   ui-improvements.css:610-635 tomonidan yopiladi (barcha property bir xil
+   yoki yangi qiymat bilan qayta ta'riflangan), o'lik, o'chirildi */
 
 .grid-cell-overlay {
-  position: absolute;
-  inset: 0;
-  background: #040408;
-  display: flex;
+  /* position/inset/background/display/justify-content/gap/transition →
+     ui-improvements.css:637 (yagona manba), o'lik. align-items va
+     border-radius u yerda umuman belgilanmagan — shu ikkitasi tirik */
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  opacity: 0;
-  transition: opacity 0.2s;
   border-radius: 6px;
 }
 
-.grid-cell:hover .grid-cell-overlay { opacity: 1; }
+/* .grid-cell:hover .grid-cell-overlay { opacity:1 } → ui-improvements.css:651
+   bilan bir xil qiymat, o'lik, o'chirildi */
 
 .grid-cell-txt {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  font-size: 11px;
-  color: var(--text2);
-  text-align: center;
-  line-height: 1.4;
+  /* display/align-items/justify-content/padding/font-size/color/text-align/
+     line-height → ui-improvements.css:687 (yagona manba), o'lik. height va
+     background u yerda belgilanmagan — tirik */
   height: 100%;
   background: var(--bg2);
 }
 
-.grid-stat {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  text-shadow: 0 1px 3px #040408;
-}
+/* .grid-stat → to'liq ui-improvements.css:656 tomonidan yopiladi, o'lik, o'chirildi */
 
 .grid-like {
   display: flex;
@@ -417,14 +384,10 @@
 }
 
 .grid-play-badge {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  background: #040408;
-  border-radius: 5px;
+  /* position/top/right/background/border-radius/display/align-items →
+     ui-improvements.css:667 (yagona manba), o'lik. padding u yerda
+     belgilanmagan (width/height bilan almashtirilgan) — tirik */
   padding: 3px 5px;
-  display: flex;
-  align-items: center;
 }
 
 /* ═══════════════════════
@@ -572,7 +535,7 @@
   flex: 1;
   text-align: center;
   padding: 13px 0;
-  border-right: 1px solid var(--line);
+  /* border-right → borderless.css:234 'none' bilan yengiladi, o'lik */
 }
 
 .up-stat:last-child { border-right: none; }
@@ -663,53 +626,38 @@
 }
 
 .up-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
+  /* display/grid-template-columns/gap → ui-improvements.css:603 (yagona
+     manba, .profile-grid,.up-grid guruhida), o'lik */
   margin: 0 -20px;
   width: calc(100% + 40px);
   padding-bottom: 8px;
 }
 
 .up-grid-cell {
-  aspect-ratio: 1;
-  background: var(--bg3);
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-  border-radius: 4px;
+  /* aspect-ratio/background/overflow/cursor/position/border-radius →
+     ui-improvements.css:610 (.grid-cell,.up-grid-cell guruhida), o'lik.
+     transition u yerda belgilanmagan — tirik */
   transition: opacity 0.2s;
 }
 
 .up-grid-cell-overlay {
-  position: absolute;
-  inset: 0;
-  background: #040408;
-  display: flex;
+  /* position/inset/background/display/justify-content/gap/transition →
+     ui-improvements.css:637 (.grid-cell-overlay,.up-grid-cell-overlay
+     guruhida), o'lik. align-items va border-radius tirik */
   align-items: center;
-  justify-content: center;
-  gap: 12px;
-  opacity: 0;
-  transition: opacity 0.2s;
   border-radius: 4px;
 }
 
-.up-grid-cell:hover .up-grid-cell-overlay { opacity: 1; }
+/* .up-grid-cell:hover .up-grid-cell-overlay { opacity:1 } →
+   ui-improvements.css:651 bilan bir xil qiymat, o'lik, o'chirildi */
 
-.up-grid-cell img,
-.up-grid-cell video {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
+/* .up-grid-cell img/video → to'liq ui-improvements.css:620 tomonidan
+   yopiladi, o'lik, o'chirildi */
 
 .up-grid-cell-txt {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  font-size: 10px;
-  color: var(--text3);
-  text-align: center;
+  /* display/align-items/justify-content/padding/font-size/color/text-align →
+     ui-improvements.css:687 (.grid-cell-txt,.up-grid-cell-txt guruhida),
+     o'lik. height va background tirik */
   height: 100%;
   background: var(--bg2);
 }
@@ -1002,8 +950,9 @@
 
 /* Avatar — flat ring, glow olib tashlandi */
 .profile-avi {
+  /* border → borderless.css:191 (.profile-avi guruhida) 'none' bilan
+     yengiladi, o'lik — loyihaning umumiy "borderless" maqsadiga mos */
   background: var(--pg-glass-mid);
-  border: 1px solid var(--pg-border-side);
 }
 .profile-avi:hover {
   border-color: #2D4477;
@@ -1023,8 +972,9 @@
 
 /* Edit button — flat */
 .edit-btn {
+  /* border → borderless.css:206 (.edit-btn guruhida) 'none' bilan
+     yengiladi, o'lik */
   background: var(--pg-glass-mid);
-  border: 0.5px solid var(--pg-border-side);
   border-radius: 14px;
   transition: background 0.15s ease;
 }
@@ -1043,12 +993,10 @@
   padding: 0;
 }
 
-/* Grid tab header — flat strip */
-.profile-grid-hdr {
-  background: var(--pg-glass);
-  border-top: 0.5px solid var(--pg-border-side);
-  border-bottom: 0.5px solid var(--pg-border-side);
-}
+/* Grid tab header — flat strip.
+   background/border-top/border-bottom → borderless.css:1124
+   (.profile-grid-hdr guruhida) 'transparent'/'none' bilan to'liq
+   yengiladi, o'lik — butun blok shu sababli o'chirildi */
 
 /* Profile grid items — flat hover, scale olib tashlandi */
 .profile-grid-item {
