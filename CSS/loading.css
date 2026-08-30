@@ -124,33 +124,7 @@
   box-shadow: 0 20px 50px #040408;
 }
 
-.auth-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: #253760;
-}
-
-.auth-card::after {
-  /* Ilgari top:-80px/right:-80px bilan kartadan TASHQARIGA chiqib
-     turardi va faqat ota elementdagi overflow:hidden orqali kesilishga
-     umid qilinardi. Muammo: .auth-card'ning o'zida transform animatsiya
-     bor (authCardFloat/authCardEntrance) — border-radius + overflow:
-     hidden + shu elementning o'zi animatsiyalanishi ko'p brauzerlarda
-     (Chrome/Firefox/Safari) alohida compositing layer hosil qilib,
-     overflow-clip'ni buzib qo'yadigan mashhur nuqson. Natijada bu blok
-     kesilmay, kartadan tashqarida "xunuk" to'rtburchak bo'lib ko'rinardi.
-     Endi blob TO'LIQ karta ICHIDA joylashadi (manfiy offset yo'q) —
-     overflow ishlaydimi-yo'qmi, baribir chiqib ketmaydi. */
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  width: 160px; height: 160px;
-  background: radial-gradient(circle at top right, #16283a 0%, transparent 70%);
-  border-radius: 0 24px 0 100%;
-  pointer-events: none;
-}
+/* Flat X-style — no top highlight line, no gradient blob */
 
 .auth-logo {
   display: flex;
@@ -166,31 +140,13 @@
   width: 44px; height: 44px;
   border-radius: 14px;
   overflow: hidden;
-  background: var(--glass-heavy);
-  border: 0.5px solid var(--glass-border-top);
-  box-shadow: var(--specular-top), var(--specular-edge), 0 6px 20px var(--blue-glow), var(--liquid-shadow-sm);
-}
-
-.auth-logo-glass::after {
-  content: '';
-  position: absolute;
-  top: -60%; left: -160%;
-  width: 70%; height: 220%;
-  background: #848487;
-  transform: rotate(22deg);
-  animation: authLogoSheen 3s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes authLogoSheen {
-  0%, 40%  { left: -160%; }
-  70%, 100% { left: 170%; }
+  background: var(--bg3);
+  border: 0.5px solid var(--line2);
 }
 
 .auth-logo-glass img {
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 1px 5px #07070C);
 }
 
 .auth-logo .auth-brand { margin-left: 10px; }
