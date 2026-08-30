@@ -25,18 +25,18 @@
   background: transparent;
   border-radius: 0;
   border: none;
-  /* border-bottom: var(--line2) o'lik — borderless.css:306 var(--line)
-     bilan yengadi (bir xil specificity, keyinroq yuklanadi) */
+  /* border-bottom → borderless.css:300 (yagona manba, `var(--line)`), o'lik, o'chirildi (2026-08-30) */
+  box-shadow: none;
   margin: 0;
   position: relative;
   transition: background 0.15s var(--ease), transform 0.15s var(--ease);
 }
 .chat-row:hover {
-  background: var(--glass);
+  /* background → dark-theme-fix.css / borderless.css'da har ikkala tema uchun ham qayta belgilanadi, o'lik, o'chirildi (2026-08-30) */
   transform: translateX(2px);
 }
 .chat-row:active {
-  background: var(--glass-mid);
+  /* background → dark-theme-fix.css / borderless.css'da har ikkala tema uchun ham qayta belgilanadi, o'lik, o'chirildi (2026-08-30) */
   transform: scale(0.99);
 }
 
@@ -110,10 +110,10 @@
 
 /* ── Chat thread (full screen overlay) ── */
 #chatThreadModal {
-  /* background/z-index o'lik — chat-dark-redesign.css va local-utility.css
-     (!important) yengadi, pastroqdagi izohga qarang */
   position: fixed;
   inset: 0;
+  /* background → CSS/chat-dark-redesign.css:5 (yagona manba, `var(--c-bg-chat)`), o'lik, o'chirildi (2026-08-30) */
+  z-index: 360;
   display: none;
   flex-direction: column;
   overscroll-behavior: contain;
@@ -121,12 +121,11 @@
 #chatThreadModal.show { display: flex; animation: slideUp 0.28s var(--ease); }
 
 .chat-thread-hdr {
-  /* background/border-bottom o'lik — borderless.css:310-313 (transparent/
-     none bilan) yengadi, bir xil specificity, keyinroq yuklanadi */
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 10px 14px;
+  /* background/border-bottom → borderless.css:1093 (yagona manba, transparent/none), o'lik, o'chirildi (2026-08-30) */
   flex-shrink: 0;
   position: relative;
 }
@@ -138,7 +137,7 @@
   background: var(--bg4);
   border: none;
   cursor: pointer;
-  color: var(--text);
+  /* color → theme.css:255 (yagona manba, unified icon system, `var(--tg-text-muted)`), o'lik, o'chirildi (2026-08-30) */
   flex-shrink: 0;
 }
 .chat-thread-back:hover { background: var(--bg5); }
@@ -170,18 +169,15 @@
   gap: 2px;
 }
 
-/* ── Sana ajratuvchi — Telegram uslubidagi suzuvchi pill ("Bugun"/"Kecha") ──
- * .chat-date-sep span ko'rinishi (background/color/font-size/padding/
- * border-radius) endi o'lik — pastroqda "FEATURE 4: Sana Ajratgichlari"
- * bo'limi (~L1070) qayta ta'riflaydi va g'olib chiqadi (keyinroq
- * yuklanadi, bir xil specificity). Struktura (display/justify-content/
- * margin) shu yerda tirik qoladi. */
+/* ── Sana ajratuvchi — Telegram uslubidagi suzuvchi pill ("Bugun"/"Kecha") ── */
 .chat-date-sep {
   display: flex;
   justify-content: center;
   margin: 10px 0 8px;
 }
 .chat-date-sep span {
+  /* background/color/font-size/padding/border-radius → chat.css:1072 (yagona manba, ikkinchi/keyingi ta'rif), o'lik, o'chirildi (2026-08-30) */
+  font-weight: 600;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
@@ -303,23 +299,17 @@
 /* read = 2 chek, ko'k-moviy */
 .msg-ticks.read { color: #5bb8f5; }
 
-/* .chat-thread-input-row bu yerdagi ko'rinishi (border-top/padding) endi
- * o'lik — CLEAN CHAT REDESIGN bo'limida (~L2243) qayta ta'riflanadi va
- * g'olib chiqadi (keyinroq yuklanadi, bir xil specificity). Struktura
- * property'lari (display/align-items/flex-shrink) hali tirik, chunki
- * pastdagi blok ularni umuman belgilamaydi. */
 .chat-thread-input-row {
   display: flex;
   align-items: center;
+  /* gap/padding/padding-bottom → chat.css:2264 (yagona manba, keyingi/oxirgi ta'rif), o'lik, o'chirildi (2026-08-30) */
+  /* border-top → borderless.css:1105 (yagona manba, `none`), o'lik, o'chirildi (2026-08-30) */
   flex-shrink: 0;
 }
 
-/* .chat-thread-input bu yerdagi ko'rinishi (background/border/padding/
- * font-size) endi o'lik — pastdagi CLEAN CHAT REDESIGN bo'limi
- * (~L2252) qayta ta'riflaydi. Struktura tirik qoladi. */
 .chat-thread-input {
   flex: 1;
-  border-radius: 20px;
+  /* background/border/border-radius/padding/font-size → chat.css:2273 (yagona manba, keyingi/oxirgi ta'rif), o'lik, o'chirildi (2026-08-30) */
   color: var(--text);
   font-family: var(--font);
   outline: none;
@@ -406,22 +396,28 @@
 /* ── New input row with blur & voice ── */
 .chat-thread-input-row {
   position: relative;
-  background: var(--bg);
-  border-top: 1px solid var(--line);
+  /* background → borderless.css:1105 (yagona manba, `transparent`), o'lik, o'chirildi (2026-08-30) */
+  /* border-top → borderless.css:1105 (yagona manba, `none`), o'lik, o'chirildi (2026-08-30) */
   gap: 6px;
   padding: 8px 10px;
   padding-bottom: max(8px, env(safe-area-inset-bottom));
 }
 
-/* Attach button — background/transition endi o'lik, CLEAN CHAT REDESIGN
- * bo'limida (~L2263) qayta ta'riflanadi va g'olib chiqadi. Struktura
- * (o'lcham/shape/pozitsiya) tirik qoladi. */
+/* Attach button */
 .chat-attach-btn {
   width: 36px; height: 36px;
   border-radius: 50%;
+  /* background → chat.css:2278 (yagona manba, keyingi/oxirgi ta'rif, `transparent`), o'lik, o'chirildi (2026-08-30) */
+  border: none;
   display: flex; align-items: center; justify-content: center;
+  /* color → theme.css:255 (yagona manba, unified icon system, `var(--tg-text-muted)`), o'lik, o'chirildi (2026-08-30) */
   cursor: pointer;
   flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+}
+.chat-attach-btn:hover {
+  /* background → chat.css:2284 (yagona manba, keyingi/oxirgi ta'rif, `transparent`), o'lik, o'chirildi (2026-08-30) */
+  color: var(--text);
 }
 .chat-attach-btn:active { transform: scale(0.93); }
 
@@ -448,22 +444,24 @@
   z-index: 0;
   will-change: transform, opacity;
 }
-/* Voice / Send button — width/background/box-shadow endi o'lik, CLEAN
- * CHAT REDESIGN bo'limida (~L2271) qayta ta'riflanadi va g'olib chiqadi.
- * Struktura (pozitsiya/shape/cursor) tirik qoladi. */
 .chat-voice-btn {
   position: relative;
   z-index: 1;
+  /* width/height → chat.css:2286 (yagona manba, keyingi/oxirgi ta'rif, 36px), o'lik, o'chirildi (2026-08-30) */
   border-radius: 50%;
+  /* background → chat.css:2286 (yagona manba, keyingi/oxirgi ta'rif, `#2563eb`), o'lik, o'chirildi (2026-08-30) */
   border: none;
   display: flex; align-items: center; justify-content: center;
-  color: #fff;
+  /* color → theme.css:268 (yagona manba, `.nav-center-btn,.btn-primary,.chat-voice-btn...`, `var(--tg-text-main)`), o'lik, o'chirildi (2026-08-30) */
   cursor: pointer;
   flex-shrink: 0;
   transition: var(--transition);
+  /* box-shadow → chat.css:2286 (yagona manba, keyingi/oxirgi ta'rif, `none`), o'lik, o'chirildi (2026-08-30) */
 }
 .chat-voice-btn:hover { }
-.chat-voice-btn:active { transform: scale(0.92); }
+.chat-voice-btn:active {
+  /* transform → chat.css:1508 (yagona manba, keyingi/oxirgi ta'rif, `scale(0.94)`), o'lik, o'chirildi (2026-08-30) */
+}
 /* .chat-voice-btn.recording lives in the "VOICE BTN — amplitude-based
  * smooth pulse" section below, which is the only recording style that
  * actually runs (it's JS-driven and disables any CSS keyframe pulse). */
@@ -518,7 +516,7 @@
   background: var(--bg5);
   border: none;
   display: flex; align-items: center; justify-content: center;
-  color: var(--text2);
+  /* color → theme.css:255 (yagona manba, unified icon system, `var(--tg-text-muted)`), o'lik, o'chirildi (2026-08-30) */
   cursor: pointer;
   flex-shrink: 0;
   transition: background 0.2s;
@@ -587,7 +585,7 @@
 .chat-img-msg {
   max-width: 260px;
   min-width: 80px;
-  border-radius: 12px;
+  /* border-radius → chat.css:2154 atrofida (yagona manba, `14px!important`), o'lik, o'chirildi (2026-08-30) */
   overflow: hidden;
   cursor: pointer;
 }
@@ -614,16 +612,16 @@
   background: #000;
 }
 
-/* ── Reply preview inside bubble — border-left/padding/margin-bottom/
- * border-radius/background endi o'lik, "CLEAN CHAT REDESIGN" bo'limi
- * (~L2278) !important bilan qayta ta'riflaydi va g'olib chiqadi.
- * cursor/transition va :hover holatlari shu yerda tirik qoladi. */
+/* ── Reply preview inside bubble ── */
 .chat-reply-preview {
+  /* border-left/margin-bottom/border-radius/background → chat.css:2299 (yagona manba, `!important` bilan qayta ta'riflangan), o'lik, o'chirildi (2026-08-30) */
+  padding: 4px 8px;
   cursor: pointer;
   transition: background 0.2s;
 }
 .chat-msg.theirs .chat-reply-preview {
   border-left-color: var(--blue);
+  /* background → chat.css:2306 (yagona manba, `!important` bilan qayta ta'riflangan), o'lik, o'chirildi (2026-08-30) */
 }
 .chat-reply-preview:hover { background: #3A3A3F; }
 .chat-msg.theirs .chat-reply-preview:hover { background: #101930; }
@@ -687,7 +685,7 @@
   background: var(--bg4);
   border: none;
   display: flex; align-items: center; justify-content: center;
-  color: var(--text2);
+  /* color → theme.css:255 (yagona manba, unified icon system, `var(--tg-text-muted)`), o'lik, o'chirildi (2026-08-30) */
   cursor: pointer;
   flex-shrink: 0;
 }
@@ -752,11 +750,9 @@
 
 /* ── Context menu ── */
 #chatContextMenu {
-  /* background/border → CSS/chat-dark-redesign.css'da (#chatThreadModal
-     ichida emas, o'zi ID selector) qayta ta'riflanadi va g'olib chiqadi,
-     shu yerdagi qatorlar o'lik */
   position: fixed;
   display: none;
+  /* background/border → chat-dark-redesign.css:224 (yagona manba), o'lik, o'chirildi (2026-08-30) */
   border-radius: 14px;
   padding: 6px;
   min-width: 170px;
@@ -765,8 +761,6 @@
   overflow: hidden;
 }
 
-/* .ctx-item transition endi o'lik — pastroqda (~L1981) !important bilan
- * qayta ta'riflanadi va g'olib chiqadi. Struktura/rang shu yerda tirik. */
 .ctx-item {
   display: flex;
   align-items: center;
@@ -780,6 +774,7 @@
   background: none;
   width: 100%;
   text-align: left;
+  /* transition → chat.css:2004 (yagona manba, `!important` bilan qayta ta'riflangan), o'lik, o'chirildi (2026-08-30) */
 }
 .ctx-item:hover { background: var(--bg4); }
 .ctx-item.danger { color: #ef4444; }
@@ -793,10 +788,9 @@
 
 /* ── Lightbox ── */
 #chatLightbox {
-  /* background o'lik — chat-dark-redesign.css rgba(6,10,15,.92) bilan
-     yengadi, keyinroq yuklanadi */
   position: fixed;
   inset: 0;
+  /* background → chat-dark-redesign.css:228 (yagona manba, `rgba(6,10,15,0.92)`), o'lik, o'chirildi (2026-08-30) */
   z-index: 600;
   display: none;
   align-items: center;
@@ -980,13 +974,16 @@
   background: var(--bg4);
   border: none;
   display: flex; align-items: center; justify-content: center;
-  color: var(--text2);
+  /* color → theme.css:255 (yagona manba, unified icon system, `var(--tg-text-muted)`), o'lik, o'chirildi (2026-08-30) */
   cursor: pointer;
   flex-shrink: 0;
   transition: background 0.2s, color 0.2s;
 }
 .chat-search-btn:hover { background: var(--bg5); color: var(--text); }
-.chat-search-btn.active { background: #101B32; color: var(--blue); }
+.chat-search-btn.active {
+  background: #101B32;
+  /* color → theme.css:263 (yagona manba, `.nav-btn.on,...,.chat-search-btn.active`, `var(--tg-primary-blue)`), o'lik, o'chirildi (2026-08-30) */
+}
 
 /* ════════════════════════════════════════════════════════════════════
    FEATURE 3: Chat ichida qidiruv (Search Bar)
@@ -1087,7 +1084,7 @@
   background: var(--bg4);
   border: none;
   display: flex; align-items: center; justify-content: center;
-  color: var(--text2);
+  /* color → theme.css:255 (yagona manba, unified icon system, `var(--tg-text-muted)`), o'lik, o'chirildi (2026-08-30) */
   cursor: pointer;
   flex-shrink: 0;
   transition: background 0.2s, color 0.2s;
@@ -1098,10 +1095,10 @@
    INCOMING CALL MODAL
    ════════════════════════════════════════════════════════════════════ */
 #incomingCallModal {
-  /* background/z-index o'lik — pastroqda (~L1735, SOLID UI) va
-     local-utility.css (!important) yengadi */
   position: fixed;
   inset: 0;
+  /* z-index → local-utility.css:203 (yagona manba, `999999!important`), o'lik, o'chirildi (2026-08-30) */
+  /* background → chat.css:1724 (yagona manba, `!important`, eng oxirgi ta'rif), o'lik, o'chirildi (2026-08-30) */
   display: none;
   animation: fadeIn 0.25s ease;
   /* Telegram-style: haqiqiy full-screen, hech qanday "karta" chegarasi yo'q */
@@ -1162,25 +1159,20 @@
   pointer-events: none;
 }
 .incoming-call-ring-anim span {
-  /* border/animation → pastroqda (~1927-qator, ANIMATIONS PACK #6) va
-     ~1750-qatorda (SOLID UI) !important bilan yengiladi, o'lik */
   position: absolute;
   inset: 0;
   border-radius: 50%;
+  /* border/animation → chat.css:1925 (yagona manba, `!important` bilan, eng oxirgi ta'rif), o'lik, o'chirildi (2026-08-30) */
 }
-/* animation-delay: pastroqda (~1936-1937, ANIMATIONS PACK) !important bilan yengiladi, o'lik */
-
-@keyframes ringPulse {
-  0%   { transform: scale(1);   opacity: 0.8; }
-  100% { transform: scale(2.5); opacity: 0; }
-}
+/* animation-delay (nth-child 2/3) → chat.css:1929-1930 (yagona manba, `!important` bilan), o'lik, o'chirildi (2026-08-30) */
+/* @keyframes ringPulse → ishlatilmay qoldi (yuqoridagi `.incoming-call-ring-anim span` endi `incRingPulse`ni ishlatadi), o'lik, o'chirildi (2026-08-30) */
 
 .incoming-call-avi {
-  /* border → pastroqda (~1756-qator, SOLID UI) !important bilan yengiladi, o'lik */
   width: 128px; height: 128px;
   border-radius: 50%;
   overflow: hidden;
   background: var(--bg4);
+  /* border → chat.css:1744 (yagona manba, `!important`, eng oxirgi ta'rif), o'lik, o'chirildi (2026-08-30) */
   flex-shrink: 0;
   position: relative;
   z-index: 1;
@@ -1205,18 +1197,16 @@
   gap: 10px;
 }
 .inc-call-btn {
-  /* border/transition → pastroqda (~1767-qator, SOLID UI) !important bilan
-     yengiladi, o'lik. background(reject/accept) → shu yerda tirik, SOLID UI
-     blokida ham qayta belgilanadi (bir xil rang, boshqa joyda flat qilindi) */
   width: 66px; height: 66px;
   border-radius: 50%;
+  /* border/transition → chat.css:1754 (yagona manba, `!important`, eng oxirgi ta'rif), o'lik, o'chirildi (2026-08-30) */
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
 }
-/* :active transform → pastroqda (SOLID UI) yengiladi, o'lik */
-.inc-call-btn.reject  { background: #ef4444; color: #fff; }
-.inc-call-btn.accept  { background: #22c55e; color: #fff; }
-/* :hover box-shadow → pastroqda (SOLID UI) transform bilan almashtiriladi, o'lik */
+/* :active transform → chat.css:1768 (yagona manba, `scale(0.93)!important`), o'lik, o'chirildi (2026-08-30) */
+.inc-call-btn.reject  { color: #fff; }
+.inc-call-btn.accept  { color: #fff; }
+.inc-call-btn:hover   { box-shadow: 0 4px 20px #06060B; }
 .inc-call-label {
   font-size: 13px;
   font-weight: 500;
@@ -1276,11 +1266,10 @@
   gap: 16px;
 }
 .call-voice-avi {
-  /* border/background → pastroqda (~1799-qator, SOLID UI) !important
-     bilan yengiladi, o'lik */
   width: 100px; height: 100px;
   border-radius: 50%;
   overflow: hidden;
+  /* background/border → chat.css:1785 (yagona manba, `!important`, eng oxirgi ta'rif), o'lik, o'chirildi (2026-08-30) */
 }
 .call-voice-avi img { width: 100%; height: 100%; object-fit: cover; }
 .call-avi-initial {
@@ -1391,14 +1380,13 @@
 #callActiveModal.video-mode #callEndCol    { order: 4; }
 
 #callActiveModal.video-mode .call-active-btns {
-  /* background/border-radius → pastroqda (~1812-qator, SOLID UI)
-     !important bilan yengiladi, o'lik */
   position: absolute;
   bottom: calc(14px + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
   gap: 10px;
+  /* background/border-radius → chat.css:1798 (yagona manba, `!important`, eng oxirgi ta'rif), o'lik, o'chirildi (2026-08-30) */
   padding: 7px 10px;
   max-width: calc(100vw - 24px);
 }
@@ -1741,49 +1729,75 @@ a.cfm-name--link:hover {
    100% width/height via the base rule above; no background/border/
    radius here so it reads as a real fullscreen call screen, not a dialog. */
 
-/* Ring animation — flat, glow olib tashlandi */
+/* Ring animation — green glass rings */
 .incoming-call-ring-anim span {
-  border: 1.5px solid #145D33;
+  /* border → chat.css:1919 (yagona manba, `!important`, eng oxirgi ta'rif), o'lik, o'chirildi (2026-08-30) */
+  box-shadow: 0 0 12px #0E2E1F !important;
 }
 
-/* Avatar — flat border, glass glow olib tashlandi */
+/* Avatar glass border */
 .incoming-call-avi {
-  border: 2.5px solid #1A8C46;
+  border: 2.5px solid #1A8C46 !important;
+  box-shadow:
+    inset 0 1px 0 #3A3A3F,
+    0 0 0 4px #0C1F19,
+    0 0 32px #0E3221,
+    0 8px 24px #06060A !important;
 }
 
-/* Buttons — flat */
+/* Buttons — glass */
 .inc-call-btn {
-  border: 0.5px solid #3F3F44;
-  transition: transform 0.2s, filter 0.2s;
+  border: 0.5px solid #3F3F44 !important;
+  box-shadow: inset 0 1px 0 #4D4D52, 0 6px 24px #05050A !important;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s !important;
 }
 .inc-call-btn.reject {
-  background: #CC3B3C;
+  background: #CC3B3C !important;
+  box-shadow: inset 0 1px 0 #3F3F44, 0 6px 24px #652024 !important;
 }
 .inc-call-btn.accept {
-  background: #1EA852;
+  background: #1EA852 !important;
+  box-shadow: inset 0 1px 0 #3F3F44, 0 6px 24px #13542F !important;
 }
-.inc-call-btn:hover { transform: scale(1.06); }
-.inc-call-btn:active { transform: scale(0.93); }
+.inc-call-btn:hover { transform: scale(1.06) !important; }
+.inc-call-btn:active { transform: scale(0.93) !important; }
 
-/* Active call modal — flat, glass pseudo-qatlam (::before) olib tashlandi:
-   JS bog'liqligi yo'qligi tekshirilgan, faqat gradient overlay bo'lgan */
+/* Active call modal — deep space glass */
 #callActiveModal {
-  background: #040811;
+  background: #040811 !important;
+}
+#callActiveModal::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    #111626,
+    #0A1213;
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* Voice avatar — flat */
+/* Voice avatar — glass sphere */
 .call-voice-avi {
-  border: 2px solid #35353B;
-  background: #17171E;
+  border: 2px solid #35353B !important;
+  box-shadow:
+    inset 0 2px 0 #35353B,
+    0 0 0 8px #0F1322,
+    0 0 60px #172039,
+    0 16px 48px #040408 !important;
+  background: #17171E !important;
 }
 
 /* ── Control buttons — consolidated into single definition above ── */
 
-/* Video mode — controls bar, flat */
+/* Video mode — controls glass bar */
 #callActiveModal.video-mode .call-active-btns {
-  background: #050509;
-  border: 0.5px solid #26262C;
-  border-radius: 60px;
+  background: #050509 !important;
+  border: 0.5px solid #26262C !important;
+  box-shadow:
+    inset 0 1px 0 #2B2B31,
+    0 4px 24px #050509 !important;
+  border-radius: 60px !important;
 }
 
 
@@ -2114,13 +2128,14 @@ a.cfm-name--link:hover {
   display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px;
 }
 .msg-reaction {
+  font-size: 16px;
   padding: 2px 6px;
   border-radius: 999px;
   background: #212127;
   cursor: pointer;
   transition: transform 0.2s var(--ease-back), background 0.2s;
   display: inline-flex; align-items: center; gap: 3px;
-  font-size: 14px; /* eski 16px o'chirildi — shu blokning o'zida qayta yozilgan edi */
+  font-size: 14px;
   border: 1px solid #1C1C23;
 }
 .msg-reaction:hover  { transform: scale(1.25); background: #35353B; }
@@ -2234,7 +2249,7 @@ a.cfm-name--link:hover {
 
 /* ── Input row — clean, chegrasiz ── */
 .chat-thread-input-row {
-  background: var(--bg);
+  /* background → borderless.css:1105 (yagona manba, `transparent`), o'lik, o'chirildi (2026-08-30) */
   border-top: none;
   box-shadow: none;
   padding: 8px 10px;
@@ -2256,7 +2271,7 @@ a.cfm-name--link:hover {
 .chat-attach-btn {
   background: transparent;
   border: none;
-  color: var(--text2);
+  /* color → theme.css:255 (yagona manba, unified icon system, `var(--tg-text-muted)`), o'lik, o'chirildi (2026-08-30) */
   box-shadow: none;
 }
 .chat-attach-btn:hover { background: transparent; color: var(--text); }
