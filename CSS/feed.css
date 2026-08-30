@@ -52,27 +52,13 @@
   overflow: hidden;
   background: var(--glass-heavy);
   border: 0.5px solid var(--glass-border-top);
-  box-shadow: var(--specular-top), var(--specular-edge), 0 4px 14px var(--blue-glow), var(--liquid-shadow-sm);
   transition: all 0.2s var(--ease-spring);
-}
-
-.hdr-logo-glass::after {
-  content: '';
-  position: absolute;
-  top: -60%; left: -160%;
-  width: 70%; height: 220%;
-  background: #848487;
-  transform: rotate(22deg);
-  transition: left 0.2s var(--ease);
-  pointer-events: none;
 }
 
 .hdr-logo:hover .hdr-logo-glass {
   border-color: var(--glass-border-top);
-  box-shadow: var(--specular-top), 0 6px 20px var(--blue-glow), var(--liquid-shadow-md);
   transform: scale(1.06);
 }
-.hdr-logo:hover .hdr-logo-glass::after { left: 170%; }
 .hdr-logo:active .hdr-logo-glass { transform: scale(0.92); }
 
 .hdr-logo-glass img {

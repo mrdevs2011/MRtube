@@ -1050,32 +1050,9 @@
    8. UPLOAD FLOW — Enhanced
    ═══════════════════════════════════════════ */
 
-/* Drag and drop zone with animated border */
+/* Drag and drop zone — flat, no spinning border / blue flash (owned by nav.css base) */
 .upload-drop {
   position: relative;
-  overflow: hidden;
-}
-
-.upload-drop::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 2px dashed var(--line2);
-  border-radius: 20px;
-  animation: borderRotate 3s linear infinite;
-  background: var(--blue);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.upload-drop:hover::before,
-.upload-drop.drag-over::before {
-  opacity: 1;
-}
-
-@keyframes borderRotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 /* File type icons */
@@ -2090,17 +2067,7 @@
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--glass-border-top); }
 
-/* ── 16. Upload drop zone — refraction tint ── */
-.upload-drop {
-  transition: all 0.42s var(--ease-back) !important;
-  box-shadow: var(--specular-top), var(--glass-inner-glow) !important;
-}
-.upload-drop:hover {
-  box-shadow:
-    var(--specular-top),
-    inset 0 0 30px var(--glass-refract),
-    var(--liquid-shadow-sm) !important;
-}
+/* ── 16. Upload drop zone — flat, owned by nav.css base (no inner-glow override) ── */
 
 /* ── 17. Detail modal — layered glass depth ── */
 #detailContent {

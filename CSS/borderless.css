@@ -97,12 +97,10 @@
   box-shadow: none;
 }
 
-/* Mobile: frosted glass blur */
+/* Mobile: solid dark bar (was semi-transparent frosted glass — looked washed-out over content) */
 @media (max-width: 767px) {
-  .bot-nav,
-  [data-theme="dark"] .bot-nav,
-  [data-theme="light"] .bot-nav {
-    background: rgba(14, 14, 18, 0.72);
+  [data-theme="dark"] .bot-nav {
+    background: #000000;
   }
   [data-theme="light"] .bot-nav {
     background: rgba(242, 242, 247, 0.78);
@@ -402,14 +400,7 @@ textarea:focus,
   border: none;
 }
 
-/* Upload drop zone */
-.upload-drop,
-[data-theme="dark"] .upload-drop,
-[data-theme="dark"] .upload-drop:hover,
-[data-theme="dark"] .upload-drop.drag-over {
-  border: none;
-  box-shadow: none;
-}
+/* Upload drop zone — border/hover feedback owned by nav.css, no override here */
 
 /* Empty state icons */
 .feed-empty-icon,
