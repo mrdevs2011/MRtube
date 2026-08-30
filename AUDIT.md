@@ -83,21 +83,35 @@ o'zgargan fayllarda `{`/`}` balansi tekshirilgan, sintaksis xatosi yo'q):
 
 ### B1 — `chat-dark-redesign.css`
 
-**MUHIM TUZATISH:** birinchi urinishda bu fayldan barcha `!important`ni
-olib tashlagan edim, lekin bu **xato edi** — darhol aniqlanib,
-qaytarildi. Sabab: CSS kaskadida `!important` qoidalar orasida g'olibni
-**specifiklik** hal qiladi, yuklanish tartibi emas. `chat.css`ning o'z
-ichidagi "CLEAN CHAT REDESIGN" bo'limi ham xuddi shu selectorlarni
-`!important` bilan belgilagani uchun, `chat-dark-redesign.css`ning
-o'zida ham `!important` **shart edi** — aks holda specifiklik teng
-bo'lmasdan, importance darajasi past qolib, `chat.css` g'olib chiqib
-qolardi (vizual regressiya). Xato ishlab chiqarishga chiqmasdan
-aniqlanib, darhol qaytarildi — fayl original holatida qoladi (104 ta
-`!important`, hammasi zarur).
+**MUHIM TUZATISH (tarixiy):** birinchi urinishda bu fayldan barcha
+`!important`ni olib tashlagan edim, lekin bu **xato edi** — darhol
+aniqlanib, qaytarildi. Sabab: CSS kaskadida `!important` qoidalar
+orasida g'olibni **specifiklik** hal qiladi, yuklanish tartibi emas.
+`chat.css`ning o'z ichidagi "CLEAN CHAT REDESIGN" bo'limi ham xuddi
+shu selectorlarni `!important` bilan belgilagani uchun,
+`chat-dark-redesign.css`ning o'zida ham `!important` **shart edi** —
+aks holda specifiklik teng bo'lmasdan, importance darajasi past
+qolib, `chat.css` g'olib chiqib qolardi (vizual regressiya).
 
-**Haqiqiy xulosa:** `chat-dark-redesign.css`dagi `!important`lar
-kerak — ular `chat.css`ning shu bilan bahslashuvchi eski qatlamini
-yengish uchun ishlatilyapti va bu funksional maqsad.
+**⚠️ YANGILANGAN HOLAT (keyingi tozalashdan so'ng):** yuqoridagi
+band eskirgan — o'sha vaqtda fayl 104 ta `!important` bilan qoldirilgan
+edi, lekin **keyinroq** haqiqiy sabab tekshirilgan: bu yerdagi hamma
+selector `#chatThreadModal .class` shaklida (ID + klass = specifiklik
+1,1,0), bu esa `chat.css`dagi oddiy `.class` qoidalaridan (0,1,0)
+**specifiklik bo'yicha allaqachon kuchli** — demak `!important`
+umuman shart emas edi, faqat ID prefiksi yetarli edi. Shundan so'ng
+`!important` **hammasi olib tashlangan** va real natija tasdiqlangan:
+hozir bu faylda **0 ta** `!important` bor, vizual regressiya yo'q.
+
+**Xulosa (dars sifatida):** ikkita tekshiruv bir-biriga zid natija
+berdi, chunki birinchisida `chat.css`dagi raqobatchi qatorlarning
+**o'zi ham** o'sha paytda `!important` ishlatgan edi (shuning uchun
+teng kuchda specifiklik yetmasdi). `chat.css` B2 bosqichida
+tozalanganidan keyin (raqobatchi `!important`lar o'chirilgach),
+`chat-dark-redesign.css`dagi ID+klass specifikligi yolg'iz o'zi
+yetarli bo'lib qoldi. **Har doim CSS o'zgarganda specificity
+tekshiruvini qayta o'tkazish kerak — eski xulosa yangi holatda
+noto'g'ri bo'lib qolishi mumkin.**
 
 ### B2 — `chat.css` ichidagi o'lik kod (BAJARILDI ✅)
 
@@ -128,13 +142,41 @@ tirik):
 o'zgarmaydi** — chunki o'chirilgan qatorlar hech qachon amalda
 ishlamagan edi.
 
+### B3 — `chat.css` ichidagi ikkinchi o'lik kod qatlami (BAJARILDI ✅)
+
+B2 audit paytida `.chat-bubble`ning `border`/`box-shadow`'i "tirik"
+deb belgilangan edi (yuqoridagi jadvalga qarang) — bu **faylning shu
+o'zida boshqa joyda** raqobat borligini hisobga olmagan edi.
+
+Aniqlangan zanjir:
+- `chat.css:1485-1490` — `.chat-msg.mine/.theirs .chat-bubble { border: 0.5px solid ... }` (specifiklik 0,2,0, `!important` YO'Q)
+- `chat.css:2202-2212` (fayl oxiriroqda) — xuddi shu selectorlar: `{ border: none !important; box-shadow: none !important; }` (specifiklik BIR XIL 0,2,0, lekin `!important` BOR)
+
+`!important` cascade'da specifiklikdan qat'iy nazar ustun turadi,
+shuning uchun 2202/2209-qator har doim g'olib chiqadi — 1485/1488
+**o'lik kod** edi (border hech qachon ko'rinmagan, komentariy
+"border kept here" degani yolg'on chiqdi). O'chirildi, `{`/`}`
+balansi tekshirildi (493/493, OK).
+
+**Dars:** o'lik kod faqat ikki fayl orasida emas, **bitta fayl
+ichida ham** yashirin bo'lishi mumkin — ayniqsa fayl 2000+ qator
+bo'lganda, bir selector bir necha marta qayta ta'riflanadi.
+
+
 ## 7. Umumiy natija (Bosqich A + B)
 
-| Fayl | Boshida `!important` | Hozir |
+| Fayl | Boshida `!important` | Hozir (real, komentariylarsiz tekshirilgan) |
 |---|---|---|
-| `chat-dark-redesign.css` | 130 | 104 (barchasi zarur, tasdiqlangan) |
-| `chat.css` | 95 | 79 |
+| `chat-dark-redesign.css` | 130 | **0** — ID+klass specifikligi (1,1,0) yetarli, B1'ga qarang |
+| `chat.css` | 95 | **78** — B3'dan keyin ham o'zgarmadi (o'chirilgan qatorlarda `!important` yo'q edi) |
 | `theme.css`, `nav.css`, `ui-improvements.css`, `feed.css` | — | eski takroriy bloklar o'chirildi |
+
+**⚠️ Metodologik eslatma:** oddiy `grep -c "!important"` `chat.css`da **79**
+chiqaradi, real esa **78** — farqi bitta eski komentariy qatoridagi
+("!important shart emas" — L1497 atrofida) matn ichida so'z sifatida
+yozilgan "!important". Kelajakda hisoblashda har doim komentariy
+bloklarini chiqarib tashlab sanash kerak (`re.sub(r'/\*.*?\*/', '', s,
+flags=re.DOTALL)` yoki shunga o'xshash), aks holda soxta raqam chiqadi.
 
 ## 8. Muhim dars (kelajakdagi ishlar uchun)
 

@@ -1481,13 +1481,10 @@
   transform: scale(1.05);
 }
 
-/* ── Messages — bubble background/color owned by chat-dark-redesign.css; border kept here ── */
-.chat-msg.mine .chat-bubble {
-  border: 0.5px solid #3A3A3F;
-}
-.chat-msg.theirs .chat-bubble {
-  border: 0.5px solid var(--line2);
-}
+/* ── Messages — bubble background/color/border owned by chat-dark-redesign.css.
+   O'chirildi: bu yerdagi border (0.5px solid ...) o'lik edi — pastdagi
+   .chat-msg.mine/.theirs .chat-bubble bloki (~L2190, bir xil specificity
+   0,2,0 lekin importance darajasi yuqori) har doim g'olib chiqardi. ── */
 
 /* ── Bubble ichidagi kod bloki/kod — .md-codeblock/.md-code odatda
    var(--glass) = --bg3 fonini ishlatadi, bu esa "theirs" bubble foni
