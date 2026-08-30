@@ -5,39 +5,39 @@
 
 /* ── DARK theme — Telegram Dark Palette ── */
 [data-theme="dark"] {
-  --bg:           #0e1621;   /* Main App/Page Background (Primary) */
-  --bg2:          #0e1621;   /* Primary — chat list rows, frost */
-  --bg3:          #17212b;   /* Surface — headers, panels, sheets */
-  --bg4:          #24303f;   /* Inputs / hover / search fields */
-  --bg5:          #2b3d4f;   /* Elevated hover / heavy surface */
-  --line:         #0a0f16;
-  --line2:        #1c2733;
-  --line3:        #2b3d4f;
+  --bg:           #000000;   /* Main App/Page Background (Primary) */
+  --bg2:          #000000;   /* Primary — chat list rows, frost */
+  --bg3:          #121212;   /* Surface — headers, panels, sheets */
+  --bg4:          #1c1c1e;   /* Inputs / hover / search fields */
+  --bg5:          #262626;   /* Elevated hover / heavy surface */
+  --line:         #000000;
+  --line2:        #1f1f1f;
+  --line3:        #2a2a2a;
   --text:         #ffffff;   /* Main Text */
-  --text2:        #7f91a4;   /* Muted / Secondary Text */
-  --text3:        #5b6b7a;
-  --text4:        #3e4c59;
+  --text2:        #8a8a8a;   /* Muted / Secondary Text */
+  --text3:        #6b6b6b;
+  --text4:        #4a4a4a;
   --blue:         #5288c1;   /* Primary Telegram Blue */
   --blue2:        #6fa0d3;
   --blue3:        #3f6f96;
-  --blue-glow:    #1c2f42;
-  --blue-glow2:   #16283a;
-  --blue-glow3:   #101f2e;
+  --blue-glow:    #101820;
+  --blue-glow2:   #0c141c;
+  --blue-glow3:   #080f16;
   --red:          #ec5e6f;
-  --red-glow:     #371A29;
+  --red-glow:     #2a1017;
   --green:        #5acb8c;
-  --green-glow:   #172B26;
+  --green-glow:   #0f1e19;
   --amber:        #f0a855;
 
-  /* ── Telegram Dark — exact spec colors, dedicated names ── */
-  --tg-bg:        #0e1621;   /* Main Page/App Background */
-  --tg-surface:   #17212b;   /* Chat Area/Header/Panels Background */
-  --tg-input:     #24303f;   /* Inputs / Search Fields Background */
+  /* ── Dark — pure black spec, dedicated names ── */
+  --tg-bg:        #000000;   /* Main Page/App Background */
+  --tg-surface:   #121212;   /* Chat Area/Header/Panels Background */
+  --tg-input:     #1c1c1e;   /* Inputs / Search Fields Background */
   --tg-blue:      #5288c1;   /* Primary Telegram Blue */
-  --tg-out:       #2b5278;   /* Outgoing Message Bubble */
-  --tg-in:        #182533;   /* Incoming Message Bubble */
+  --tg-out:       #1c3a52;   /* Outgoing Message Bubble */
+  --tg-in:        #1c1c1e;   /* Incoming Message Bubble */
   --tg-text:      #ffffff;   /* Main Text Color */
-  --tg-muted:     #7f91a4;   /* Muted / Secondary Text Color */
+  --tg-muted:     #8a8a8a;   /* Muted / Secondary Text Color */
 
   /* ── Icon system aliases ── */
   --tg-text-muted:   #7f91a4;  /* default icon color */
