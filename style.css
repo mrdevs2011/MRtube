@@ -16,6 +16,7 @@
 @import url('./CSS/dark-theme-fix.css');
 @import url('./CSS/borderless.css');
 @import url('./CSS/chat-dark-redesign.css');
+@import url('./CSS/auth-ig-style.css');
 
 /* ── Global Reset ── */
 *, *::before, *::after {

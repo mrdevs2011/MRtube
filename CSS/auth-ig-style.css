@@ -1,0 +1,130 @@
+/* ═══════════════════════════════════════════
+   AUTH SCREEN — Instagram-style layout
+   Faqat KO'RINISH (layout/tipografiya) o'zgardi —
+   ranglar mavjud tema o'zgaruvchilaridan (--bg, --text,
+   --blue va h.k.), logika (auth.js) BUTUNLAY tegilmagan.
+   ═══════════════════════════════════════════ */
+
+.auth-card.ig-style {
+  padding: 32px 28px 28px;
+}
+
+/* Sarlavha — Instagram'dagi kabi qalin, chapga tekislangan */
+.auth-card.ig-style .auth-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 22px;
+  letter-spacing: -0.3px;
+}
+
+/* ── Floating-label input qutisi ──
+   Label doim ko'rinadi: bo'sh holatda input ichida markazda,
+   fokus/qiymat bor holatda yuqoriga "suzib chiqadi" — CSS-only,
+   auth.js hech narsaga tegmaydi (faqat placeholder=" " ishlatiladi). */
+.ig-field {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.ig-field .ig-input {
+  width: 100%;
+  height: 56px;
+  padding: 22px 16px 8px;
+  margin-bottom: 0;
+  border-radius: 10px !important;
+  background: var(--glass) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--text) !important;
+  font-size: 15px;
+  font-family: var(--font);
+  outline: none;
+  box-shadow: none !important;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.ig-field .ig-input:focus {
+  border-color: var(--blue) !important;
+  background: var(--glass-mid) !important;
+}
+
+.ig-field .ig-input::placeholder { color: transparent; }
+
+.ig-field label {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  font-size: 15px;
+  font-family: var(--font);
+  pointer-events: none;
+  transition: all 0.15s ease;
+}
+
+.ig-field .ig-input:focus + label,
+.ig-field .ig-input:not(:placeholder-shown) + label {
+  top: 12px;
+  transform: translateY(0);
+  font-size: 11px;
+  color: var(--text3);
+}
+
+/* ── Asosiy tugma — to'liq eni, pill shakli ── */
+.ig-style .ig-btn-primary {
+  width: 100%;
+  height: 44px;
+  padding: 0;
+  border-radius: 8px;
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ── Divider — "OR" chizig'i o'rniga brend belgisi ── */
+.ig-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 22px 0 18px;
+  color: var(--text3);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ig-divider::before,
+.ig-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--glass-border);
+}
+
+/* ── Pastki "Ro'yxatdan o'tish / Kirish" qatori — outline pill tugma ── */
+.auth-switch.ig-switch {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.ig-switch #authSwitchText { color: var(--text2); font-size: 13px; }
+
+.ig-switch .ig-create-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 11px;
+  border: 1px solid var(--blue);
+  border-radius: 8px;
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.ig-switch .ig-create-btn:hover {
+  background: var(--blue-glow2);
+  text-decoration: none;
+}

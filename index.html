@@ -43,7 +43,7 @@
 
 <!-- AUTH -->
 <div id="authWrap" style="display:none;">
-  <div class="auth-card">
+  <div class="auth-card ig-style">
     <div class="auth-logo">
       <div class="auth-logo-glass">
         <img src="./svg/MRgram.svg" alt="MRgram" width="28" height="28">
@@ -51,15 +51,35 @@
       <span class="auth-brand">MRgram</span>
     </div>
     <div class="auth-title" id="authTitle">Hisobingizga kiring</div>
-    <div id="nameRow" class="d-none"><input class="field" type="text" id="aFullname" placeholder="To'liq ism"></div>
-    <input class="field" type="text"     id="aUsername" placeholder="Foydalanuvchi nomi" autocomplete="username">
-    <input class="field" type="password" id="aPassword" placeholder="Parol (kamida 6 ta belgi)"   autocomplete="current-password">
-    <div id="confirmRow" class="d-none"><input class="field" type="password" id="aConfirm" placeholder="Parolni tasdiqlang"></div>
+
+    <div id="nameRow" class="d-none ig-field">
+      <input class="field ig-input" type="text" id="aFullname" placeholder=" ">
+      <label for="aFullname">To'liq ism</label>
+    </div>
+
+    <div class="ig-field">
+      <input class="field ig-input" type="text" id="aUsername" placeholder=" " autocomplete="username">
+      <label for="aUsername">Foydalanuvchi nomi</label>
+    </div>
+
+    <div class="ig-field">
+      <input class="field ig-input" type="password" id="aPassword" placeholder=" " autocomplete="current-password">
+      <label for="aPassword">Parol (kamida 6 ta belgi)</label>
+    </div>
+
+    <div id="confirmRow" class="d-none ig-field">
+      <input class="field ig-input" type="password" id="aConfirm" placeholder=" ">
+      <label for="aConfirm">Parolni tasdiqlang</label>
+    </div>
+
     <div class="err-msg" id="authErr"></div>
-    <button class="btn-primary" id="authBtn">Kirish</button>
-    <div class="auth-switch">
+    <button class="btn-primary ig-btn-primary" id="authBtn">Kirish</button>
+
+    <div class="ig-divider"><span>MRgram</span></div>
+
+    <div class="auth-switch ig-switch">
       <span id="authSwitchText">Hisobingiz yo'qmi? </span>
-      <span class="auth-link" id="authSwitchBtn">Ro'yxatdan o'tish</span>
+      <span class="auth-link ig-create-btn" id="authSwitchBtn">Ro'yxatdan o'tish</span>
     </div>
   </div>
 </div>
