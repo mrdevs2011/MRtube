@@ -358,10 +358,10 @@ body:has(.search-overlay.open) .app-hdr {
    ═══════════════════════ */
 .post {
   /* background/border/box-shadow → CSS/00-components.core.css (yagona manba) */
+  /* position:relative → ui-improvements.css:70 bilan bir xil, o'sha yerda qoldirildi */
   margin-bottom: 16px;
   overflow: hidden;
   isolation: isolate;
-  position: relative;
 }
 
 /* .post:hover cosmetics → CSS/00-components.core.css'da (flat, glow yo'q) */
@@ -1182,9 +1182,9 @@ body:has(.search-overlay.open) .app-hdr {
 }
 
 /* Light mode: softer shadows */
-[data-theme="light"] .post {
-  box-shadow: 0 2px 8px #DADADE;
-}
+/* box-shadow o'chirildi — borderless.css:43 (.post, [data-theme="light"] .post
+   guruhida) bir xil specificity bilan keyinroq yuklanadi, box-shadow:none
+   g'olib chiqadi, bu qator hech qachon ko'rinmagan (o'lik) */
 
 [data-theme="light"] .post:hover {
   box-shadow: 0 4px 16px #D0D0D5;
