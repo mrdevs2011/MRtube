@@ -6,11 +6,10 @@
 
 /* ── Header ── */
 .app-hdr {
+  /* background/border-bottom → CSS/00-components.core.css (yagona manba) */
   position: fixed;
   top: 0; left: 0; right: 0;
   height: var(--hdr);
-  background: var(--glass);
-  border-bottom: 1px solid var(--glass-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,13 +18,7 @@
   z-index: 80;
 }
 
-.app-hdr::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 1px;
-  background: #16283a;
-}
+/* .app-hdr::after gradient chizig'i o'chirildi — flat dizayn, chiziq kerak emas */
 
 .hdr-logo {
   display: flex;
@@ -364,23 +357,14 @@ body:has(.search-overlay.open) .app-hdr {
    POST CARD — Solid UI
    ═══════════════════════ */
 .post {
-  background: var(--glass);
-  border: 0.5px solid var(--glass-border);
-  border-radius: 20px;
+  /* background/border/box-shadow → CSS/00-components.core.css (yagona manba) */
   margin-bottom: 16px;
   overflow: hidden;
-  transition: all 0.2s var(--ease-spring);
   isolation: isolate;
-  box-shadow: var(--specular-top), var(--liquid-shadow-sm);
   position: relative;
 }
 
-.post:hover {
-  background: var(--glass-mid);
-  border-color: var(--glass-border-top);
-  box-shadow: var(--specular-top), var(--liquid-shadow-md);
-  transform: translateY(-3px) scale(1.002);
-}
+/* .post:hover cosmetics → CSS/00-components.core.css'da (flat, glow yo'q) */
 
 .post-head {
   padding: 12px 14px 10px;

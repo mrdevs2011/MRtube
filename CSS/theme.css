@@ -248,33 +248,7 @@ body,
   box-shadow: var(--specular-top), var(--liquid-shadow-lg);
 }
 
-/* Gradient buttons — liquid style */
-.btn-primary {
-  background: var(--blue);
-  box-shadow: 0 4px 16px var(--blue-glow), var(--specular-top);
-  transition: all 0.35s var(--ease-back);
-}
-
-.btn-primary:hover {
-  background: var(--blue2);
-  box-shadow: 0 8px 28px var(--blue-glow), var(--specular-top);
-  transform: translateY(-2px) scale(1.01);
-}
-
-.btn-primary:active {
-  transform: scale(0.93);
-  transition: transform 0.08s ease;
-}
-
-.btn-danger {
-  background: var(--red);
-  box-shadow: 0 4px 16px var(--red-glow), var(--specular-top);
-}
-
-.btn-danger:hover {
-  background: #ff4466;
-  box-shadow: 0 8px 28px var(--red-glow), var(--specular-top);
-}
+/* .btn-primary / .btn-danger → CSS/00-components.core.css'ga ko'chirildi */
 
 .success-glow { box-shadow: 0 4px 16px var(--green-glow); }
 

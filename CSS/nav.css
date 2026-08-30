@@ -26,97 +26,7 @@
 
 .field::placeholder { color: var(--text3); }
 
-/* ── Buttons ── */
-.btn-primary {
-  width: 100%;
-  padding: 14px;
-  background: var(--blue3);
-  border: none;
-  border-radius: 50px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  font-family: var(--font);
-  cursor: pointer;
-  margin-top: 4px;
-  transition: all 0.2s var(--ease-spring);
-  position: relative;
-  overflow: hidden;
-  letter-spacing: -0.1px;
-  box-shadow: 0 4px 20px var(--blue-glow), inset 0 1px 0 #46464B;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%;
-  width: 100%; height: 100%;
-  background: #2D2D33;
-  transition: left 0.2s var(--ease);
-}
-
-.btn-primary:hover::before { left: 100%; }
-.btn-primary:hover {
-  transform: translateY(-2px) scale(1.005);
-  box-shadow: 0 8px 30px var(--blue-glow), inset 0 1px 0 #46464B;
-}
-.btn-primary:active {
-  transform: scale(0.93);
-  transition: transform 0.08s ease;
-}
-
-.btn-ghost {
-  width: 100%;
-  padding: 12px;
-  background: var(--glass);
-  border: 0.5px solid var(--glass-border);
-  border-radius: 14px;
-  color: var(--text2);
-  font-size: 13px;
-  font-family: var(--font);
-  cursor: pointer;
-  margin-top: 8px;
-  transition: all 0.2s var(--ease-spring);
-  box-shadow: var(--specular-top);
-}
-
-.btn-ghost:hover {
-  background: var(--glass-mid);
-  border-color: var(--glass-border-top);
-  color: var(--text);
-  transform: translateY(-1px);
-  box-shadow: var(--specular-top), var(--liquid-shadow-sm);
-}
-
-.btn-ghost:active {
-  transform: scale(0.94);
-  transition: transform 0.08s ease;
-}
-
-.btn-danger {
-  width: 100%;
-  padding: 12px;
-  background: #1B0D16;
-  border: 0.5px solid #3B1521;
-  border-radius: 14px;
-  color: var(--red);
-  font-size: 13px;
-  font-family: var(--font);
-  cursor: pointer;
-  margin-top: 8px;
-  transition: all 0.2s var(--ease-spring);
-}
-
-.btn-danger:hover {
-  background: #29101B;
-  border-color: #5C1C2C;
-  transform: translateY(-1px);
-}
-
-.btn-danger:active {
-  transform: scale(0.94);
-  transition: transform 0.08s ease;
-}
+/* .btn-primary / .btn-ghost / .btn-danger → CSS/00-components.core.css'ga ko'chirildi */
 
 .auth-switch {
   text-align: center;
@@ -189,57 +99,8 @@
 }
 .auth-link:hover { color: var(--blue2); text-decoration: underline; }
 
-/* ═══════════════════════
-   BOTTOM NAV — Solid UI
-   ═══════════════════════ */
-.bot-nav {
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: var(--nav);
-  background: var(--glass);
-  border-top: 0.5px solid var(--glass-border);
-  box-shadow:
-    inset 0 1px 0 var(--glass-border-top),
-    0 -4px 24px #07070D;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  z-index: 100;
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-/* Specular shimmer line */
-.bot-nav::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 0.5px;
-  background: var(--glass-shine);
-  pointer-events: none;
-}
-
-/* Desktop: bottom nav → left sidebar */
-@media (min-width: 768px) {
-  .bot-nav {
-    bottom: auto;
-    top: 0; left: 0; right: auto;
-    width: var(--sidebar);
-    height: 100dvh;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 4px;
-    padding: 16px 0;
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
-    box-shadow: none;
-  }
-
-  .bot-nav::before {
-    display: none;
-  }
-}
+/* .bot-nav → CSS/00-components.core.css'ga ko'chirildi
+   (.bot-nav::before shimmer chizig'i ataylab olib tashlandi — flat dizayn) */
 
 /* ── Nav buttons ── */
 .nav-btn {

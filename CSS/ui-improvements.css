@@ -1877,26 +1877,10 @@
    YAKUNIY POLISH
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* ── 1. Header — header, shimmer, border gradient ── */
-.app-hdr {
-  background: var(--glass-mid);
-  border-bottom: 0.5px solid var(--glass-border);
-  box-shadow:
-    inset 0 1px 0 var(--glass-border-top),
-    inset 0 -0.5px 0 #17171E,
-    0 2px 20px #07070D;
-}
-
-/* specular shimmer — yuqori chiziq */
-.app-hdr::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 5%; right: 5%;
-  height: 0.5px;
-  background: var(--glass-shine);
-  pointer-events: none;
-  z-index: 1;
-}
+/* .app-hdr glow/shimmer bloki o'chirildi — CSS/00-components.core.css
+   allaqachon flat .app-hdr'ni belgilaydi, bu yerdagi eski blok uni
+   !important bilan bekor qilib, borderless.css urinishini yo'qqa
+   chiqarardi. AUDIT.md 2-bo'limga qarang. */
 
 /* header icon buttons — solid pill on hover */
 .hdr-icon-btn {
@@ -1931,13 +1915,8 @@
   filter: drop-shadow(0 0 8px var(--blue-glow)) !important;
 }
 
-/* ── 3. Bottom nav — ambient inner glow ── */
-.bot-nav {
-  box-shadow:
-    inset 0 1px 0 var(--glass-border-top),
-    inset 0 0 40px var(--glass-refract),
-    0 -2px 24px #07070D !important;
-}
+/* .bot-nav glow bloki o'chirildi — CSS/00-components.core.css'da
+   flat versiyasi belgilangan. AUDIT.md 2-bo'limga qarang. */
 
 /* ── 4. Sheet handle — pull indicator animatsiyasi ── */
 .sheet-handle {
@@ -1959,39 +1938,24 @@
     0 -2px 16px #07070D !important;
 }
 
-/* ── 6. Post cards — dynamic tilt + glass depth ── */
-.post {
-  transition: all 0.42s var(--ease-back) !important;
-}
-.post:hover {
-  transform: translateY(-3px) scale(1.003) !important;
-  box-shadow:
-    var(--specular-top),
-    var(--glass-inner-glow),
-    var(--liquid-shadow-md) !important;
-  border-color: var(--glass-border-top) !important;
-}
+/* .post glow/tilt bloki o'chirildi — CSS/00-components.core.css'da
+   flat versiyasi belgilangan (transform: none). AUDIT.md 2-bo'limga qarang. */
 
-/* ── 7. Input fields — focus ring + inner glow ── */
-.field:focus,
+/* ── 7. Input fields — focus ring (faqat .cmt-input/.ta/.sb-panel uchun,
+   .field o'z fokus-ringini CSS/00-components.core.css'dan oladi) ── */
 .cmt-input:focus,
 .ta:focus,
 .sb-panel-input-wrap:focus-within {
   box-shadow:
-    var(--specular-top),
     inset 0 0 0 1px #151C32,
     0 0 0 3px #12182B !important;
 }
 
-/* ── 8. Buttons — spring bounce ── */
-.btn-primary,
-.btn-ghost,
-.btn-danger,
+/* .btn-primary/.btn-ghost/.btn-danger spring-bounce o'chirildi —
+   CSS/00-components.core.css flat hover'ni belgilaydi. */
 .cmt-send {
   transition: all 0.40s var(--ease-back) !important;
 }
-.btn-primary:hover { transform: translateY(-2px) scale(1.02) !important; }
-.btn-ghost:hover   { transform: translateY(-1px) scale(1.01) !important; }
 
 /* ── 9. Avatar — glass ring + hover scale ── */
 .dm-avi, .cmt-avi, .cmt-my-avi {

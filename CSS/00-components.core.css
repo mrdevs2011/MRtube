@@ -1,0 +1,176 @@
+/* ═══════════════════════════════════════════════════════════════
+   MRgram — CORE COMPONENTS (single source of truth)
+   ═══════════════════════════════════════════════════════════════
+   Bu fayl quyidagi komponentlar uchun YAGONA manba:
+   .btn-primary, .btn-ghost, .btn-danger, .bot-nav, .app-hdr,
+   .field / input / textarea, .post (bazaviy karta)
+
+   Ilgari bu komponentlar theme.css, nav.css, borderless.css,
+   ui-improvements.css, feed.css fayllarida 4-5 marta qayta
+   ta'riflangan edi va ui-improvements.css oxirida "YAKUNIY POLISH"
+   nomli bo'lim borderless.css olib tashlagan glow/shadow'larni
+   !important bilan qaytadan yoqib qo'yardi — shu sabab flat dizaynga
+   o'tish urinishlari "yo'qolib" ketardi.
+
+   Bu fayl X.com uslubidagi FLAT dizaynni asos qilib oladi:
+   - shadow/glow yo'q (faqat funksional fokus-ring qoladi)
+   - transform/scale hover animatsiyalari yo'q
+   - shimmer/specular chiziqlar yo'q
+   - border orqali struktura ko'rsatiladi, soya orqali emas
+
+   Yuklanish tartibi: style.css'da eng OXIRIDA import qilinishi kerak
+   (barcha eski qoidalardan keyin), shunda bu fayl avtomatik g'olib
+   chiqadi va boshqa fayllardagi eski qoidalarni asta-sekin o'chirish
+   mumkin bo'ladi — hech narsa buzilmaydi.
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── 1. Buttons ─────────────────────────────────────────────── */
+
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: var(--blue3, var(--blue));
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  margin-top: 4px;
+  letter-spacing: -0.1px;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.btn-primary:hover  { background: var(--blue2, var(--blue)); }
+.btn-primary:active { opacity: 0.85; }
+
+.btn-ghost {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 0.5px solid var(--glass-border);
+  border-radius: 12px;
+  color: var(--text2);
+  font-size: 13px;
+  font-family: var(--font);
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-ghost:hover  { background: var(--glass); color: var(--text); }
+.btn-ghost:active { opacity: 0.85; }
+
+.btn-danger {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 0.5px solid #3B1521;
+  border-radius: 12px;
+  color: var(--red);
+  font-size: 13px;
+  font-family: var(--font);
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.15s ease;
+}
+
+.btn-danger:hover  { background: #1B0D16; }
+.btn-danger:active { opacity: 0.85; }
+
+
+/* ── 2. Bottom nav / sidebar ────────────────────────────────── */
+
+.bot-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: var(--nav);
+  background: var(--bg2, var(--glass));
+  border-top: 0.5px solid var(--glass-border);
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 100;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Desktop: bottom nav → left sidebar */
+@media (min-width: 768px) {
+  .bot-nav {
+    bottom: auto;
+    top: 0; left: 0; right: auto;
+    width: var(--sidebar);
+    height: 100dvh;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+    padding: 16px 0;
+    border-top: none;
+    border-right: 0.5px solid var(--glass-border);
+    background: transparent;
+  }
+}
+
+
+/* ── 3. App header ──────────────────────────────────────────── */
+
+.app-hdr {
+  background: var(--bg2, var(--glass));
+  border-bottom: 0.5px solid var(--glass-border);
+  box-shadow: none;
+}
+
+@media (min-width: 768px) {
+  .app-hdr { background: transparent; }
+}
+
+
+/* ── 4. Input fields ────────────────────────────────────────── */
+
+.field,
+input:not([type="checkbox"]):not([type="radio"]),
+textarea {
+  background: var(--glass);
+  border: 0.5px solid var(--glass-border);
+  border-radius: 10px;
+  color: var(--text);
+  transition: border-color 0.15s ease;
+}
+
+.field:focus,
+input:focus,
+textarea:focus {
+  border-color: var(--blue);
+  background: var(--glass-mid);
+  box-shadow: 0 0 0 2px var(--blue-glow2, transparent);
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder,
+.field::placeholder { color: var(--text3); }
+
+
+/* ── 5. Post card (base) ────────────────────────────────────── */
+
+.post {
+  background: var(--bg2, var(--glass));
+  border: 0.5px solid var(--glass-border);
+  border-radius: 14px;
+  box-shadow: none;
+  transition: border-color 0.15s ease;
+}
+
+.post:hover {
+  border-color: var(--glass-border-top);
+  box-shadow: none;
+  transform: none;
+}
+
+@media (min-width: 768px) {
+  .post { border-radius: 16px; }
+}

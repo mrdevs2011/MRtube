@@ -17,6 +17,7 @@
 @import url('./CSS/borderless.css');
 @import url('./CSS/chat-dark-redesign.css');
 @import url('./CSS/auth-ig-style.css');
+@import url('./CSS/00-components.core.css'); /* Yagona manba: btn/bot-nav/app-hdr/field/post — eski takrorlarni asta-sekin pastdagi AUDIT.md bo'yicha o'chiring */
 
 /* ── Global Reset ── */
 *, *::before, *::after {
