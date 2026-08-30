@@ -25,18 +25,18 @@
   background: transparent;
   border-radius: 0;
   border: none;
-  border-bottom: 1px solid var(--cg-border-side, var(--line));
+  border-bottom: 1px solid var(--line2);
   box-shadow: none;
   margin: 0;
   position: relative;
   transition: background 0.15s var(--ease), transform 0.15s var(--ease);
 }
 .chat-row:hover {
-  background: var(--cg-row-hover, var(--glass));
+  background: var(--glass);
   transform: translateX(2px);
 }
 .chat-row:active {
-  background: var(--cg-glass-mid, var(--glass-mid));
+  background: var(--glass-mid);
   transform: scale(0.99);
 }
 
@@ -1445,83 +1445,31 @@
    CHAT — SOLID UI
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* ── Chat glass variables ── */
-[data-theme="dark"] {
-  --cg-glass:        #17212b;
-  --cg-glass-mid:    #24303f;
-  --cg-glass-strong: #2b3d4f;
-  --cg-border-top:   #24303f;
-  --cg-border-side:  #17212b;
-  --cg-border-bot:   #0e1621;
-  --cg-specular:     none;
-  --cg-blur:         none;
-  --cg-blur-light:   none;
-  --cg-shadow:       0 8px 32px #050509, 0 2px 8px #07070C;
-  --cg-shadow-sm:    0 2px 12px #07070D, 0 1px 4px #08080E;
-  --cg-mine-bg:      #2b5278;
-  --cg-theirs-bg:    #182533;
-  --cg-input-bg:     #24303f;
-  --cg-hdr-bg:       #17212b;
-  --cg-indicator-bg: #200E15;
-  --cg-voice-rec-shadow: 0 0 0 4px #49191E, 0 0 24px #37141A;
-  --cg-row-bg:       #0e1621;
-  --cg-row-hover:    #182533;
-}
-[data-theme="light"] {
-  --cg-glass:        var(--bg3);
-  --cg-glass-mid:    var(--bg4);
-  --cg-glass-strong: var(--bg5);
-  --cg-border-top:   rgba(255,255,255,1.0);
-  --cg-border-side:  #F6F6F8;
-  --cg-border-bot:   #EEEEF2;
-  --cg-specular:     none;
-  --cg-blur:         none;
-  --cg-blur-light:   none;
-  --cg-shadow:       0 8px 32px #D0D0D5, 0 2px 8px #DADADE;
-  --cg-shadow-sm:    0 2px 12px #D7D7DC, 0 1px 4px #DEDEE3;
-  --cg-mine-bg:      #3A69EC;
-  --cg-theirs-bg:    var(--bg4);
-  --cg-input-bg:     var(--bg3);
-  --cg-hdr-bg:       var(--bg3);
-  --cg-indicator-bg: #E8DCE1;
-  --cg-voice-rec-shadow: 0 0 0 4px #E9BFC2, 0 0 24px #E9CFD3;
-  --cg-row-bg:       var(--bg2);
-  --cg-row-hover:    var(--bg4);
-}
+/* ── Chat glass variables — removed (unused, was old Telegram-blue palette;
+   all consumers migrated to pure-black tokens: --glass, --glass-mid,
+   --line2, --bg3, and chat-dark-redesign.css's --c-* vars) ── */
+
 
 /* .chat-row styling now lives in one place, near the top of this file. */
 
-/* ── Avatar in chat rows ── */
-.chat-avi {
-  background: var(--cg-glass-mid) !important;
-  border: 0.5px solid var(--cg-border-side) !important;
-  box-shadow: var(--cg-specular) !important;
-}
+/* ── Avatar in chat rows — owned by base .chat-avi definition (no override needed) ── */
 
 /* ── Chat thread header — owned by base definition above (single source) ── */
 
-/* ── Back button ── */
+/* ── Back button — background/color owned by chat-dark-redesign.css; transition/hover-scale kept here ── */
 .chat-thread-back {
-  background: var(--cg-glass-mid) !important;
-  border: 0.5px solid var(--cg-border-side) !important;
-  box-shadow: var(--cg-specular) !important;
-  transition: background 0.2s, transform 0.2s !important;
+  transition: background 0.2s, transform 0.2s;
 }
 .chat-thread-back:hover {
-  background: var(--cg-glass-strong) !important;
-  transform: scale(1.05) !important;
+  transform: scale(1.05);
 }
 
-/* ── Messages — message bubbles ── */
+/* ── Messages — bubble background/color owned by chat-dark-redesign.css; border kept here ── */
 .chat-msg.mine .chat-bubble {
-  background: var(--cg-mine-bg) !important;
-  box-shadow: var(--cg-specular), 0 4px 16px #14275D, inset 0 -1px 0 #08080E !important;
-  border: 0.5px solid #3A3A3F !important;
+  border: 0.5px solid #3A3A3F;
 }
 .chat-msg.theirs .chat-bubble {
-  background: var(--cg-theirs-bg) !important;
-  box-shadow: var(--cg-specular), var(--cg-shadow-sm) !important;
-  border: 0.5px solid var(--cg-border-side) !important;
+  border: 0.5px solid var(--line2);
 }
 
 /* ── Bubble ichidagi kod bloki/kod — .md-codeblock/.md-code odatda
@@ -2553,7 +2501,7 @@ a.cfm-name--link:hover {
   gap: 10px;
   padding: 8px 12px;
   padding-top: calc(8px + env(safe-area-inset-top, 0px));
-  background: var(--cg-hdr-bg, #12141A);
+  background: var(--bg3, #12141A);
   border-bottom: 1px solid var(--line, #232428);
   box-shadow: 0 2px 10px rgba(0,0,0,0.25);
   cursor: pointer;
