@@ -5,13 +5,13 @@
 
 .profile-hdr {
   padding: 68px 16px 16px;
-  /* background/border-bottom → pastdagi --pg-* blok (1000-qator atrofida) !important bilan yengiladi */
+  /* background/border-bottom → pastdagi --pg-* blok (~995-qator) belgilaydi (2026-08-30: !important olib tashlandi, halo pseudo-element o'chirildi) */
   position: relative;
 }
 
 .profile-grid-hdr {
   display: flex;
-  /* border-top/border-bottom/background → --pg-* blok !important bilan yengiladi */
+  /* border-top/border-bottom/background → --pg-* blok belgilaydi (2026-08-30: !important olib tashlandi) */
   margin: 0;
 }
 
@@ -33,10 +33,10 @@
   border-bottom-color: var(--blue);
 }
 
-.profile-hdr::before {
-  /* content/position/right/height/background/pointer-events → --pg-* blok !important bilan yengiladi */
-  top: 0; left: 0;
-}
+/* .profile-hdr::before (blue-halo pseudo-element) butunlay o'chirildi
+   2026-08-30 — bu yerdagi top/left-only qoldiq ham o'lik edi, chunki
+   content xususiyati pastki blokda o'chirilgach, ::before umuman
+   render bo'lmaydi (CSS spec: content:none → pseudo yaratilmaydi) */
 
 .profile-top {
   display: flex;
@@ -55,14 +55,15 @@
 .profile-avi {
   width: 76px; height: 76px;
   border-radius: 50%;
-  /* background/border/box-shadow → --pg-* blok !important bilan yengiladi */
+  /* background/border → --pg-* blok belgilaydi (2026-08-30: glow/!important olib tashlandi) */
   position: relative;
   cursor: pointer;
   flex-shrink: 0;
-  transition: all 0.40s var(--ease-spring);
+  transition: border-color 0.15s ease;
 }
 
-/* .profile-avi:hover border-color/box-shadow/transform → --pg-* blok !important bilan yengiladi (pastda) */
+/* .profile-avi:hover border-color → --pg-* blok belgilaydi (pastda).
+   Glow shadow va scale(1.05) 2026-08-30'da flat dizayn uchun o'chirildi. */
 
 .profile-avi img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
 
@@ -71,7 +72,7 @@
   bottom: 2px; right: 2px;
   width: 22px; height: 22px;
   border-radius: 50%;
-  /* background/border → --pg-* blok !important bilan yengiladi */
+  /* background/border → --pg-* blok belgilaydi (2026-08-30: box-shadow glow va !important olib tashlandi) */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -328,7 +329,7 @@
 .edit-btn {
   width: 100%;
   padding: 10px;
-  /* background/border/border-radius/transition → --pg-* blok !important bilan yengiladi */
+  /* background/border/border-radius/transition → --pg-* blok belgilaydi (2026-08-30: glow/!important olib tashlandi) */
   color: var(--text);
   font-size: 13px;
   font-weight: 500;
@@ -967,13 +968,9 @@
   --pg-glass-strong: var(--bg5);
   --pg-border-top:   #444449;
   --pg-border-side:  #1F1F25;
-  --pg-specular:     none;
   --pg-blur:         none;
   --pg-blur-light:   none;
-  --pg-shadow:       0 8px 32px #050509, 0 2px 8px #07070C;
-  --pg-shadow-sm:    0 2px 12px #07070D;
   --pg-hdr-bg:       var(--bg2);
-  --pg-blue-halo:    #12182B;
 }
 [data-theme="light"] {
   --pg-glass:        var(--bg3);
@@ -981,33 +978,19 @@
   --pg-glass-strong: var(--bg5);
   --pg-border-top:   rgba(255,255,255,1.0);
   --pg-border-side:  #F6F6F8;
-  --pg-specular:     none;
   --pg-blur:         none;
   --pg-blur-light:   none;
-  --pg-shadow:       0 8px 32px #D0D0D5, 0 2px 8px #DADADE;
-  --pg-shadow-sm:    0 2px 12px #D7D7DC;
   --pg-hdr-bg:       var(--bg3);
-  --pg-blue-halo:    #DADEEB;
 }
 
-/* Profile header — living glass */
+/* Profile header — flat (2026-08-30 tozalandi, halo/glow olib tashlandi) */
 .profile-hdr {
-  background: var(--pg-hdr-bg) !important;
-  border-bottom: none !important;
-  box-shadow:
-    var(--pg-specular),
-    0 1px 0 var(--pg-border-side),
-    0 4px 32px #07070D !important;
+  background: var(--pg-hdr-bg);
+  border-bottom: none;
   position: relative;
 }
-.profile-hdr::before {
-  content: '' !important;
-  position: absolute !important;
-  top: 0; left: 0; right: 0 !important;
-  height: 220px !important;
-  background: var(--pg-blue-halo) !important;
-  pointer-events: none !important;
-}
+/* .profile-hdr::before blue-halo pseudo-element butunlay o'chirildi —
+   flat dizaynda header ustida gradient halo kerak emas */
 .profile-hdr::after {
   content: '';
   position: absolute;
@@ -1017,87 +1000,68 @@
   pointer-events: none;
 }
 
-/* Avatar — glass sphere glow */
+/* Avatar — flat ring, glow olib tashlandi */
 .profile-avi {
-  background: var(--pg-glass-mid) !important;
-  border: 1px solid var(--pg-border-side) !important;
-  box-shadow:
-    inset 0 1px 0 #444449,
-    0 0 0 3px #111626,
-    0 8px 28px #06060A,
-    0 0 40px #101f2e !important;
+  background: var(--pg-glass-mid);
+  border: 1px solid var(--pg-border-side);
 }
 .profile-avi:hover {
-  border-color: #2D4477 !important;
-  box-shadow:
-    inset 0 1px 0 #4D4D52,
-    0 0 0 5px #161E34,
-    0 10px 36px #050509,
-    0 0 60px #161E34 !important;
-  transform: scale(1.05) !important;
+  border-color: #2D4477;
 }
 
-/* Stat blocks — glass chips */
+/* Stat blocks — flat chips */
 .stat {
-  background: var(--pg-glass) !important;
-  border-radius: 14px !important;
-  border: 0.5px solid var(--pg-border-side) !important;
-  box-shadow: var(--pg-specular), var(--pg-shadow-sm) !important;
-  transition: background 0.20s, transform 0.16s, box-shadow 0.20s !important;
+  background: var(--pg-glass);
+  border-radius: 14px;
+  border: 0.5px solid var(--pg-border-side);
+  transition: background 0.15s ease;
   margin: 0 3px;
 }
 .stat:hover {
-  background: var(--pg-glass-mid) !important;
-  transform: translateY(-2px) !important;
-  box-shadow: var(--pg-specular), var(--pg-shadow) !important;
+  background: var(--pg-glass-mid);
 }
 
-/* Edit button — glass */
+/* Edit button — flat */
 .edit-btn {
-  background: var(--pg-glass-mid) !important;
-  border: 0.5px solid var(--pg-border-side) !important;
-  border-radius: 14px !important;
-  box-shadow: var(--pg-specular), var(--pg-shadow-sm) !important;
-  transition: background 0.18s, transform 0.15s, box-shadow 0.18s !important;
+  background: var(--pg-glass-mid);
+  border: 0.5px solid var(--pg-border-side);
+  border-radius: 14px;
+  transition: background 0.15s ease;
 }
 .edit-btn:hover {
-  background: var(--pg-glass-strong) !important;
-  border-color: var(--pg-border-top) !important;
-  transform: translateY(-1px) !important;
-  box-shadow: var(--pg-specular), var(--pg-shadow) !important;
+  background: var(--pg-glass-strong);
+  border-color: var(--pg-border-top);
 }
 
 /* Follow/unfollow button — icon only, circle */
 .up-follow-btn {
-  width: 44px !important;
-  height: 44px !important;
-  border-radius: 50% !important;
-  background: none !important;
-  box-shadow: none !important;
-  padding: 0 !important;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: none;
+  box-shadow: none;
+  padding: 0;
 }
 
-/* Grid tab header — glass strip */
+/* Grid tab header — flat strip */
 .profile-grid-hdr {
-  background: var(--pg-glass) !important;
-  border-top: 0.5px solid var(--pg-border-side) !important;
-  border-bottom: 0.5px solid var(--pg-border-side) !important;
+  background: var(--pg-glass);
+  border-top: 0.5px solid var(--pg-border-side);
+  border-bottom: 0.5px solid var(--pg-border-side);
 }
 
-/* Profile grid items — light solid card on hover */
+/* Profile grid items — flat hover, scale olib tashlandi */
 .profile-grid-item {
-  transition: transform 0.18s, filter 0.18s !important;
+  transition: filter 0.15s ease;
 }
 .profile-grid-item:hover {
-  transform: scale(1.02) !important;
   z-index: 2;
 }
 
-/* Avi edit badge — glass */
+/* Avi edit badge — flat */
 .avi-edit-badge {
-  background: #365AC7 !important;
-  border: 1px solid #525257 !important;
-  box-shadow: 0 2px 8px #293E6B !important;
+  background: #365AC7;
+  border: 1px solid #525257;
 }
 
 
@@ -1302,6 +1266,10 @@ a.profile-meta-link:hover { text-decoration: underline; }
   font-weight: 500;
   pointer-events: none;
 }
+/* !important shart — .field'ning shorthand padding (nav.css) @import
+   zanjirida profile.css'dan KEYIN yuklanadi (teng specificity, keyingi
+   fayl g'olib chiqadi), shuning uchun !important'siz padding-left
+   hech qachon qo'llanmaydi. Tekshirilgan 2026-08-30. */
 .pe-prefix-field { padding-left: 28px !important; }
 
 /* Group edit avatar */

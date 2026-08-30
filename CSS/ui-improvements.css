@@ -1858,148 +1858,124 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
-   YAKUNIY POLISH
+   YAKUNIY POLISH — flat (X.com uslubi, 2026-08-30 tozalandi)
+   Bu yerda avval bo'lgan specular/liquid-glow/spring-bounce effektlar
+   butunlay olib tashlandi. Faqat oddiy, funksional transitionlar qoldi.
    ═══════════════════════════════════════════════════════════════════════ */
 
 /* .app-hdr glow/shimmer bloki o'chirildi — CSS/00-components.core.css
-   allaqachon flat .app-hdr'ni belgilaydi, bu yerdagi eski blok uni
-   !important bilan bekor qilib, borderless.css urinishini yo'qqa
-   chiqarardi. AUDIT.md 2-bo'limga qarang. */
+   allaqachon flat .app-hdr'ni belgilaydi. AUDIT.md 2-bo'limga qarang. */
 
-/* header icon buttons — solid pill on hover */
+/* header icon buttons — flat, oddiy hover */
 .hdr-icon-btn {
-  border-radius: 12px !important;
-  transition: all 0.32s var(--ease-back) !important;
+  border-radius: 12px;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 .hdr-icon-btn:hover {
-  background: var(--glass-mid) !important;
+  background: var(--glass-mid);
   border: 0.5px solid var(--glass-border);
-  box-shadow: var(--specular-top), var(--liquid-shadow-sm) !important;
-  color: var(--text) !important;
+  color: var(--text);
 }
 .hdr-icon-btn:active {
-  transform: scale(0.86) !important;
-  transition: transform 0.08s ease !important;
+  opacity: 0.7;
 }
 
-/* ── 2. Nav-btn — floating pill, scale spring, glow ── */
+/* ── 2. Nav-btn — flat, glow olib tashlandi ── */
 .nav-btn {
-  transition: all 0.38s var(--ease-back) !important;
+  transition: background 0.15s ease;
 }
 .nav-btn:hover {
-  transform: scale(1.10);
   background: var(--glass-mid);
   border: 0.5px solid var(--glass-border);
   /* box-shadow → CSS/borderless.css'da 'none' bilan yengiladi */
 }
-.nav-btn.on {
-  transform: scale(1.04) !important;
-}
-.nav-btn.on svg {
-  filter: drop-shadow(0 0 8px var(--blue-glow)) !important;
-}
+/* .nav-btn.on scale-pulse va svg glow o'chirildi — flat active holat
+   CSS/00-components.core.css yoki nav.css orqali boshqariladi */
 
 /* .bot-nav glow bloki o'chirildi — CSS/00-components.core.css'da
    flat versiyasi belgilangan. AUDIT.md 2-bo'limga qarang. */
 
-/* ── 4. Sheet handle — pull indicator animatsiyasi ── */
+/* ── 4. Sheet handle — oddiy hover ── */
 .sheet-handle {
   cursor: grab;
-  transition: all 0.25s ease;
+  transition: opacity 0.15s ease;
 }
 .sheet-handle:hover {
-  opacity: 1 !important;
-  transform: scaleX(1.3);
+  opacity: 1;
 }
 
-/* ── 5. Sheet — inner glow va chromatic border ── */
+/* ── 5. Sheet — inner glow olib tashlandi, flat shadow ── */
 .sheet {
-  box-shadow:
-    inset 0 1px 0 var(--glass-border-top),
-    inset 0 0 60px var(--glass-refract),
-    var(--glass-inner-glow),
-    0 -8px 48px #06060C,
-    0 -2px 16px #07070D !important;
+  box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.35);
 }
 
 /* .post glow/tilt bloki o'chirildi — CSS/00-components.core.css'da
    flat versiyasi belgilangan (transform: none). AUDIT.md 2-bo'limga qarang. */
 
-/* ── 7. Input fields — focus ring (faqat .cmt-input/.ta/.sb-panel uchun,
-   .field o'z fokus-ringini CSS/00-components.core.css'dan oladi) ── */
+/* ── 7. Input fields — flat focus ring (faqat .cmt-input/.ta/.sb-panel
+   uchun, .field o'z fokus-ringini CSS/00-components.core.css'dan oladi) ── */
 .cmt-input:focus,
 .ta:focus,
 .sb-panel-input-wrap:focus-within {
-  box-shadow:
-    inset 0 0 0 1px #151C32,
-    0 0 0 3px #12182B !important;
+  box-shadow: inset 0 0 0 1px var(--blue);
 }
 
 /* .btn-primary/.btn-ghost/.btn-danger spring-bounce o'chirildi —
    CSS/00-components.core.css flat hover'ni belgilaydi. */
 .cmt-send {
-  transition: all 0.40s var(--ease-back) !important;
+  transition: opacity 0.15s ease;
 }
 
-/* ── 9. Avatar — glass ring + hover scale ── */
+/* ── 9. Avatar — flat ring, glow/scale olib tashlandi ── */
 .dm-avi, .cmt-avi, .cmt-my-avi {
-  box-shadow: var(--specular-top), 0 0 0 1.5px var(--glass-border) !important;
-  transition: all 0.38s var(--ease-back) !important;
+  box-shadow: 0 0 0 1.5px var(--glass-border);
 }
 .dm-avi:hover, .cmt-avi:hover {
-  transform: scale(1.08) !important;
-  box-shadow: var(--specular-top), 0 0 0 2px var(--blue), var(--liquid-shadow-sm) !important;
+  box-shadow: 0 0 0 2px var(--blue);
 }
 
-/* ── 10. Zoom modal — liquid entrance ── */
+/* ── 10. Zoom modal — oddiy fade, "liquid" animatsiya nomi va
+   spring-easing olib tashlandi ── */
 #zoomModal.show {
-  animation: zoomLiquidIn 0.42s var(--ease-back) both !important;
+  animation: zoomFadeIn 0.2s ease both;
 }
-@keyframes zoomLiquidIn {
+@keyframes zoomFadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
 
-/* ── 11. File card — spring lift ── */
+/* ── 11. File card — flat hover, lift/scale olib tashlandi ── */
 .file-card {
-  transition: all 0.42s var(--ease-back) !important;
+  transition: background 0.15s ease;
 }
 .file-card:hover {
-  transform: translateY(-3px) scale(1.008) !important;
-  box-shadow:
-    var(--specular-top),
-    var(--glass-inner-glow),
-    var(--liquid-shadow-md) !important;
-  background: var(--glass-mid) !important;
+  background: var(--glass-mid);
 }
 
-/* ── 12. Toggle — spring thumb, glow ── */
+/* ── 12. Toggle — flat, glow olib tashlandi ── */
 .toggle-track {
-  transition: all 0.42s var(--ease-back) !important;
+  transition: background 0.15s ease;
 }
 .toggle-track::after {
-  box-shadow: 0 2px 8px #06060B, inset 0 1px 0 #E6E6E7 !important;
-  transition: transform 0.42s var(--ease-back) !important;
+  box-shadow: none;
+  transition: transform 0.15s ease;
 }
 .toggle input:checked + .toggle-track::after {
-  box-shadow: 0 2px 8px var(--blue-glow), inset 0 1px 0 #E6E6E7 !important;
+  box-shadow: none;
 }
 
-/* ── 13. Comment body — glass depth ── */
+/* ── 13. Comment body — flat, glow/translateX olib tashlandi ── */
 .cmt-body {
-  box-shadow: var(--specular-top) !important;
-  transition: all 0.32s var(--ease-back) !important;
+  transition: background 0.15s ease;
 }
 .cmt-body:hover {
-  transform: translateX(2px) !important;
-  box-shadow: var(--specular-top), var(--liquid-shadow-sm) !important;
+  background: var(--glass-mid);
 }
 
-/* ── 14. Search overlay — glass panel ── */
+/* ── 14. Search overlay — flat panel ── */
 .search-overlay-inner {
-  background: var(--glass-mid) !important;
-  border: 0.5px solid var(--glass-border-top) !important;
-  box-shadow: var(--specular-top), var(--glass-inner-glow), var(--liquid-shadow-lg) !important;
+  background: var(--glass-mid);
+  border: 0.5px solid var(--glass-border-top);
 }
 
 /* ── 15. Scrollbar — solid style ── */
@@ -2017,33 +1993,18 @@
 
 /* ── 16. Upload drop zone — flat, owned by nav.css base (no inner-glow override) ── */
 
-/* ── 17. Detail modal — layered glass depth ── */
+/* ── 17. Detail modal — flat shadow, glass depth olib tashlandi ── */
 #detailContent {
-  box-shadow:
-    inset 0 1px 0 var(--glass-border-top),
-    inset 0 0 80px var(--glass-refract),
-    var(--glass-inner-glow),
-    0 -8px 48px #07070C !important;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.35);
 }
 
-/* ── 18. Pulse animatsiya — create button ── */
+/* ── 18. Create button — pulse animatsiya butunlay o'chirildi (flat) ── */
 .nav-center-btn {
-  transition: all 0.45s var(--ease-back) !important;
+  transition: background 0.15s ease;
 }
-.nav-center-btn::before {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: var(--blue-glow2);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  z-index: -1;
-}
-.nav-center-btn:hover::before { opacity: 1 !important; }
+/* .nav-center-btn::before pulse-glow pseudo-element olib tashlandi */
 .nav-center-btn:hover {
-  transform: scale(1.12) translateY(-4px) !important;
+  opacity: 0.85;
 }
 
 /* ── 19. @prefers-reduced-motion — ikkinchi blok o'chirildi, chunki
@@ -2051,9 +2012,12 @@
    (yuqorida, "reduce" bo'limi) reduced-motion sozlamasini bekor
    qilib qo'ygan edi — accessibility bug, 2026-08-30 tuzatildi */
 
-/* ── 20. Global focus ring ── */
+/* ── 20. Global focus ring — accessibility uchun saqlandi, glow
+   kamaytirildi (faqat bitta aniq ring, ikkinchi "glow2" halo olib
+   tashlandi) ── */
 :focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px var(--blue), 0 0 0 4px var(--blue-glow2) !important;
+  box-shadow: 0 0 0 2px var(--blue);
   border-radius: inherit;
 }
+

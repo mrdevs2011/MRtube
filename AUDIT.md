@@ -178,6 +178,80 @@ yozilgan "!important". Kelajakda hisoblashda har doim komentariy
 bloklarini chiqarib tashlab sanash kerak (`re.sub(r'/\*.*?\*/', '', s,
 flags=re.DOTALL)` yoki shunga o'xshash), aks holda soxta raqam chiqadi.
 
+## 7.1. Bosqich C — Vizual flat tozalash (BAJARILDI ✅, 2026-08-30)
+
+Maqsad: "X.com uslubidagi flat, skromniy dizayn" — glow/specular/
+liquid-glass/spring-bounce/pulse effektlarni butunlay olib tashlash.
+
+### C1 — `ui-improvements.css`, "YAKUNIY POLISH" bo'limi
+
+Bu bo'lim (~1860-2060-qator) to'liq liquid-glass uslubida edi:
+`var(--specular-top)`, `var(--liquid-shadow-*)`, `var(--glass-inner-glow)`
+glow-soyalar; `var(--ease-back)` spring-bounce transitionlar;
+`scale()`/`translateY()` hover-lift effektlari; `.nav-center-btn::before`
+pulse-glow pseudo-element (create tugmasi atrofidagi pulsatsiya).
+
+**Qilingan:** barcha glow-soya, spring-easing, scale/translateY-lift
+olib tashlandi; oddiy `background`/`opacity` o'zgarishlariga
+almashtirildi; pulse pseudo-element butunlay o'chirildi; focus-ring
+(accessibility) saqlandi, lekin ikkinchi "glow2" halo qatlami olib
+tashlandi. JS bog'liqligi tekshirildi (`bar.js`, `feed.js` faqat
+`.click()` chaqiradi, `::before`ga bog'liq emas — xavfsiz).
+
+**Natija:** bu bo'limdagi barcha `!important` olib tashlandi (glow
+o'chgach, raqib qoida qolmadi — cascade urushi tugadi). `{`/`}`
+balansi tekshirildi (333/333, OK).
+
+### C2 — `profile.css`, header/avatar/stat/edit-btn bloki (~993-1101-qator)
+
+Xuddi shunday liquid-glass qatlam: `--pg-blue-halo` (header ustidagi
+gradient halo pseudo-element), avatar atrofidagi `0 0 40px`/`0 0 60px`
+glow soyalar, `scale(1.05)`/`translateY()` hover-liftlar.
+
+**Qilingan:**
+- `.profile-hdr::before` (blue-halo pseudo-element) — **ikki qismda**
+  ta'riflangan edi (yuqorida `top/left`, pastda `content`/`background`).
+  Pastki qism o'chirilgach, yuqoridagi qism ham **o'lik** bo'lib qoldi
+  (CSS spec: `content` yo'q bo'lsa `::before` render bo'lmaydi) —
+  ikkalasi ham o'chirildi.
+- Avatar/stat/edit-btn/badge — barcha glow box-shadow va scale/
+  translateY hover olib tashlandi, flat background/border qoldi.
+- `--pg-specular`, `--pg-shadow`, `--pg-shadow-sm`, `--pg-blue-halo`
+  o'zgaruvchilari (dark va light tema bloklarida) — endi hech qayerda
+  ishlatilmagani tasdiqlangach, **definitsiyadan ham o'chirildi**
+  (o'lik CSS custom property).
+- 8 ta eski komentariy ("... `--pg-*` blok `!important` bilan
+  yengiladi") **yangilandi** — ular hozir yolg'on gapirardi, chunki
+  aynan o'sha `!important`larni shu tozalashda olib tashladim (B1'dagi
+  eskirgan-komentariy muammosining o'zi, boshqa faylda).
+
+**Qoldirilgan yagona `!important`:** `.pe-prefix-field { padding-left:
+28px !important; }` (L1269 atrofida) — tekshirildi, **asosli**: `.field`
+shorthand `padding` qoidasi `nav.css`da bor, `nav.css` esa `style.css`
+`@import` zanjirida `profile.css`dan **keyin** yuklanadi (teng
+specificity, keyingi fayl g'olib chiqadi) — `!important`siz
+`padding-left: 28px` hech qachon qo'llanmasdi. Izoh qo'shildi.
+
+**Natija:** `profile.css`dagi `!important` soni **47 → 1** (real,
+komentariylarsiz hisoblangan). `{`/`}` balansi tekshirildi (208/208, OK).
+
+### Yangilangan umumiy jadval
+
+| Fayl | Boshida | B/C dan keyin |
+|---|---|---|
+| `chat-dark-redesign.css` | 130 | **0** |
+| `chat.css` | 95 | **78** |
+| `ui-improvements.css` | 47 | **0** ("YAKUNIY POLISH" bo'limida) |
+| `profile.css` | 47 | **1** (asosli, hujjatlashtirilgan) |
+
+**Dars (yana bir bor tasdiqlandi):** eskirgan komentariy — bu loyihaning
+takrorlanuvchi muammosi. Har safar `!important` yoki pseudo-element
+o'chirilganda, o'sha narsaga ishora qiluvchi **boshqa joydagi**
+komentariylarni ham qidirib, yangilash kerak — aks holda AUDIT.md B1
+kabi holat yana takrorlanadi.
+
+
+
 ## 8. Muhim dars (kelajakdagi ishlar uchun)
 
 Bu loyihada `!important`larni "shunchaki olib tashlash" xavfli — chunki
