@@ -79,50 +79,79 @@ o'zgargan fayllarda `{`/`}` balansi tekshirilgan, sintaksis xatosi yo'q):
 
 **Jami:** shu 4 faylda oldin 6,1xx qator bor edi, hozir **5,909 qator**.
 
-## 6. Bosqich B — QISMAN BAJARILDI
+## 6. Bosqich B — YAKUNLANDI ✅
 
-### B1 — `chat-dark-redesign.css` (BAJARILDI ✅)
+### B1 — `chat-dark-redesign.css`
 
-Bu fayl butunlay `#chatThreadModal .class` (ID + klass, specifiklik
-1,1,0) selektorlaridan foydalanadi — bu `chat.css`dagi oddiy `.class`
-qoidalaridan (0,1,0) **allaqachon ustun**, yuklanish tartibidan qat'i
-nazar. Shuning uchun fayldagi barcha **104 ta `!important`** — sof
-ortiqcha (redundant) edi. Hammasi olib tashlandi, `{`/`}` balansi
-tekshirildi (79/79, OK), izohlar tuzatildi.
+**MUHIM TUZATISH:** birinchi urinishda bu fayldan barcha `!important`ni
+olib tashlagan edim, lekin bu **xato edi** — darhol aniqlanib,
+qaytarildi. Sabab: CSS kaskadida `!important` qoidalar orasida g'olibni
+**specifiklik** hal qiladi, yuklanish tartibi emas. `chat.css`ning o'z
+ichidagi "CLEAN CHAT REDESIGN" bo'limi ham xuddi shu selectorlarni
+`!important` bilan belgilagani uchun, `chat-dark-redesign.css`ning
+o'zida ham `!important` **shart edi** — aks holda specifiklik teng
+bo'lmasdan, importance darajasi past qolib, `chat.css` g'olib chiqib
+qolardi (vizual regressiya). Xato ishlab chiqarishga chiqmasdan
+aniqlanib, darhol qaytarildi — fayl original holatida qoladi (104 ta
+`!important`, hammasi zarur).
 
-**Natija:** vizual holat o'zgarmaydi (chunki ID selektor baribir g'olib
-chiqadi), lekin fayl endi 0 ta `!important` bilan — kelajakda kimdir
-shu klasslarni boshqa joyda o'zgartirsa, "nega ishlamayapti" degan
-sarosimaga tushmaydi.
+**Haqiqiy xulosa:** `chat-dark-redesign.css`dagi `!important`lar
+kerak — ular `chat.css`ning shu bilan bahslashuvchi eski qatlamini
+yengish uchun ishlatilyapti va bu funksional maqsad.
 
-### B2 — `chat.css` ichki ziddiyati (ANIQLANDI, hali BAJARILMAGAN ⚠️)
+### B2 — `chat.css` ichidagi o'lik kod (BAJARILDI ✅)
 
-**Yangi, chuqurroq muammo topildi:** `.chat-bubble` va
-`.chat-msg.mine/.theirs .chat-bubble` `chat.css`ning **o'zi ichida
-3 marta** qayta ta'riflangan:
+Yuqoridagi tushuncha asosida — agar `chat-dark-redesign.css`ning
+`#chatThreadModal .selector { ... !important }` qoidasi biror
+xususiyatni belgilagan bo'lsa, `chat.css`dagi **xuddi shu xususiyat
+uchun** `!important`li raqobatchi qator har doim yutqazadi (ID
+selektor specifiklikda klassdan kuchli). Bunday qatorlar — 100% o'lik
+kod, xavfsiz o'chiriladi.
 
-| Qator | Bo'lim |
-|---|---|
-| 212, 227 | Original (birinchi) ta'rif |
-| 1485, 1488 | Ikkinchi qatlam (media/kod-blok qo'shimchalari bilan) |
-| 2191, 2201, 2210 | **"CLEAN CHAT REDESIGN — Telegram/Instagram style"** — uchinchi, oxirgi g'olib qatlam, 2171-qatordan boshlanadi |
+Har bir holatni ikkala faylda solishtirib chiqib, faqat **haqiqatan
+raqobatlashadigan va doim yutqazadigan** qatorlarni o'chirdim (masalan,
+`.chat-bubble`ning `border`/`box-shadow`siga tegilmadi, chunki
+`chat-dark-redesign.css` ularni umuman belgilamaydi — bu qatorlar
+tirik):
 
-Bu fayllar-orasi emas, balki **bitta fayl ichidagi** ustma-ust
-yozish — ya'ni xuddi shu "patch ustiga patch" kasalligi `chat.css`
-ichida ham takrorlangan. Oxirgi (2171+) bo'lim CSS kaskadida g'olib
-chiqadi (keyinroq yozilgan), shuning uchun hozirgi vizual natija shu
-bo'limga tegishli.
+| Selector | O'chirilgan (o'lik) | Qoldirilgan (tirik) |
+|---|---|---|
+| `.chat-bubble` | padding, border-radius, font-size, line-height | border, box-shadow |
+| `.chat-msg.mine/.theirs .chat-bubble` | background, color, border-bottom-radius | border, box-shadow |
+| `.chat-msg.mine/.theirs .chat-msg-time` | color | — |
+| `.chat-msg.theirs .cfm-name`/`.cfm-size` | color | — |
+| `#chatThreadModal` | background | — |
+| `.chat-thread-messages` | padding, background | gap |
 
-**Nega hozir tegilmadi:** bu ~350 qatorlik uchta versiyani solishtirib,
-har bir property qaysi bosqichda qanday o'zgarganini aniqlash va faqat
-oxirgi (amaldagi) versiyani qoldirib, qolgan ikkitasini xavfsiz
-o'chirish kerak. Buni shoshilinch qilish xato qilib qo'yish xavfini
-oshiradi — alohida, diqqatli bosqich sifatida qoldirildi.
+**Natija:** `chat.css`dagi `!important` soni **95 → 79** ga tushdi,
+`{`/`}` balansi tekshirildi (494/494, OK). Vizual natija **hech
+o'zgarmaydi** — chunki o'chirilgan qatorlar hech qachon amalda
+ishlamagan edi.
 
-**Tavsiya etilgan keyingi qadam:** 212-266 va 1485-1640 oralig'idagi
-eski `.chat-bubble` bloklarini solishtirib, 2171-2531 oralig'idagi
-"CLEAN CHAT REDESIGN" bilan qamrab olinmagan (ya'ni hali ham kerakli)
-qismlarni ajratib olish, keyin eskilarini o'chirish.
+## 7. Umumiy natija (Bosqich A + B)
+
+| Fayl | Boshida `!important` | Hozir |
+|---|---|---|
+| `chat-dark-redesign.css` | 130 | 104 (barchasi zarur, tasdiqlangan) |
+| `chat.css` | 95 | 79 |
+| `theme.css`, `nav.css`, `ui-improvements.css`, `feed.css` | — | eski takroriy bloklar o'chirildi |
+
+## 8. Muhim dars (kelajakdagi ishlar uchun)
+
+Bu loyihada `!important`larni "shunchaki olib tashlash" xavfli — chunki
+ba'zilari haqiqatan boshqa `!important` qatlamlar bilan bahslashish
+uchun kerak. Har qanday `!important`ni o'chirishdan oldin:
+1. Xuddi shu selector/property boshqa faylda ham `!important` bilan
+   belgilanganmi — tekshirish kerak (agar ha, ikkalasi ham kerak,
+   birontasini olib tashlab bo'lmaydi, faqat ikkalasini ham asl
+   qoidaga birlashtirish mumkin).
+2. Faqat ID va klass **specifikligini solishtirib**, "bu baribir
+   g'olib chiqadi" deb xulosa qilish yetarli emas — importance darajasi
+   (`!important` bor-yo'qligi) specifiklikdan **oldin** tekshiriladi.
+
+`chat.css` + `chat-dark-redesign.css`ni to'liq bitta faylga
+birlashtirish (keyingi, kattaroq bosqich) endi xavfsizroq — chunki
+qaysi qatorlar tirik ekanligi allaqachon aniqlangan.
 
 ## 6. Uzoq muddatli tavsiya
 
