@@ -35,11 +35,7 @@
 }
 
 /* ── Header ─────────────────────────────────────────────────────────── */
-#chatThreadModal .chat-thread-hdr {
-  background: var(--c-bg-header) !important;
-  border-bottom: 1px solid var(--c-divider) !important;
-  padding: 10px 14px !important;
-}
+/* ── Header — owned by CSS/chat.css .chat-thread-hdr (uses --c-bg-header/--c-divider directly) ── */
 #chatThreadModal .chat-thread-back {
   background: transparent !important;
   color: var(--c-accent) !important;

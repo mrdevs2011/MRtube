@@ -123,10 +123,12 @@
 .chat-thread-hdr {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--line);
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--c-bg-header, var(--bg3, #121212));
+  border-bottom: 1px solid var(--c-divider, rgba(255,255,255,0.06));
   flex-shrink: 0;
+  position: relative;
 }
 
 .chat-thread-back {
@@ -1496,20 +1498,7 @@
   box-shadow: var(--cg-specular) !important;
 }
 
-/* ── Chat thread header — solid panel ── */
-.chat-thread-hdr {
-  background: var(--cg-hdr-bg) !important;
-  border-bottom: none !important;
-  box-shadow: var(--cg-specular), 0 1px 0 var(--cg-border-side), 0 4px 24px #07070D !important;
-  position: relative;
-}
-.chat-thread-hdr::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 0.5px;
-  background: var(--cg-border-side);
-}
+/* ── Chat thread header — owned by base definition above (single source) ── */
 
 /* ── Back button ── */
 .chat-thread-back {
@@ -2265,13 +2254,6 @@ a.cfm-name--link:hover {
   background: var(--bg) !important;
 }
 
-/* ── Header — minimal, chegrasiz ── */
-.chat-thread-hdr {
-  background: transparent !important;
-  border-bottom: none !important;
-  padding: 10px 12px !important;
-  gap: 10px !important;
-}
 
 /* ── Messages container ── */
 .chat-thread-messages {
