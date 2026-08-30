@@ -43,22 +43,22 @@
 .post,
 [data-theme="dark"] .post,
 [data-theme="light"] .post {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 .post:hover,
 [data-theme="dark"] .post:hover,
 [data-theme="light"] .post:hover {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Header — top bar */
 .app-hdr,
 [data-theme="dark"] .app-hdr,
 [data-theme="light"] .app-hdr {
-  border-bottom: none !important;
-  box-shadow: none !important;
+  border-bottom: none;
+  box-shadow: none;
 }
 
 /* Mobile: frosted glass blur */
@@ -66,10 +66,10 @@
   .app-hdr,
   [data-theme="dark"] .app-hdr,
   [data-theme="light"] .app-hdr {
-    background: rgba(14, 14, 18, 0.72) !important;
+    background: rgba(14, 14, 18, 0.72);
   }
   [data-theme="light"] .app-hdr {
-    background: rgba(242, 242, 247, 0.78) !important;
+    background: rgba(242, 242, 247, 0.78);
   }
 }
 
@@ -78,23 +78,23 @@
   .app-hdr,
   [data-theme="dark"] .app-hdr,
   [data-theme="light"] .app-hdr {
-    background: transparent !important;
+    background: transparent;
   }
 }
 
 /* Header gradient line o'chirish */
 .app-hdr::after,
 [data-theme="dark"] .app-hdr::after {
-  display: none !important;
+  display: none;
 }
 
 /* Bottom nav */
 .bot-nav,
 [data-theme="dark"] .bot-nav,
 [data-theme="light"] .bot-nav {
-  border-top: none !important;
-  border-right: none !important;
-  box-shadow: none !important;
+  border-top: none;
+  border-right: none;
+  box-shadow: none;
 }
 
 /* Mobile: frosted glass blur */
@@ -102,10 +102,10 @@
   .bot-nav,
   [data-theme="dark"] .bot-nav,
   [data-theme="light"] .bot-nav {
-    background: rgba(14, 14, 18, 0.72) !important;
+    background: rgba(14, 14, 18, 0.72);
   }
   [data-theme="light"] .bot-nav {
-    background: rgba(242, 242, 247, 0.78) !important;
+    background: rgba(242, 242, 247, 0.78);
   }
 }
 
@@ -114,15 +114,15 @@
   .bot-nav,
   [data-theme="dark"] .bot-nav,
   [data-theme="light"] .bot-nav {
-    background: transparent !important;
+    background: transparent;
   }
 }
 
 /* Desktop sidebar ::before gradient line o'chirish */
 @media (min-width: 768px) {
   .bot-nav::before {
-    display: none !important;
-    background: none !important;
+    display: none;
+    background: none;
   }
 }
 
@@ -133,131 +133,131 @@
 [data-theme="dark"] .nav-btn.on,
 [data-theme="light"] .nav-btn:hover,
 [data-theme="light"] .nav-btn.on {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Sheet (bottom panel) */
 .sheet,
 [data-theme="dark"] .sheet,
 [data-theme="light"] .sheet {
-  border-top: none !important;
-  box-shadow: none !important;
+  border-top: none;
+  box-shadow: none;
 }
 
 /* Modal */
 .modal-content,
 [data-theme="dark"] .modal-content,
 [data-theme="light"] .modal-content {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Glass components */
 .glass,
 .glass-heavy {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Theme button */
 .theme-btn,
 [data-theme="dark"] .theme-btn:hover,
 [data-theme="light"] .theme-btn:hover {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Auth card */
 .auth-card,
 [data-theme="dark"] .auth-card,
 [data-theme="light"] .auth-card {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Avatar (avi) */
 .avi,
 [data-theme="dark"] .avi,
 [data-theme="light"] .avi {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 [data-theme="dark"] .avi:hover,
 [data-theme="light"] .avi:hover {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Profile avatar */
 .profile-avi,
 [data-theme="dark"] .profile-avi,
 [data-theme="light"] .profile-avi {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 [data-theme="dark"] .profile-avi:hover,
 [data-theme="light"] .profile-avi:hover {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Edit button */
 .edit-btn,
 [data-theme="dark"] .edit-btn,
 [data-theme="light"] .edit-btn {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Profile header */
 .profile-hdr,
 [data-theme="dark"] .profile-hdr {
-  border-bottom: none !important;
+  border-bottom: none;
 }
 
 /* Profile grid */
 [data-theme="dark"] .grid-cell,
 [data-theme="light"] .grid-cell {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 [data-theme="dark"] .grid-cell:hover {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Profile stats box */
 .up-stat-box,
 [data-theme="dark"] .up-stat-box {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
-.up-stat { border-right: none !important; }
+.up-stat { border-right: none; }
 
 /* Profile grid header */
 .profile-grid-hdr,
 [data-theme="dark"] .profile-grid-hdr {
-  border-color: transparent !important;
+  border-color: transparent;
 }
 
 /* Post stats separator */
 .post-stats,
 [data-theme="dark"] .post-stats {
-  border-top: none !important;
-  border-bottom: none !important;
+  border-top: none;
+  border-bottom: none;
 }
 
 /* Post action buttons */
 .act-btn,
 [data-theme="dark"] .act-btn {
-  border-right: none !important;
+  border-right: none;
 }
 
 /* Post head separator */
 .post-head,
 [data-theme="dark"] .post-head {
-  border-bottom: none !important;
+  border-bottom: none;
 }
 
 /* Input fields */
@@ -270,8 +270,8 @@ textarea,
 [data-theme="light"] .field,
 [data-theme="light"] input:not([type="checkbox"]):not([type="radio"]),
 [data-theme="light"] textarea {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 .field:focus,
@@ -283,70 +283,70 @@ textarea:focus,
 [data-theme="light"] .field:focus,
 [data-theme="light"] input:focus,
 [data-theme="light"] textarea:focus {
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
+  border: none;
+  box-shadow: none;
+  outline: none;
 }
 
 /* Chat input */
 .chat-input-bar,
 [data-theme="dark"] .chat-input-bar {
-  border-top: none !important;
-  box-shadow: none !important;
+  border-top: none;
+  box-shadow: none;
 }
 
 .chat-input-wrap,
 [data-theme="dark"] .chat-input-wrap,
 [data-theme="dark"] .chat-input-wrap:focus-within {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Chat list rows */
 .chat-row,
 [data-theme="dark"] .chat-thread {
-  border-bottom: 1px solid var(--line) !important;
+  border-bottom: 1px solid var(--line);
 }
 
 /* Chat thread header separator */
 .chat-thread-hdr,
 [data-theme="dark"] .chat-thread-hdr {
-  border-bottom: none !important;
+  border-bottom: none;
 }
 
 /* Message bubbles */
 [data-theme="dark"] .msg-in .msg-bubble {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 [data-theme="dark"] .msg-out .msg-bubble {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* File card */
 .file-card,
 [data-theme="dark"] .file-card,
 [data-theme="light"] .file-card {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 [data-theme="dark"] .file-card:hover {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 .file-dl,
 [data-theme="dark"] .file-dl,
 [data-theme="dark"] .file-dl:hover {
-  border: none !important;
+  border: none;
 }
 
 /* Toast */
 #toast,
 [data-theme="dark"] #toast {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Badges */
@@ -354,56 +354,56 @@ textarea:focus,
 .badge-priv,
 [data-theme="dark"] .badge-pub,
 [data-theme="dark"] .badge-priv {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Buttons */
 .btn-primary,
 .btn-primary:hover {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 .btn-danger,
 .btn-danger:hover {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 [data-theme="dark"] .hdr-new-post-btn {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Sidebar */
 .sb-wrap,
 [data-theme="dark"] .sb-wrap {
-  border-right: none !important;
+  border-right: none;
 }
 
 /* Search overlay */
 .search-overlay-box,
 [data-theme="dark"] .search-overlay-box {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 .search-overlay-close,
 [data-theme="dark"] .search-overlay-close {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Upload float bar */
 .upload-float-bar,
 [data-theme="dark"] .upload-float-bar {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Visibility row */
 .visibility-row,
 [data-theme="dark"] .visibility-row,
 [data-theme="dark"] .visibility-row.is-public {
-  border: none !important;
+  border: none;
 }
 
 /* Upload drop zone */
@@ -411,8 +411,8 @@ textarea:focus,
 [data-theme="dark"] .upload-drop,
 [data-theme="dark"] .upload-drop:hover,
 [data-theme="dark"] .upload-drop.drag-over {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Empty state icons */
@@ -422,28 +422,28 @@ textarea:focus,
 [data-theme="dark"] .feed-empty-icon,
 [data-theme="dark"] .empty-icon,
 [data-theme="dark"] .empty-search-icon {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Comments */
 .cmt-body,
 [data-theme="dark"] .cmt-body,
 [data-theme="dark"] .cmt-body:hover {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 .cmt-input,
 [data-theme="dark"] .cmt-input,
 [data-theme="dark"] .cmt-input:focus {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 .cmt-input-row,
 [data-theme="dark"] .cmt-input-row {
-  border-top: none !important;
+  border-top: none;
 }
 
 /* Onboarding / Admin / Verify cards */
@@ -453,119 +453,119 @@ textarea:focus,
 [data-theme="dark"] .onb-card,
 [data-theme="dark"] .admin-card,
 [data-theme="dark"] .verify-card {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 [data-theme="dark"] .admin-card:hover {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Detail modal */
 #detailContent,
 [data-theme="dark"] #detailContent {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 .dm-close,
 [data-theme="dark"] .dm-close {
-  border: none !important;
+  border: none;
 }
 
 /* Skeleton */
 .skeleton-post,
 [data-theme="dark"] .skeleton-post {
-  border: none !important;
+  border: none;
 }
 
 /* Reel */
 .reel-avi,
 [data-theme="dark"] .reel-avi {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 .reel-top-btn,
 .reel-vol-top,
 [data-theme="dark"] .reel-top-btn,
 [data-theme="dark"] .reel-vol-top {
-  border: none !important;
+  border: none;
 }
 
 /* Offline indicator */
 #offlineIndicator {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Cached badge */
 .cached-badge {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Card hover — shadow olib tashlash */
 .card-hover:hover {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Sidebar desktop — chegarasiz */
 @media (min-width: 768px) {
   .bot-nav {
-    border-right: none !important;
-    border-top: none !important;
+    border-right: none;
+    border-top: none;
   }
 }
 
 /* Nav ring/glow animatsiyalari — shadow yo'q */
 .nav-btn:hover,
 .nav-btn.on {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Feed buttons */
 .follow-btn,
 .unfollow-btn {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Story/reel ring */
 .story-ring,
 .reel-ring {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Profile cover-photo separator */
 .profile-cover {
-  border-bottom: none !important;
+  border-bottom: none;
 }
 
 /* Splash bar */
 [data-theme="dark"] .splash-bar {
-  border: none !important;
+  border: none;
 }
 
 [data-theme="dark"] .splash-fill {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Offline indicator pulse dot */
 #offlineIndicator::before {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* Groups */
 .group-card,
 .group-hdr {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* Admin */
 [data-theme="dark"] .admin-card {
-  border: none !important;
+  border: none;
 }
 
 /* ════════════════════════════════════════════
@@ -574,98 +574,98 @@ textarea:focus,
 
 /* 1. act-btn hover — dark background light temada */
 .act-btn:hover {
-  background: var(--bg3) !important;
-  color: var(--text) !important;
+  background: var(--bg3);
+  color: var(--text);
 }
 
 [data-theme="light"] .act-btn:hover {
-  background: var(--bg3) !important;
-  color: var(--text) !important;
+  background: var(--bg3);
+  color: var(--text);
 }
 
 /* 2. AI reply bubble — light temada ham to'g'ri rang */
 .ai-reply-bubble {
-  background: var(--bg3) !important;
-  border: none !important;
+  background: var(--bg3);
+  border: none;
 }
 
 [data-theme="light"] .ai-reply-bubble {
-  background: var(--bg3) !important;
-  border: none !important;
+  background: var(--bg3);
+  border: none;
 }
 
 [data-theme="light"] .ai-reply-header {
-  color: var(--blue) !important;
-  border-bottom: none !important;
+  color: var(--blue);
+  border-bottom: none;
 }
 
 [data-theme="light"] .ai-reply-body {
-  color: var(--text) !important;
+  color: var(--text);
 }
 
 [data-theme="light"] .ai-reply-close:hover {
-  background: var(--bg4) !important;
-  color: var(--text) !important;
+  background: var(--bg4);
+  color: var(--text);
 }
 
 /* 3. Sidebar nav-btn aktiv holat — dark styled light temada */
 [data-theme="light"] .nav-btn.on {
-  background: var(--bg3) !important;
-  border: none !important;
-  box-shadow: none !important;
+  background: var(--bg3);
+  border: none;
+  box-shadow: none;
 }
 
 /* Desktop sidebar nav-btn */
 @media (min-width: 768px) {
   [data-theme="light"] .nav-btn.on {
-    background: var(--bg3) !important;
-    border: none !important;
-    box-shadow: none !important;
+    background: var(--bg3);
+    border: none;
+    box-shadow: none;
   }
 
   [data-theme="light"] .nav-btn:hover {
-    background: var(--bg3) !important;
-    border: none !important;
-    box-shadow: none !important;
+    background: var(--bg3);
+    border: none;
+    box-shadow: none;
   }
 }
 
 /* 4. Visibility buttons (Private/Public) — light temada dark styled */
 [data-theme="light"] .vis-btn--active[data-mode="private"] {
-  background: var(--blue-glow3) !important;
-  border: none !important;
-  color: var(--blue) !important;
+  background: var(--blue-glow3);
+  border: none;
+  color: var(--blue);
 }
 
 [data-theme="light"] .vis-btn--active[data-mode="public"] {
-  background: var(--green-glow) !important;
-  border: none !important;
-  color: var(--green) !important;
+  background: var(--green-glow);
+  border: none;
+  color: var(--green);
 }
 
 /* 5. Input focus — light temada dark border/outline chiqib qolishi */
 [data-theme="light"] input:focus,
 [data-theme="light"] textarea:focus,
 [data-theme="light"] .field:focus {
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
+  border: none;
+  outline: none;
+  box-shadow: none;
 }
 
 /* 6. nav-center-btn (+ tugma) — light temada shadow o'chish */
 [data-theme="light"] .nav-center-btn {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* 7. Sidebar top/bottom border — light temada */
 [data-theme="light"] .sb-top,
 [data-theme="light"] .sb-bottom {
-  border: none !important;
+  border: none;
 }
 
 /* 8. Sheet handle — light temada */
 [data-theme="light"] .sheet-handle {
-  background: var(--line3) !important;
+  background: var(--line3);
 }
 
 /* ════════════════════════════════════════════
@@ -674,72 +674,72 @@ textarea:focus,
 
 /* Incoming (theirs) — play button light temada ko'rinsin */
 [data-theme="light"] .chat-msg.theirs .cvm-play {
-  background: var(--bg4) !important;
-  color: var(--text) !important;
+  background: var(--bg4);
+  color: var(--text);
 }
 
 [data-theme="light"] .chat-msg.theirs .cvm-play:hover {
-  background: var(--bg5) !important;
+  background: var(--bg5);
 }
 
 /* Incoming waveform bars — light temada ko'rinsin */
 [data-theme="light"] .chat-msg.theirs .cvm-bar {
-  background: var(--text3) !important;
+  background: var(--text3);
 }
 
 [data-theme="light"] .chat-msg.theirs .cvm-bar.played {
-  background: var(--blue) !important;
+  background: var(--blue);
 }
 
 /* Incoming duration text */
 [data-theme="light"] .chat-msg.theirs .cvm-dur {
-  color: var(--text2) !important;
+  color: var(--text2);
 }
 
 /* Dark theme — incoming play button kontrast yaxshilash */
 [data-theme="dark"] .chat-msg.theirs .cvm-play {
-  background: var(--bg4) !important;
-  color: var(--text) !important;
+  background: var(--bg4);
+  color: var(--text);
 }
 
 [data-theme="dark"] .chat-msg.theirs .cvm-bar {
-  background: var(--text3) !important;
+  background: var(--text3);
 }
 
 /* ════════════════════════════════════════════
    THEME BUTTON — sidebar pastida border o'chish
    ════════════════════════════════════════════ */
 .theme-btn {
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
+  border: none;
+  box-shadow: none;
+  outline: none;
 }
 
 [data-theme="light"] .theme-btn {
-  border: none !important;
-  box-shadow: none !important;
+  border: none;
+  box-shadow: none;
 }
 
 /* ════════════════════════════════════════════
    AVATAR — light temada placeholder background
    ════════════════════════════════════════════ */
 [data-theme="light"] .avi {
-  background: var(--bg3) !important;
-  box-shadow: none !important;
+  background: var(--bg3);
+  box-shadow: none;
 }
 
 [data-theme="light"] .avi:hover {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* avi base — shadow olib tashlash */
 .avi {
-  box-shadow: none !important;
-  border: none !important;
+  box-shadow: none;
+  border: none;
 }
 
 .avi:hover {
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
 /* ════════════════════════════════════════════════════════════════
@@ -749,123 +749,123 @@ textarea:focus,
 
 /* ── CHAT THREAD ── */
 [data-theme="light"] .chat-thread-messages {
-  background: var(--bg) !important;
+  background: var(--bg);
 }
 
 /* Incoming bubble */
 [data-theme="light"] .chat-msg.theirs .chat-bubble {
-  background: var(--bg3) !important;
-  color: var(--text) !important;
+  background: var(--bg3);
+  color: var(--text);
 }
 
 /* Chat input area */
 [data-theme="light"] .chat-input-bar,
 [data-theme="light"] .chat-thread-input-row {
-  background: var(--bg2) !important;
+  background: var(--bg2);
 }
 
 [data-theme="light"] .chat-input-wrap,
 [data-theme="light"] .chat-thread-input {
-  background: var(--bg3) !important;
-  color: var(--text) !important;
+  background: var(--bg3);
+  color: var(--text);
 }
 
 /* Chat list row hover */
-[data-theme="light"] .chat-row:hover { background: var(--bg3) !important; }
-[data-theme="light"] .chat-row:active { background: var(--bg4) !important; }
+[data-theme="light"] .chat-row:hover { background: var(--bg3); }
+[data-theme="light"] .chat-row:active { background: var(--bg4); }
 
 /* Chat header */
 [data-theme="light"] .chat-thread-hdr {
-  background: var(--bg) !important;
+  background: var(--bg);
 }
 
 /* Chat back button */
 [data-theme="light"] .chat-thread-back:hover {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 
 /* Reply preview */
 [data-theme="light"] .chat-reply-preview {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 [data-theme="light"] .chat-msg.theirs .chat-reply-preview:hover {
-  background: var(--bg4) !important;
+  background: var(--bg4);
 }
 
 /* File preview bar */
 [data-theme="light"] .chat-file-preview {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 [data-theme="light"] .cfp-remove:hover {
-  background: var(--bg4) !important;
+  background: var(--bg4);
 }
 
 /* File message */
-[data-theme="light"] .cfm-name { color: var(--text) !important; }
+[data-theme="light"] .cfm-name { color: var(--text); }
 [data-theme="light"] .chat-msg.theirs .cfm-dl {
-  background: var(--bg4) !important;
-  color: var(--text2) !important;
+  background: var(--bg4);
+  color: var(--text2);
 }
 
 /* Voice message bubble */
-[data-theme="light"] .chat-voice-msg { background: transparent !important; }
+[data-theme="light"] .chat-voice-msg { background: transparent; }
 [data-theme="light"] .chat-msg.theirs .cvm-play {
-  background: var(--bg4) !important;
-  color: var(--text) !important;
+  background: var(--bg4);
+  color: var(--text);
 }
 [data-theme="light"] .cvm-play:hover {
-  background: var(--bg5) !important;
+  background: var(--bg5);
 }
 [data-theme="light"] .chat-msg.theirs .cvm-bar {
-  background: var(--text3) !important;
+  background: var(--text3);
 }
 [data-theme="light"] .chat-msg.theirs .cvm-bar.played {
-  background: var(--blue) !important;
+  background: var(--blue);
 }
 [data-theme="light"] .chat-msg.theirs .cvm-dur {
-  color: var(--text2) !important;
+  color: var(--text2);
 }
 
 /* Call modal */
 [data-theme="light"] #callActiveModal {
-  background: var(--bg) !important;
+  background: var(--bg);
 }
 [data-theme="light"] .call-ctrl-btn {
-  background: var(--bg3) !important;
-  color: var(--text2) !important;
+  background: var(--bg3);
+  color: var(--text2);
 }
 [data-theme="light"] .call-ctrl-btn.active {
-  background: var(--blue-glow2) !important;
-  color: var(--blue) !important;
+  background: var(--blue-glow2);
+  color: var(--blue);
 }
 
 /* Chat photo viewer */
 [data-theme="light"] .chat-photo-viewer {
-  background: rgba(240,240,245,0.95) !important;
+  background: rgba(240,240,245,0.95);
 }
 
 /* ── FEED ── */
 /* Header search/mute hover */
 [data-theme="light"] .hdr-mute-btn:hover {
-  background: var(--bg3) !important;
-  color: var(--text) !important;
+  background: var(--bg3);
+  color: var(--text);
 }
 
 /* Follow/like buttons */
 [data-theme="light"] .follow-btn {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 
 /* Comment body */
 [data-theme="light"] .cmt-body {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 [data-theme="light"] .cmt-body:hover {
-  background: var(--bg4) !important;
+  background: var(--bg4);
 }
 [data-theme="light"] .cmt-input {
-  background: var(--bg3) !important;
-  color: var(--text) !important;
+  background: var(--bg3);
+  color: var(--text);
 }
 
 /* AI reply bubble — all moods */
@@ -875,225 +875,225 @@ textarea:focus,
 [data-theme="light"] .ai-reply-bubble.ai-mood-amazed,
 [data-theme="light"] .ai-reply-bubble.ai-mood-sad,
 [data-theme="light"] .ai-reply-bubble.ai-mood-angry {
-  background: var(--bg3) !important;
-  border: none !important;
+  background: var(--bg3);
+  border: none;
 }
 
 [data-theme="light"] .ai-reply-body {
-  color: var(--text) !important;
+  color: var(--text);
 }
 
 [data-theme="light"] .ai-reply-close:hover {
-  background: var(--bg4) !important;
-  color: var(--text) !important;
+  background: var(--bg4);
+  color: var(--text);
 }
 
 /* Reel overlays */
 [data-theme="light"] .reel {
-  background: var(--bg) !important;
+  background: var(--bg);
 }
 [data-theme="light"] .reel-top-btn,
 [data-theme="light"] .reel-vol-top {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 [data-theme="light"] .reel-top-btn:hover,
 [data-theme="light"] .reel-vol-top:hover {
-  background: var(--bg4) !important;
+  background: var(--bg4);
 }
 
 /* Post gradient overlay (media) */
 [data-theme="light"] .post-media-overlay,
 [data-theme="light"] .reel-gradient-bot {
-  background: rgba(200,200,210,0.85) !important;
+  background: rgba(200,200,210,0.85);
 }
 
 /* ── PROFILE ── */
 [data-theme="light"] .profile-hdr {
-  background: var(--bg) !important;
+  background: var(--bg);
 }
 
 /* Profile cover gradient */
 [data-theme="light"] .profile-cover-gradient {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 
 /* Stats edit box */
 [data-theme="light"] .up-stat-box {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 
 /* Profile grid cell */
 [data-theme="light"] .grid-cell,
 [data-theme="light"] .up-grid-cell {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 
 /* Profile actions bar */
 [data-theme="light"] .profile-actions {
-  background: var(--bg) !important;
+  background: var(--bg);
 }
 
 /* Profile tab header */
 [data-theme="light"] .profile-grid-hdr {
-  background: var(--bg) !important;
+  background: var(--bg);
 }
 
 /* Avatar cover bg (cover-crop) */
 [data-theme="light"] .avatar-crop-container {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 
 /* ── NAV / SIDEBAR ── */
 /* Notification badge */
 [data-theme="light"] .nav-notif-dot {
-  background: var(--red) !important;
+  background: var(--red);
 }
 
 /* Sidebar */
 [data-theme="light"] .sb-panel-input-wrap {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 [data-theme="light"] .sb-panel-input-wrap:focus-within {
-  background: var(--bg4) !important;
+  background: var(--bg4);
 }
 
 /* Search overlay */
 [data-theme="light"] .search-overlay {
-  background: rgba(220,220,228,0.95) !important;
+  background: rgba(220,220,228,0.95);
 }
 [data-theme="light"] .search-overlay-box {
-  background: var(--bg2) !important;
+  background: var(--bg2);
 }
 [data-theme="light"] .search-overlay-close {
-  background: var(--bg3) !important;
-  color: var(--text2) !important;
+  background: var(--bg3);
+  color: var(--text2);
 }
 [data-theme="light"] .search-overlay-close:hover {
-  background: var(--bg4) !important;
+  background: var(--bg4);
 }
 
 /* Sheet */
 [data-theme="light"] .sheet {
-  background: var(--bg2) !important;
+  background: var(--bg2);
 }
 
 /* Modal */
 [data-theme="light"] .modal-content,
 [data-theme="light"] #detailContent {
-  background: var(--bg2) !important;
+  background: var(--bg2);
 }
 [data-theme="light"] .overlay {
-  background: rgba(100,100,108,0.6) !important;
+  background: rgba(100,100,108,0.6);
 }
 
 /* Upload drop zone */
 [data-theme="light"] .upload-drop {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 [data-theme="light"] .upload-drop:hover {
-  background: var(--bg4) !important;
+  background: var(--bg4);
 }
 [data-theme="light"] .upload-drop.drag-over {
-  background: var(--blue-glow3) !important;
+  background: var(--blue-glow3);
 }
 
 /* Upload float bar */
 [data-theme="light"] .upload-float-bar {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 
 /* Toast */
 [data-theme="light"] #toast {
-  background: var(--bg3) !important;
-  color: var(--text) !important;
+  background: var(--bg3);
+  color: var(--text);
 }
 
 /* Skeleton shimmer */
 [data-theme="light"] .skeleton-post {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 [data-theme="light"] .skel-avi,
 [data-theme="light"] .skel-line,
 [data-theme="light"] .skel-media {
-  background: var(--bg3) !important;
-  background-size: 200% 100% !important;
+  background: var(--bg3);
+  background-size: 200% 100%;
 }
 
 /* File card */
 [data-theme="light"] .file-card {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 [data-theme="light"] .file-card:hover {
-  background: var(--bg4) !important;
+  background: var(--bg4);
 }
 [data-theme="light"] .file-dl {
-  background: var(--blue-glow3) !important;
-  color: var(--blue) !important;
+  background: var(--blue-glow3);
+  color: var(--blue);
 }
 [data-theme="light"] .file-dl:hover {
-  background: var(--blue-glow2) !important;
+  background: var(--blue-glow2);
 }
 
 /* Empty state icons */
 [data-theme="light"] .feed-empty-icon,
 [data-theme="light"] .empty-icon,
 [data-theme="light"] .empty-search-icon {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 
 /* Dm-close button */
 [data-theme="light"] .dm-close {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 [data-theme="light"] .dm-close:hover {
-  background: var(--bg4) !important;
+  background: var(--bg4);
 }
 
 /* del-btn hover */
 [data-theme="light"] .del-btn:hover {
-  background: var(--bg4) !important;
-  color: var(--red) !important;
+  background: var(--bg4);
+  color: var(--red);
 }
 
 /* cmt-del hover */
 [data-theme="light"] .cmt-del:hover {
-  background: var(--bg4) !important;
-  color: var(--red) !important;
+  background: var(--bg4);
+  color: var(--red);
 }
 
 /* Groups */
 [data-theme="light"] .group-card {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 
 /* Sidebar items active */
 [data-theme="light"] .sb-item.active {
-  background: var(--blue-glow3) !important;
-  color: var(--blue) !important;
+  background: var(--blue-glow3);
+  color: var(--blue);
 }
 [data-theme="light"] .sb-item:hover {
-  background: var(--bg3) !important;
-  color: var(--text) !important;
+  background: var(--bg3);
+  color: var(--text);
 }
 
 /* hdr-icon-btn hover */
 [data-theme="light"] .hdr-icon-btn:hover {
-  background: var(--bg3) !important;
+  background: var(--bg3);
 }
 
 /* nav-btn.on — active sidebar item */
 [data-theme="light"] .nav-btn.on {
-  background: var(--blue-glow3) !important;
+  background: var(--blue-glow3);
 }
 
 /* Post background */
 [data-theme="light"] .post {
-  background: var(--bg2) !important;
+  background: var(--bg2);
 }
 
 /* Reels dark gradient — light temada oq */
 [data-theme="light"] .reel-avi {
-  border: none !important;
+  border: none;
 }
 
 /* ══════════════════════════════════════════
@@ -1105,45 +1105,45 @@ textarea:focus,
 /* Chat thread header */
 .chat-thread-hdr,
 [data-theme="dark"] .chat-thread-hdr {
-  background: transparent !important;
-  border-bottom: none !important;
-  box-shadow: none !important;
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
 }
 .chat-thread-hdr::after,
 [data-theme="dark"] .chat-thread-hdr::after {
-  display: none !important;
+  display: none;
 }
 
 /* Chat input row */
 .chat-thread-input-row,
 [data-theme="dark"] .chat-thread-input-row {
-  background: transparent !important;
-  box-shadow: none !important;
-  border-top: none !important;
+  background: transparent;
+  box-shadow: none;
+  border-top: none;
 }
 
 /* Profile header */
 .profile-hdr,
 [data-theme="dark"] .profile-hdr {
-  background: transparent !important;
-  border-bottom: none !important;
+  background: transparent;
+  border-bottom: none;
 }
 .profile-hdr::before,
 [data-theme="dark"] .profile-hdr::before {
-  display: none !important;
+  display: none;
 }
 
 /* Profile grid tab bar */
 .profile-grid-hdr,
 [data-theme="dark"] .profile-grid-hdr {
-  background: transparent !important;
-  border-top: none !important;
-  border-bottom: none !important;
+  background: transparent;
+  border-top: none;
+  border-bottom: none;
 }
 
 /* Chats list view header */
 .chats-hdr {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
