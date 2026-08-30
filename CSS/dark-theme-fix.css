@@ -429,13 +429,6 @@
   background: #20111C;
 }
 
-[data-theme="dark"] .hdr-new-post-btn {
-  background: var(--blue3);
-  box-shadow:
-    0 4px 16px var(--blue-glow),
-    inset 0 1px 0 #4D4D52;
-}
-
 [data-theme="dark"] .hdr-icon-btn:hover {
   background: #121212;
 }

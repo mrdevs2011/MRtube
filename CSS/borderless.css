@@ -369,10 +369,6 @@ textarea:focus,
   box-shadow: none;
 }
 
-[data-theme="dark"] .hdr-new-post-btn {
-  box-shadow: none;
-}
-
 /* Sidebar */
 .sb-wrap,
 [data-theme="dark"] .sb-wrap {
