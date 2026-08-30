@@ -2,10 +2,14 @@
    CHAT THREAD — DARK REDESIGN (Telegram-style, dark navy)
    Faqat #chatThreadModal (bitta suhbat oynasi) uchun — chats ro'yxati va
    ilovaning qolgan qismiga tegilmagan. Sof CSS qayta ko'rinish; hech
-   qanday backend yoki funksional JS mantiqqa tegilmagan. Ayrim joylarda
-   !important ishlatilgan, chunki CSS/chat.css ichida shu klasslar
-   ustidan yozilgan avvalgi !important qatlam bor edi — ID selektor +
-   !important orqali ustunlik ta'minlanadi.
+   qanday backend yoki funksional JS mantiqqa tegilmagan.
+
+   ESLATMA (tozalandi): bu fayl avval har bir qatorda !important
+   ishlatar edi, chunki CSS/chat.css'dagi oddiy .class qoidalarini
+   yengish kerak edi. Lekin bu yerdagi hamma selector #chatThreadModal
+   bilan boshlanadi (ID + klass = specifiklik 1,1,0), bu esa
+   chat.css'dagi .class qoidalaridan (0,1,0) allaqachon kuchli —
+   !important shart emas edi. AUDIT.md Bosqich B'ga qarang.
    ══════════════════════════════════════════════════════════════════════ */
 
 /* ── Root theme vars (--bg, --bg2, --bg3...) are owned by theme.css.
@@ -31,71 +35,71 @@
   --c-divider:     rgba(255,255,255,0.06);
   --c-danger:      #ec5e6f;
 
-  background: var(--c-bg-chat) !important;
+  background: var(--c-bg-chat);
 }
 
 /* ── Header ─────────────────────────────────────────────────────────── */
 /* ── Header — owned by CSS/chat.css .chat-thread-hdr (uses --c-bg-header/--c-divider directly) ── */
 #chatThreadModal .chat-thread-back {
-  background: transparent !important;
-  color: var(--c-accent) !important;
+  background: transparent;
+  color: var(--c-accent);
 }
-#chatThreadModal .chat-thread-back:hover { background: rgba(255,255,255,0.06) !important; }
+#chatThreadModal .chat-thread-back:hover { background: rgba(255,255,255,0.06); }
 #chatThreadModal .chat-thread-avi {
-  background: #ff7a45 !important;
+  background: #ff7a45;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
 }
-#chatThreadModal .chat-thread-name { color: var(--c-text-1) !important; font-weight: 600 !important; }
-#chatThreadModal .chat-thread-typing { color: var(--c-accent-2) !important; }
-#chatThreadModal #chatTypingStatus.online { color: var(--c-accent-2) !important; }
+#chatThreadModal .chat-thread-name { color: var(--c-text-1); font-weight: 600; }
+#chatThreadModal .chat-thread-typing { color: var(--c-accent-2); }
+#chatThreadModal #chatTypingStatus.online { color: var(--c-accent-2); }
 #chatThreadModal .chat-call-btn,
 #chatThreadModal .chat-search-btn {
-  background: transparent !important;
-  color: var(--c-accent) !important;
+  background: transparent;
+  color: var(--c-accent);
 }
 #chatThreadModal .chat-call-btn:hover,
-#chatThreadModal .chat-search-btn:hover { background: rgba(255,255,255,0.06) !important; color: var(--c-accent-2) !important; }
-#chatThreadModal .chat-search-btn.active { background: rgba(79,163,227,0.16) !important; color: var(--c-accent-2) !important; }
+#chatThreadModal .chat-search-btn:hover { background: rgba(255,255,255,0.06); color: var(--c-accent-2); }
+#chatThreadModal .chat-search-btn.active { background: rgba(79,163,227,0.16); color: var(--c-accent-2); }
 
-#chatThreadModal .chat-search-wrap { background: var(--c-bg-header) !important; border-bottom: 1px solid var(--c-divider) !important; }
-#chatThreadModal .chat-search-input { background: rgba(255,255,255,0.06) !important; border-color: transparent !important; color: var(--c-text-1) !important; }
-#chatThreadModal .chat-search-close { background: rgba(255,255,255,0.06) !important; color: var(--c-text-2) !important; }
+#chatThreadModal .chat-search-wrap { background: var(--c-bg-header); border-bottom: 1px solid var(--c-divider); }
+#chatThreadModal .chat-search-input { background: rgba(255,255,255,0.06); border-color: transparent; color: var(--c-text-1); }
+#chatThreadModal .chat-search-close { background: rgba(255,255,255,0.06); color: var(--c-text-2); }
 
 /* ── Thread background (subtle glow pattern like the demo) ────────────── */
 #chatThreadModal .chat-thread-messages {
   background-image:
     rgba(16,16,18,0.72),
-    url('../img/chat-wallpaper.jpg') !important;
-  background-size: cover, cover !important;
-  background-position: center top, center top !important;
-  background-repeat: no-repeat, no-repeat !important;
-  background-attachment: scroll, scroll !important;
-  background-color: var(--c-bg-pattern) !important;
-  padding: 14px 10px 10px !important;
+    url('../img/chat-wallpaper.jpg');
+  background-size: cover, cover;
+  background-position: center top, center top;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: scroll, scroll;
+  background-color: var(--c-bg-pattern);
+  padding: 14px 10px 10px;
   scrollbar-width: none;
 }
 #chatThreadModal .chat-thread-messages::-webkit-scrollbar { display: none; }
 
 #chatThreadModal .chat-date-sep span {
-  background: rgba(255,255,255,0.06) !important;
-  border-color: transparent !important;
-  color: var(--c-text-2) !important;
+  background: rgba(255,255,255,0.06);
+  border-color: transparent;
+  color: var(--c-text-2);
 }
 
 /* ── Bubbles ────────────────────────────────────────────────────────── */
 #chatThreadModal .chat-bubble {
-  border-radius: 16px !important;
-  padding: 7px 11px 8px !important;
-  font-size: 15.5px !important;
-  line-height: 1.36 !important;
+  border-radius: 16px;
+  padding: 7px 11px 8px;
+  font-size: 15.5px;
+  line-height: 1.36;
 }
 #chatThreadModal .chat-msg.mine .chat-bubble {
-  background: var(--c-bubble-out) !important;
-  color: var(--c-text-1) !important;
+  background: var(--c-bubble-out);
+  color: var(--c-text-1);
 }
 #chatThreadModal .chat-msg.theirs .chat-bubble {
-  background: var(--c-bubble-in) !important;
-  color: var(--c-text-1) !important;
+  background: var(--c-bubble-in);
+  color: var(--c-text-1);
 }
 
 /* ── Bubble tail — "dekor" tarafdagi burchak sal qirrali (Telegram/
@@ -104,95 +108,95 @@
  * "chiqib kelayotgandek" ko'rinadi. Qolgan 3 burchak 16px yumaloq
  * qolaveradi. ── */
 #chatThreadModal .chat-msg.mine .chat-bubble {
-  border-bottom-right-radius: 5px !important;
+  border-bottom-right-radius: 5px;
 }
 #chatThreadModal .chat-msg.theirs .chat-bubble {
-  border-bottom-left-radius: 5px !important;
+  border-bottom-left-radius: 5px;
 }
 
-#chatThreadModal .chat-msg-time { font-size: 11px !important; }
-#chatThreadModal .chat-msg.mine .chat-msg-time  { color: rgba(230,240,250,0.75) !important; }
-#chatThreadModal .chat-msg.theirs .chat-msg-time { color: var(--c-text-time) !important; }
+#chatThreadModal .chat-msg-time { font-size: 11px; }
+#chatThreadModal .chat-msg.mine .chat-msg-time  { color: rgba(230,240,250,0.75); }
+#chatThreadModal .chat-msg.theirs .chat-msg-time { color: var(--c-text-time); }
 #chatThreadModal .msg-ticks { color: rgba(230,240,250,0.6); }
 #chatThreadModal .msg-ticks.read { color: var(--c-tick-read); }
-#chatThreadModal .msg-edited { color: var(--c-text-time) !important; }
+#chatThreadModal .msg-edited { color: var(--c-text-time); }
 
 /* Reply-quote inside bubble */
-#chatThreadModal .chat-reply-preview { background: rgba(255,255,255,0.08) !important; border-left: 3px solid var(--c-accent) !important; }
-#chatThreadModal .chat-msg.theirs .chat-reply-preview { background: rgba(0,0,0,0.18) !important; }
-#chatThreadModal .chat-reply-preview:hover { background: rgba(255,255,255,0.13) !important; }
-#chatThreadModal .crp-name { color: var(--c-accent-2) !important; }
-#chatThreadModal .crp-text { color: var(--c-text-2) !important; }
+#chatThreadModal .chat-reply-preview { background: rgba(255,255,255,0.08); border-left: 3px solid var(--c-accent); }
+#chatThreadModal .chat-msg.theirs .chat-reply-preview { background: rgba(0,0,0,0.18); }
+#chatThreadModal .chat-reply-preview:hover { background: rgba(255,255,255,0.13); }
+#chatThreadModal .crp-name { color: var(--c-accent-2); }
+#chatThreadModal .crp-text { color: var(--c-text-2); }
 
 /* Reactions */
-#chatThreadModal .reaction-pill { background: rgba(255,255,255,0.07) !important; border-color: transparent !important; color: var(--c-text-1) !important; }
-#chatThreadModal .reaction-pill:hover { background: rgba(255,255,255,0.12) !important; }
-#chatThreadModal .reaction-pill.mine { background: rgba(79,163,227,0.18) !important; border-color: transparent !important; color: var(--c-accent-2) !important; }
+#chatThreadModal .reaction-pill { background: rgba(255,255,255,0.07); border-color: transparent; color: var(--c-text-1); }
+#chatThreadModal .reaction-pill:hover { background: rgba(255,255,255,0.12); }
+#chatThreadModal .reaction-pill.mine { background: rgba(79,163,227,0.18); border-color: transparent; color: var(--c-accent-2); }
 
 /* Files & media inside bubble */
-#chatThreadModal .cfm-name { color: var(--c-text-1) !important; }
-#chatThreadModal .chat-msg.theirs .cfm-name { color: var(--c-text-1) !important; }
+#chatThreadModal .cfm-name { color: var(--c-text-1); }
+#chatThreadModal .chat-msg.theirs .cfm-name { color: var(--c-text-1); }
 #chatThreadModal .cfm-size,
-#chatThreadModal .chat-msg.theirs .cfm-size { color: var(--c-text-2) !important; }
-#chatThreadModal .cfm-dl { background: rgba(255,255,255,0.14) !important; color: var(--c-text-1) !important; }
-#chatThreadModal .cfm-dl:hover { background: rgba(255,255,255,0.24) !important; }
+#chatThreadModal .chat-msg.theirs .cfm-size { color: var(--c-text-2); }
+#chatThreadModal .cfm-dl { background: rgba(255,255,255,0.14); color: var(--c-text-1); }
+#chatThreadModal .cfm-dl:hover { background: rgba(255,255,255,0.24); }
 
 /* Typing bubble (floating, above input) */
-#chatThreadModal .typing-bubble { background: var(--c-bubble-in) !important; color: var(--c-text-2) !important; }
-#chatThreadModal .typing-name { color: var(--c-text-1) !important; }
-#chatThreadModal .typing-dots span { background: var(--c-accent) !important; }
+#chatThreadModal .typing-bubble { background: var(--c-bubble-in); color: var(--c-text-2); }
+#chatThreadModal .typing-name { color: var(--c-text-1); }
+#chatThreadModal .typing-dots span { background: var(--c-accent); }
 
 /* ── Voice message bubble — circular play + waveform (demo look) ─────── */
-#chatThreadModal .chat-voice-msg { min-width: 210px !important; gap: 8px !important; }
+#chatThreadModal .chat-voice-msg { min-width: 210px; gap: 8px; }
 
-#chatThreadModal .chat-msg.mine .cvm-play { background: rgba(255,255,255,0.22) !important; color: #fff !important; }
-#chatThreadModal .chat-msg.mine .cvm-play:hover { background: rgba(255,255,255,0.34) !important; }
-#chatThreadModal .chat-msg.mine .cvm-bar { background: rgba(255,255,255,0.42) !important; }
-#chatThreadModal .chat-msg.mine .cvm-bar.played { background: rgba(255,255,255,0.95) !important; }
-#chatThreadModal .chat-msg.mine .cvm-dur { color: rgba(255,255,255,0.8) !important; }
+#chatThreadModal .chat-msg.mine .cvm-play { background: rgba(255,255,255,0.22); color: #fff; }
+#chatThreadModal .chat-msg.mine .cvm-play:hover { background: rgba(255,255,255,0.34); }
+#chatThreadModal .chat-msg.mine .cvm-bar { background: rgba(255,255,255,0.42); }
+#chatThreadModal .chat-msg.mine .cvm-bar.played { background: rgba(255,255,255,0.95); }
+#chatThreadModal .chat-msg.mine .cvm-dur { color: rgba(255,255,255,0.8); }
 
-#chatThreadModal .chat-msg.theirs .cvm-play { background: var(--c-accent) !important; color: var(--c-bg-chat) !important; }
-#chatThreadModal .chat-msg.theirs .cvm-play:hover { background: var(--c-accent-2) !important; }
-#chatThreadModal .chat-msg.theirs .cvm-bar { background: var(--c-text-2) !important; opacity: 0.5; }
-#chatThreadModal .chat-msg.theirs .cvm-bar.played { background: #5288c1 !important; opacity: 1; }
-#chatThreadModal .chat-msg.theirs .cvm-dur { color: var(--c-text-2) !important; }
+#chatThreadModal .chat-msg.theirs .cvm-play { background: var(--c-accent); color: var(--c-bg-chat); }
+#chatThreadModal .chat-msg.theirs .cvm-play:hover { background: var(--c-accent-2); }
+#chatThreadModal .chat-msg.theirs .cvm-bar { background: var(--c-text-2); opacity: 0.5; }
+#chatThreadModal .chat-msg.theirs .cvm-bar.played { background: #5288c1; opacity: 1; }
+#chatThreadModal .chat-msg.theirs .cvm-dur { color: var(--c-text-2); }
 
 /* ── Composer / input row — skrinshotga 1:1 mos, tekis (flat) ko'rinish:
  * hech qanday pill/doira foni yo'q, ikonkalar to'g'ridan-to'g'ri panel
  * fonida "suzib" turadi (emoji — matn — attach — mic, hammasi flat). ── */
 #chatThreadModal .chat-thread-input-row {
-  background: var(--c-bg-input) !important;
-  border-top: 1px solid var(--c-divider) !important;
-  padding: 8px 10px calc(10px + env(safe-area-inset-bottom, 0px)) !important;
-  position: relative !important;
+  background: var(--c-bg-input);
+  border-top: 1px solid var(--c-divider);
+  padding: 8px 10px calc(10px + env(safe-area-inset-bottom, 0px));
+  position: relative;
 }
 #chatThreadModal .chat-thread-input {
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
-  color: var(--c-text-1) !important;
-  padding: 9px 4px !important;
-  transition: opacity 0.15s ease !important;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: var(--c-text-1);
+  padding: 9px 4px;
+  transition: opacity 0.15s ease;
 }
-#chatThreadModal .chat-thread-input::placeholder { color: var(--c-text-2) !important; }
+#chatThreadModal .chat-thread-input::placeholder { color: var(--c-text-2); }
 #chatThreadModal .chat-emoji-btn {
-  background: transparent !important;
-  color: var(--c-text-2) !important;
+  background: transparent;
+  color: var(--c-text-2);
 }
-#chatThreadModal .chat-emoji-btn:hover { background: transparent !important; color: var(--c-text-1) !important; }
+#chatThreadModal .chat-emoji-btn:hover { background: transparent; color: var(--c-text-1); }
 #chatThreadModal .chat-attach-btn {
-  background: transparent !important;
-  color: var(--c-text-2) !important;
-  transition: opacity 0.15s ease, color 0.2s !important;
+  background: transparent;
+  color: var(--c-text-2);
+  transition: opacity 0.15s ease, color 0.2s;
 }
-#chatThreadModal .chat-attach-btn:hover { background: transparent !important; color: var(--c-text-1) !important; }
+#chatThreadModal .chat-attach-btn:hover { background: transparent; color: var(--c-text-1); }
 
 #chatThreadModal .chat-voice-btn {
-  background: transparent !important;
-  box-shadow: none !important;
-  color: var(--c-text-1) !important;
+  background: transparent;
+  box-shadow: none;
+  color: var(--c-text-1);
 }
-#chatThreadModal .chat-voice-btn:hover { background: transparent !important; }
+#chatThreadModal .chat-voice-btn:hover { background: transparent; }
 
 /* Mikrofon tugmasi bosib turilganda — oddiy scale animatsiya. */
 #chatThreadModal .chat-voice-btn.active {
@@ -201,20 +205,20 @@
 }
 
 /* Reply bar above input */
-#chatThreadModal .chat-reply-bar { background: var(--c-bg-input) !important; border-top: 1px solid var(--c-divider) !important; }
-#chatThreadModal .crb-name { color: var(--c-accent-2) !important; }
-#chatThreadModal .crb-text { color: var(--c-text-2) !important; }
-#chatThreadModal .crb-line { background: var(--c-accent) !important; }
-#chatThreadModal .crb-close { background: rgba(255,255,255,0.08) !important; color: var(--c-text-2) !important; }
-#chatThreadModal .crb-close:hover { background: rgba(255,255,255,0.14) !important; color: var(--c-text-1) !important; }
+#chatThreadModal .chat-reply-bar { background: var(--c-bg-input); border-top: 1px solid var(--c-divider); }
+#chatThreadModal .crb-name { color: var(--c-accent-2); }
+#chatThreadModal .crb-text { color: var(--c-text-2); }
+#chatThreadModal .crb-line { background: var(--c-accent); }
+#chatThreadModal .crb-close { background: rgba(255,255,255,0.08); color: var(--c-text-2); }
+#chatThreadModal .crb-close:hover { background: rgba(255,255,255,0.14); color: var(--c-text-1); }
 
 /* File preview above input */
-#chatThreadModal .chat-file-preview { background: var(--c-bg-input) !important; border-top: 1px solid var(--c-divider) !important; }
-#chatThreadModal .cfp-name { color: var(--c-text-1) !important; }
-#chatThreadModal .cfp-size { color: var(--c-text-2) !important; }
-#chatThreadModal .cfp-icon { background: rgba(255,255,255,0.08) !important; color: var(--c-accent) !important; }
-#chatThreadModal .cfp-remove { background: rgba(255,255,255,0.08) !important; color: var(--c-text-2) !important; }
-#chatThreadModal .cfp-remove:hover { background: rgba(255,75,75,0.18) !important; color: var(--c-danger) !important; }
+#chatThreadModal .chat-file-preview { background: var(--c-bg-input); border-top: 1px solid var(--c-divider); }
+#chatThreadModal .cfp-name { color: var(--c-text-1); }
+#chatThreadModal .cfp-size { color: var(--c-text-2); }
+#chatThreadModal .cfp-icon { background: rgba(255,255,255,0.08); color: var(--c-accent); }
+#chatThreadModal .cfp-remove { background: rgba(255,255,255,0.08); color: var(--c-text-2); }
+#chatThreadModal .cfp-remove:hover { background: rgba(255,75,75,0.18); color: var(--c-danger); }
 
 /* Context menu — align to same palette (sibling of #chatThreadModal) */
 #chatContextMenu { background: var(--c-bg-header, #121212); border: 1px solid rgba(255,255,255,0.06); }

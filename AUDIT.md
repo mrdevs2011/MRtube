@@ -79,12 +79,50 @@ o'zgargan fayllarda `{`/`}` balansi tekshirilgan, sintaksis xatosi yo'q):
 
 **Jami:** shu 4 faylda oldin 6,1xx qator bor edi, hozir **5,909 qator**.
 
-## 6. Bosqich B — keyingi (hali bajarilmagan)
+## 6. Bosqich B — QISMAN BAJARILDI
 
-`chat.css` (2531 qator, 95 `!important`) va `chat-dark-redesign.css`
-(224 qator, 130 `!important`) — bularni birlashtirish keyingi eng katta
-ish. Zichligi eng yuqori fayl aynan shu (`chat-dark-redesign.css`da
-har 1.7 qatorga bitta `!important` to'g'ri keladi).
+### B1 — `chat-dark-redesign.css` (BAJARILDI ✅)
+
+Bu fayl butunlay `#chatThreadModal .class` (ID + klass, specifiklik
+1,1,0) selektorlaridan foydalanadi — bu `chat.css`dagi oddiy `.class`
+qoidalaridan (0,1,0) **allaqachon ustun**, yuklanish tartibidan qat'i
+nazar. Shuning uchun fayldagi barcha **104 ta `!important`** — sof
+ortiqcha (redundant) edi. Hammasi olib tashlandi, `{`/`}` balansi
+tekshirildi (79/79, OK), izohlar tuzatildi.
+
+**Natija:** vizual holat o'zgarmaydi (chunki ID selektor baribir g'olib
+chiqadi), lekin fayl endi 0 ta `!important` bilan — kelajakda kimdir
+shu klasslarni boshqa joyda o'zgartirsa, "nega ishlamayapti" degan
+sarosimaga tushmaydi.
+
+### B2 — `chat.css` ichki ziddiyati (ANIQLANDI, hali BAJARILMAGAN ⚠️)
+
+**Yangi, chuqurroq muammo topildi:** `.chat-bubble` va
+`.chat-msg.mine/.theirs .chat-bubble` `chat.css`ning **o'zi ichida
+3 marta** qayta ta'riflangan:
+
+| Qator | Bo'lim |
+|---|---|
+| 212, 227 | Original (birinchi) ta'rif |
+| 1485, 1488 | Ikkinchi qatlam (media/kod-blok qo'shimchalari bilan) |
+| 2191, 2201, 2210 | **"CLEAN CHAT REDESIGN — Telegram/Instagram style"** — uchinchi, oxirgi g'olib qatlam, 2171-qatordan boshlanadi |
+
+Bu fayllar-orasi emas, balki **bitta fayl ichidagi** ustma-ust
+yozish — ya'ni xuddi shu "patch ustiga patch" kasalligi `chat.css`
+ichida ham takrorlangan. Oxirgi (2171+) bo'lim CSS kaskadida g'olib
+chiqadi (keyinroq yozilgan), shuning uchun hozirgi vizual natija shu
+bo'limga tegishli.
+
+**Nega hozir tegilmadi:** bu ~350 qatorlik uchta versiyani solishtirib,
+har bir property qaysi bosqichda qanday o'zgarganini aniqlash va faqat
+oxirgi (amaldagi) versiyani qoldirib, qolgan ikkitasini xavfsiz
+o'chirish kerak. Buni shoshilinch qilish xato qilib qo'yish xavfini
+oshiradi — alohida, diqqatli bosqich sifatida qoldirildi.
+
+**Tavsiya etilgan keyingi qadam:** 212-266 va 1485-1640 oralig'idagi
+eski `.chat-bubble` bloklarini solishtirib, 2171-2531 oralig'idagi
+"CLEAN CHAT REDESIGN" bilan qamrab olinmagan (ya'ni hali ham kerakli)
+qismlarni ajratib olish, keyin eskilarini o'chirish.
 
 ## 6. Uzoq muddatli tavsiya
 

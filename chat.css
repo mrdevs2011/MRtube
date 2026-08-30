@@ -1,0 +1,2526 @@
+/* ═══════════════════════════════════════════
+   MRdatabase — Chats & Direct Messages
+   ═══════════════════════════════════════════ */
+
+/* ── Chats list (chatsView) ── */
+.chats-hdr {
+  padding: 18px 16px 10px;
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.chats-list { padding-bottom: 70px; }
+
+/* Canonical chat-row definition (merged from 3 previously conflicting
+ * declarations later in this file). Flat, Telegram-style row: no
+ * card/shadow, a hairline bottom border, and a quick, non-bouncy
+ * background swap + slight nudge on hover/press. */
+.chat-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid var(--line2);
+  box-shadow: none;
+  margin: 0;
+  position: relative;
+  transition: background 0.15s var(--ease), transform 0.15s var(--ease);
+}
+.chat-row:hover {
+  background: var(--glass);
+  transform: translateX(2px);
+}
+.chat-row:active {
+  background: var(--glass-mid);
+  transform: scale(0.99);
+}
+
+.chat-avi {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--glass-mid);
+  border: 0.5px solid var(--glass-border);
+  box-shadow: var(--specular-top);
+}
+.chat-avi img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
+
+.chat-row-body { flex: 1; min-width: 0; }
+
+.chat-row-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-row-preview {
+  font-size: 12.5px;
+  color: var(--text2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+.chat-row-preview.chat-row-empty { color: var(--text3); font-style: italic; }
+
+.chat-row-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.chat-row-time {
+  font-size: 11px;
+  color: var(--text3);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+/* Unread row — badge with +N count (per-conversation). Uses the app's
+ * own blue accent rather than alarm-red, so an unread count doesn't
+ * read as a warning/error. */
+.chat-row-badge {
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  background: var(--tg-blue, #5288c1);
+  border-radius: 11px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px #652024;
+}
+
+.chat-row.unread .chat-row-name { font-weight: 800; }
+.chat-row.unread .chat-row-preview { color: var(--text); font-weight: 600; }
+.chat-row.unread .chat-row-preview.chat-row-empty { color: var(--text3); font-weight: 400; }
+
+/* ── Chat thread (full screen overlay) ── */
+#chatThreadModal {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 360;
+  display: none;
+  flex-direction: column;
+  overscroll-behavior: contain;
+}
+#chatThreadModal.show { display: flex; animation: slideUp 0.28s var(--ease); }
+
+.chat-thread-hdr {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--c-bg-header, var(--bg3, #121212));
+  border-bottom: 1px solid var(--c-divider, rgba(255,255,255,0.06));
+  flex-shrink: 0;
+  position: relative;
+}
+
+.chat-thread-back {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg4);
+  border: none;
+  cursor: pointer;
+  color: var(--text);
+  flex-shrink: 0;
+}
+.chat-thread-back:hover { background: var(--bg5); }
+
+.chat-thread-avi {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: var(--bg4);
+}
+.chat-thread-avi img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 50%; }
+
+.chat-thread-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-thread-messages {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  padding: 12px 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* ── Sana ajratuvchi — Telegram uslubidagi suzuvchi pill ("Bugun"/"Kecha") ── */
+.chat-date-sep {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 8px;
+}
+.chat-date-sep span {
+  background: rgba(255,255,255,0.06);
+  color: var(--text2);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* ── Message layout ── */
+.chat-msg {
+  display: flex;
+  position: relative;
+  max-width: 72%;
+  margin: 0;
+}
+.chat-msg + .chat-msg { margin-top: 2px; }
+.chat-msg.mine  + .chat-msg.theirs,
+.chat-msg.theirs + .chat-msg.mine  { margin-top: 8px; }
+
+.chat-msg.mine   {
+  align-self: flex-end;
+  justify-content: flex-end;
+}
+.chat-msg.theirs {
+  align-self: flex-start;
+  align-items: flex-end;
+  gap: 0;
+}
+
+/* ── Bubble — Telegram compact style ── */
+.chat-bubble {
+  position: relative;
+  padding: 7px 12px 7px 12px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.45;
+  word-break: break-word;
+  max-width: 100%;
+  display: inline-block;
+}
+.chat-msg.mine   .chat-bubble {
+  background: #2b5278;
+  color: #fff;
+  border-bottom-right-radius: 5px;
+}
+.chat-msg.theirs .chat-bubble {
+  background: #182533;
+  color: var(--text);
+  border-bottom-left-radius: 5px;
+}
+
+/* ── Text + meta inline (Telegram trick) ── */
+.chat-bubble-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  /* Reserve space for meta at the end of last line */
+  padding-right: 0;
+}
+
+/* Wrap text & meta together — meta floats to bottom-right */
+.chat-bubble-wrap {
+  display: block;
+}
+
+/* Clearfix: .chat-msg-meta ichida float:right bor (yuqoridagi
+ * "Telegram trick"). Matnli xabarlarda bu muammo bo'lmaydi, chunki
+ * matn balandligi float'dan har doim baland. Lekin voice-message yoki
+ * AI ovozli javobda (past, fixed balandlikdagi block element) float
+ * clear qilinmasa, .chat-bubble-wrap balandligi floatni hisobga olmay
+ * kichik chiqadi — natijada vaqt/soat bubble'ning pastki-o'ng burchagi
+ * doirasidan tashqariga chiqib ketadi. Shu clearfix bilan wrap doim
+ * float'ni to'liq o'z ichiga oladi. */
+.chat-bubble-wrap::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.chat-bubble-text::after {
+  /* invisible spacer so meta doesn't overlap last word */
+  content: '\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0';
+  display: inline;
+}
+
+/* MUHIM (dumli/tail xato tuzatildi): avval bu yerda `margin-bottom:-2px`
+ * VA `position:relative; bottom:-2px` bir vaqtda ishlatilgan edi — bu
+ * meta blokini yuqoridagi clearfix HISOBGA OLGANIDAN ~4px pastroqqa
+ * (vizual jihatdan) surib yuborar edi, chunki `position:relative` bilan
+ * qilingan siljish clearfix balandligi hisobiga umuman kirmaydi. Natijada
+ * matnli xabarlarda bilinmas edi (matn balandligi baribir kattaroq), lekin
+ * ovozli xabar pufakchalarida (past, fixed balandlikdagi blok) meta
+ * bubble'ning pastki-o'ng burchagidagi "quloqcha" (tail) zonasiga chiqib,
+ * u yerdagi fon-rang pseudo-elementi bilan to'qnashib, xunuk qora
+ * to'rtburchak sifatida ko'rinar edi. Endi meta hech qanday qo'shimcha
+ * vizual siljishsiz, clearfix qanday hisoblasa, aynan shu joyda chiziladi —
+ * demak u har doim bubble padding'i ICHIDA, tail zonasidan tashqarida qoladi. */
+.chat-msg-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  float: right;
+  margin-left: 6px;
+  margin-top: 2px;
+  line-height: 1;
+}
+
+.chat-msg-time {
+  font-size: 11px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.chat-msg.mine   .chat-msg-time { color: #C1C1C3; }
+.chat-msg.theirs .chat-msg-time { color: var(--text3); }
+
+/* ── Read-receipt ticks ── */
+.msg-ticks {
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+  /* sent = 1 chek, xira oq */
+  color: #909093;
+}
+/* read = 2 chek, ko'k-moviy */
+.msg-ticks.read { color: #5bb8f5; }
+
+.chat-thread-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.chat-thread-input {
+  flex: 1;
+  background: var(--bg4);
+  border: 1px solid var(--line2);
+  border-radius: 20px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  color: var(--text);
+  font-family: var(--font);
+  outline: none;
+}
+.chat-thread-input::placeholder { color: var(--text3); }
+
+/* Emoji tugmasi — alohida, input pastidan TASHQARIDA, eng chapda
+ * (Telegram tartibi: emoji — pill — attach — mic). */
+.chat-emoji-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.chat-emoji-btn {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text3);
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: color 0.15s, background 0.15s, transform 0.15s;
+}
+.chat-emoji-btn:hover  { color: var(--text2); background: var(--bg4); }
+.chat-emoji-btn:active { transform: scale(0.88); }
+
+.chat-emoji-quickpick {
+  display: none;
+  flex-wrap: wrap;
+  gap: 2px;
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 8px);
+  width: 236px;
+  max-height: 160px;
+  overflow-y: auto;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 8px;
+  box-shadow: 0 6px 24px #07070D;
+  z-index: 50;
+}
+.chat-emoji-quickpick.show { display: flex; }
+.chat-emoji-quickpick button {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  background: none;
+  border: none;
+  font-size: 19px;
+  line-height: 1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.15s, background 0.15s;
+}
+.chat-emoji-quickpick button:hover  { background: var(--bg4); transform: scale(1.15); }
+.chat-emoji-quickpick button:active { transform: scale(0.9); }
+
+.chat-thread-send {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+.chat-thread-send:hover { background: var(--blue3); }
+
+/* ── Desktop ── */
+@media (min-width: 768px) {
+  .chats-hdr, .chats-list { max-width: 560px; margin-left: auto; margin-right: auto; }
+  .chats-hdr { padding-left: 0; padding-right: 0; }
+
+  #chatThreadModal { left: var(--sidebar); }
+}
+
+/* ── New input row with blur & voice ── */
+.chat-thread-input-row {
+  position: relative;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  gap: 6px;
+  padding: 8px 10px;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+}
+
+/* Attach button */
+.chat-attach-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--bg4);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+}
+.chat-attach-btn:hover { background: var(--bg5); color: var(--text); }
+.chat-attach-btn:active { transform: scale(0.93); }
+
+/* Voice / Send button */
+.chat-voice-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+/* Ovoz balandligiga qarab JS orqali (modules/chat.js, _startPulse)
+ * scale/opacity real-vaqtda yangilanadigan doira — mikrofon tugmasi
+ * ORQASIDA, gapirilganda tashqariga "yoyilib" chiqadi. */
+.cv-pulse {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--blue);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform, opacity;
+}
+.chat-voice-btn {
+  position: relative;
+  z-index: 1;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--blue);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: var(--transition);
+  box-shadow: 0 2px 10px #1D396C;
+}
+.chat-voice-btn:hover { }
+.chat-voice-btn:active { transform: scale(0.92); }
+/* .chat-voice-btn.recording lives in the "VOICE BTN — amplitude-based
+ * smooth pulse" section below, which is the only recording style that
+ * actually runs (it's JS-driven and disables any CSS keyframe pulse). */
+
+/* File preview above input */
+.chat-file-preview {
+  display: none;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.chat-file-preview.active { display: block; }
+
+.cfp-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg4);
+  border-radius: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--line2);
+}
+
+.cfp-icon {
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.cfp-icon svg { width: 36px; height: 36px; }
+
+.cfp-info { flex: 1; min-width: 0; }
+
+.cfp-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cfp-size {
+  font-size: 11.5px;
+  color: var(--text3);
+  margin-top: 1px;
+}
+
+.cfp-remove {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--bg5);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.cfp-remove:hover { background: #2B1117; color: #ef4444; }
+
+/* ── Voice message bubble ── */
+
+/* ── File message (non-image, non-video) ── */
+.chat-file-msg {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 180px;
+  max-width: 260px;
+  padding: 2px 0;
+}
+
+.cfm-icon {
+  width: 38px; height: 38px;
+  flex-shrink: 0;
+}
+.cfm-icon svg { width: 38px; height: 38px; }
+
+.cfm-info { flex: 1; min-width: 0; }
+
+.cfm-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.chat-msg.theirs .cfm-name { color: var(--text); }
+
+.cfm-size {
+  font-size: 11px;
+  color: #B5B5B7;
+  margin-top: 1px;
+}
+.chat-msg.theirs .cfm-size { color: var(--text3); }
+
+.cfm-dl {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.22);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.chat-msg.theirs .cfm-dl { background: var(--bg5, #e0e0e6); color: var(--text); }
+.cfm-dl:hover { background: rgba(255,255,255,0.35); }
+.chat-msg.theirs .cfm-dl:hover { background: var(--bg4, #d0d0d8); }
+
+/* ═══════════════════════════════════════════
+   NEW FEATURES: Image, Video, Reply, Reactions,
+   Context Menu, Lightbox, Edit badge
+   ═══════════════════════════════════════════ */
+
+/* ── Image message ── */
+.chat-img-msg {
+  max-width: 260px;
+  min-width: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.chat-img-msg img {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: opacity 0.2s;
+}
+.chat-img-msg img:hover { opacity: 1; }
+
+/* ── Video message ── */
+.chat-video-msg {
+  max-width: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.chat-video-msg video {
+  display: block;
+  border-radius: 10px;
+  background: #000;
+}
+
+/* ── Reply preview inside bubble ── */
+.chat-reply-preview {
+  border-left: 3px solid #848487;
+  padding: 4px 8px;
+  margin-bottom: 6px;
+  border-radius: 0 6px 6px 0;
+  background: #26262C;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.chat-msg.theirs .chat-reply-preview {
+  border-left-color: var(--blue);
+  background: #0D1222;
+}
+.chat-reply-preview:hover { background: #3A3A3F; }
+.chat-msg.theirs .chat-reply-preview:hover { background: #101930; }
+
+.crp-name {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #E6E6E7;
+  margin-bottom: 1px;
+}
+.chat-msg.theirs .crp-name { color: var(--blue); }
+
+.crp-text {
+  font-size: 12px;
+  color: #C1C1C3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+.chat-msg.theirs .crp-text { color: var(--text2); }
+
+/* ── Reply bar (above input) ── */
+.chat-reply-bar {
+  display: none;
+  padding: 8px 12px;
+  background: var(--bg);
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+}
+.chat-reply-bar.active { display: flex; align-items: center; gap: 10px; }
+
+.crb-line {
+  width: 3px;
+  min-height: 32px;
+  border-radius: 2px;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+.crb-body { flex: 1; min-width: 0; }
+
+.crb-name {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 1px;
+}
+
+.crb-text {
+  font-size: 12px;
+  color: var(--text2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.crb-close {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--bg4);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text2);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.crb-close:hover { background: var(--bg5); color: var(--text); }
+
+/* ── Reactions ── */
+.chat-reactions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+  padding: 0 2px;
+}
+.chat-msg.mine .chat-reactions { justify-content: flex-end; }
+
+.reaction-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 3px 8px;
+  background: var(--bg4);
+  border: 1px solid var(--line2);
+  border-radius: 12px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  color: var(--text);
+}
+.reaction-pill:hover { background: var(--bg5); transform: scale(1.08); }
+.reaction-pill.mine  {
+  background: #0F172B;
+  border-color: #1A3360;
+  color: var(--blue);
+}
+
+/* ── Emoji picker ── */
+.emoji-picker {
+  display: none;
+  position: absolute;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 6px 8px;
+  gap: 4px;
+  box-shadow: 0 4px 20px #07070D;
+  z-index: 400;
+  flex-wrap: nowrap;
+}
+.emoji-picker.show { display: flex; }
+
+.emoji-pick-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: transform 0.2s, background 0.2s;
+  line-height: 1;
+}
+.emoji-pick-btn:hover { transform: scale(1.3); background: var(--bg4); }
+
+/* ── Context menu ── */
+#chatContextMenu {
+  position: fixed;
+  display: none;
+  background: var(--bg);
+  border: 0.5px solid var(--line);
+  border-radius: 14px;
+  padding: 6px;
+  min-width: 170px;
+  box-shadow: 0 8px 30px #07070D;
+  z-index: 500;
+  overflow: hidden;
+}
+
+.ctx-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: var(--text);
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  transition: background 0.2s;
+}
+.ctx-item:hover { background: var(--bg4); }
+.ctx-item.danger { color: #ef4444; }
+.ctx-item svg { flex-shrink: 0; }
+
+.ctx-divider {
+  height: 0.5px;
+  background: var(--line);
+  margin: 4px 0;
+}
+
+/* ── Lightbox ── */
+#chatLightbox {
+  position: fixed;
+  inset: 0;
+  background: #000001;
+  z-index: 600;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+#chatLightbox.show { display: flex; }
+
+#chatLightboxImg {
+  max-width: 95vw;
+  max-height: 90vh;
+  border-radius: 8px;
+  object-fit: contain;
+  display: block;
+}
+
+#chatLightboxClose {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: #2D2D33;
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background 0.2s;
+}
+#chatLightboxClose:hover { background: #46464B; }
+
+/* ── Edited badge ── */
+.msg-edited {
+  font-size: 10.5px;
+  color: #909093;
+  margin-right: 3px;
+  font-style: italic;
+}
+.chat-msg.theirs .msg-edited { color: var(--text3); }
+
+/* ── Highlight (reply scroll) ── */
+@keyframes msgHighlight {
+  0%, 100% { opacity: 1; }
+  30% { opacity: 0.4; }
+}
+.chat-msg-highlight .chat-bubble {
+  animation: msgHighlight 1.2s ease;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   FEATURE 1: Typing Indicator — "Ivan yozmoqda..."
+   ════════════════════════════════════════════════════════════════════ */
+
+/* Header info column (name + typing status) */
+.chat-thread-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Typing status under name in header */
+.chat-thread-typing {
+  font-size: 11.5px;
+  color: var(--blue);
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: height 0.2s, opacity 0.2s;
+  white-space: nowrap;
+}
+
+/* Floating typing bubble above input */
+.chat-typing-indicator {
+  flex-shrink: 0;
+  padding: 0 14px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+  pointer-events: none;
+}
+.chat-typing-indicator.active {
+  max-height: 42px;
+}
+
+.typing-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--bg4);
+  border-radius: 18px 18px 18px 4px;
+  padding: 6px 12px;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: var(--text2);
+}
+
+.typing-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.typing-label {
+  font-style: italic;
+  color: var(--text2);
+}
+
+/* Animated 3-dot pulse */
+.typing-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 2px;
+}
+.typing-dots span {
+  display: block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--blue);
+  animation: typingPulse 1.2s ease-in-out infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingPulse {
+  0%, 80%, 100% { opacity: 0.25; transform: scale(0.85); }
+  40%           { opacity: 1;    transform: scale(1); }
+}
+
+/* "Ovozli xabar ijro etilmoqda..." indikatori — jonli TTS ijrosi paytida
+ * AI stream pufakchasi ostida ko'rinadi (bosqich 4). Standart holatda
+ * yashiringan (max-height:0), .show klassi qo'shilganda ochiladi/yopiladi
+ * — bu shunchaki opacity emas, balki chiroyli "eshilib chiqish" effekti
+ * uchun kerak. */
+.ai-speaking-indicator {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text2);
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.2s ease, max-height 0.25s ease;
+}
+.ai-speaking-indicator.show {
+  opacity: 1;
+  max-height: 20px;
+}
+.ai-speaking-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+.ai-speaking-bars span {
+  display: block;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--blue);
+  animation: aiSpeakBar 0.9s ease-in-out infinite;
+}
+.ai-speaking-bars span:nth-child(1) { height: 40%; animation-delay: 0s; }
+.ai-speaking-bars span:nth-child(2) { height: 100%; animation-delay: 0.15s; }
+.ai-speaking-bars span:nth-child(3) { height: 60%; animation-delay: 0.3s; }
+.ai-speaking-bars span:nth-child(4) { height: 85%; animation-delay: 0.45s; }
+
+@keyframes aiSpeakBar {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.6; }
+  50%      { transform: scaleY(1);   opacity: 1; }
+}
+
+
+/* Search button in header */
+.chat-search-btn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--bg4);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+}
+.chat-search-btn:hover { background: var(--bg5); color: var(--text); }
+.chat-search-btn.active { background: #101B32; color: var(--blue); }
+
+/* ════════════════════════════════════════════════════════════════════
+   FEATURE 3: Chat ichida qidiruv (Search Bar)
+   ════════════════════════════════════════════════════════════════════ */
+
+.chat-search-wrap {
+  flex-shrink: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease;
+}
+.chat-search-wrap.active {
+  max-height: 56px;
+}
+
+.chat-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  color: var(--text3);
+}
+
+.chat-search-input {
+  flex: 1;
+  background: var(--bg4);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 7px 12px;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.chat-search-input:focus {
+  border-color: var(--blue);
+}
+.chat-search-input::placeholder { color: var(--text3); }
+
+.chat-search-close {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--bg4);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+.chat-search-close:hover { background: var(--bg5); color: var(--text); }
+
+/* Search highlight in message text */
+.chat-search-hl {
+  background: #6B5909;
+  color: var(--text);
+  border-radius: 2px;
+  padding: 0 1px;
+}
+.chat-msg.mine .chat-search-hl {
+  background: #525257;
+  color: #fff;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   FEATURE 4: Sana Ajratgichlari — Date Separator Pills
+   ════════════════════════════════════════════════════════════════════ */
+
+.chat-date-sep {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 4px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.chat-date-sep span {
+  display: inline-block;
+  background: var(--bg4);
+  border: 1px solid var(--line2, var(--line));
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 0.01em;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   CALL BUTTONS IN CHAT HEADER
+   ════════════════════════════════════════════════════════════════════ */
+.chat-call-btn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--bg4);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+}
+.chat-call-btn:hover { background: #0C251B; color: #22c55e; }
+
+/* ════════════════════════════════════════════════════════════════════
+   INCOMING CALL MODAL
+   ════════════════════════════════════════════════════════════════════ */
+#incomingCallModal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000000;
+  background:
+    radial-gradient(circle at 50% 0%, #1a3a2e 0%, #05060F 55%),
+    #05060F;
+  display: none;
+  animation: fadeIn 0.25s ease;
+  /* Telegram-style: haqiqiy full-screen, hech qanday "karta" chegarasi yo'q */
+}
+#incomingCallModal.show { display: flex; }
+
+.incoming-call-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  padding: calc(env(safe-area-inset-top, 0px) + 28px) 24px calc(env(safe-area-inset-bottom, 0px) + 36px);
+}
+
+/* Yuqori qism — kichik sarlavha (holat satridan pastroqda) */
+.incoming-call-top {
+  flex-shrink: 0;
+  width: 100%;
+  text-align: center;
+}
+.incoming-call-subtitle {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #7a8a84;
+  text-transform: uppercase;
+}
+
+/* O'rta qism — avatar + ism + tur, ekranning yuqori-yarmida markazlashgan */
+.incoming-call-center {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding-bottom: 8vh; /* Telegram'dagidek avatar biroz yuqorida turadi */
+}
+
+/* Pastki qism — Accept/Decline har doim ekran tagida */
+.incoming-call-btns {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 8px;
+}
+
+/* Ring animation (3 pulsing rings) */
+.incoming-call-ring-anim {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  pointer-events: none;
+}
+.incoming-call-ring-anim span {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid #156737;
+  animation: ringPulse 1.8s ease-out infinite;
+}
+.incoming-call-ring-anim span:nth-child(2) { animation-delay: 0.6s; }
+.incoming-call-ring-anim span:nth-child(3) { animation-delay: 1.2s; }
+
+@keyframes ringPulse {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+
+.incoming-call-avi {
+  width: 128px; height: 128px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg4);
+  border: 3px solid #22c55e;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+.incoming-call-avi img { width: 100%; height: 100%; object-fit: cover; }
+
+.incoming-call-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+.incoming-call-type {
+  font-size: 15px;
+  color: #B5B5B7;
+}
+
+.inc-call-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.inc-call-btn {
+  width: 66px; height: 66px;
+  border-radius: 50%;
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.inc-call-btn:active { transform: scale(0.92); }
+.inc-call-btn.reject  { background: #ef4444; color: #fff; }
+.inc-call-btn.accept  { background: #22c55e; color: #fff; }
+.inc-call-btn:hover   { box-shadow: 0 4px 20px #06060B; }
+.inc-call-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #D6D6D8;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   ACTIVE CALL MODAL
+   ════════════════════════════════════════════════════════════════════ */
+#callActiveModal {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #0f172a;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 24px 48px;
+  transition: background 0.4s ease, padding 0.4s ease;
+}
+#callActiveModal.show { display: flex; }
+#callActiveModal.video-mode { padding: 0; background: #000; }
+
+/* Stage — voice va video qatlamlari bir joyda ustma-ust turadi,
+   shu sababli ular orasida smooth crossfade qilish mumkin (display:none
+   bilan bo'lsa sakrab o'tardi, endi opacity/scale bilan erib o'tadi). */
+.call-stage {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+}
+.call-voice-wrap,
+.call-video-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.94);
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(.22,.61,.36,1), transform 0.4s cubic-bezier(.22,.61,.36,1);
+}
+.call-voice-wrap.cs-active,
+.call-video-wrap.cs-active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+/* Voice mode */
+.call-voice-wrap {
+  flex-direction: column;
+  gap: 16px;
+}
+.call-voice-avi {
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--bg4);
+  border: 3px solid #2D2D33;
+}
+.call-voice-avi img { width: 100%; height: 100%; object-fit: cover; }
+.call-avi-initial {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 42px;
+  font-weight: 700;
+  color: #fff;
+  background: #22c55e;
+}
+.incoming-call-avi .call-avi-initial { font-size: 52px; }
+.call-voice-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Video mode */
+.call-video-wrap {
+  background: #000;
+  border-radius: inherit;
+  overflow: hidden;
+}
+#callRemoteVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.call-local-pip {
+  position: absolute;
+  bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+  right: 16px;
+  width: 92px;
+  height: 128px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 2px solid #525257;
+  z-index: 2;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s;
+}
+.call-local-pip.cs-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.call-status {
+  font-size: 14px;
+  color: #9C9C9F;
+  text-align: center;
+  transition: font-size 0.4s ease, transform 0.4s ease, top 0.4s ease;
+}
+.call-timer {
+  font-size: 32px;
+  font-weight: 300;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 2px;
+  transition: font-size 0.4s ease, transform 0.4s ease, top 0.4s ease;
+}
+#callActiveModal.video-mode .call-status,
+#callActiveModal.video-mode .call-timer {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+#callActiveModal.video-mode .call-timer { top: 42px; }
+
+/* Control buttons — icon + label, kabi reference (Discord/FaceTime) */
+.call-active-btns {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  transition: gap 0.4s ease, background 0.4s ease, padding 0.4s ease,
+              border-radius 0.4s ease, bottom 0.4s ease, transform 0.4s ease;
+}
+.call-ctrl-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.call-ctrl-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #C7C7CA;
+  text-align: center;
+}
+
+/* Default (voice) tartib: Video, Mikrofon, Karnay, Tugatish — Flip yashirin */
+#callSwitchCol { order: 0; display: none; }
+#callCamCol     { order: 1; }
+#callMicCol     { order: 2; }
+#callSpeakerCol { order: 3; }
+#callEndCol     { order: 4; }
+
+/* Video rejimida tartib: Flip, Video, Mikrofon, Tugatish — Karnay yashirin
+   (video chog'ida ovoz avtomatik dinamikdan chiqadi) */
+#callActiveModal.video-mode #callSwitchCol { order: 1; }
+#callActiveModal.video-mode #callCamCol    { order: 2; }
+#callActiveModal.video-mode #callMicCol    { order: 3; }
+#callActiveModal.video-mode #callSpeakerCol{ display: none; }
+#callActiveModal.video-mode #callEndCol    { order: 4; }
+
+#callActiveModal.video-mode .call-active-btns {
+  position: absolute;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  gap: 10px;
+  background: rgba(4, 4, 8, 0.55);
+  padding: 7px 10px;
+  border-radius: 50px;
+  max-width: calc(100vw - 24px);
+}
+
+.call-ctrl-btn {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: #212127;
+  border: 0.5px solid #35353B;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 #3A3A3F;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s, width 0.4s ease, height 0.4s ease;
+}
+.call-ctrl-btn:hover   {
+  background: #35353B;
+  transform: scale(1.07);
+  box-shadow: inset 0 1px 0 #48484E;
+}
+.call-ctrl-btn:active  { transform: scale(0.91); }
+.call-ctrl-btn.muted   {
+  background: #49191E;
+  border-color: #591D22;
+  color: #ef4444;
+}
+.call-ctrl-btn.active  {
+  background: #172A50;
+  border-color: #1A3360;
+  color: #60a5fa;
+}
+.call-ctrl-btn.end-btn {
+  background: #dc2626;
+  border-color: #3A3A3F;
+  width: 62px; height: 62px;
+}
+.call-ctrl-btn.end-btn:hover { background: #ef4444; }
+.call-ctrl-btn.end-btn svg { transform: rotate(135deg); } /* qabul svg'ini burab — "tugatish" belgisi */
+
+/* Video rejimida — tugmalar kichikroq, kam joy egallaydi */
+#callActiveModal.video-mode .call-ctrl-btn {
+  width: 42px; height: 42px;
+}
+#callActiveModal.video-mode .call-ctrl-btn svg { width: 17px; height: 17px; transition: width 0.3s ease, height 0.3s ease; }
+#callActiveModal.video-mode .call-ctrl-btn.end-btn {
+  width: 48px; height: 48px;
+}
+#callActiveModal.video-mode .call-ctrl-btn.end-btn svg { width: 19px; height: 19px; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CHAT — SOLID UI
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── Chat glass variables — removed (unused, was old Telegram-blue palette;
+   all consumers migrated to pure-black tokens: --glass, --glass-mid,
+   --line2, --bg3, and chat-dark-redesign.css's --c-* vars) ── */
+
+
+/* .chat-row styling now lives in one place, near the top of this file. */
+
+/* ── Avatar in chat rows — owned by base .chat-avi definition (no override needed) ── */
+
+/* ── Chat thread header — owned by base definition above (single source) ── */
+
+/* ── Back button — background/color owned by chat-dark-redesign.css; transition/hover-scale kept here ── */
+.chat-thread-back {
+  transition: background 0.2s, transform 0.2s;
+}
+.chat-thread-back:hover {
+  transform: scale(1.05);
+}
+
+/* ── Messages — bubble background/color owned by chat-dark-redesign.css; border kept here ── */
+.chat-msg.mine .chat-bubble {
+  border: 0.5px solid #3A3A3F;
+}
+.chat-msg.theirs .chat-bubble {
+  border: 0.5px solid var(--line2);
+}
+
+/* ── Bubble ichidagi kod bloki/kod — .md-codeblock/.md-code odatda
+   var(--glass) = --bg3 fonini ishlatadi, bu esa "theirs" bubble foni
+   (--bg4) bilan deyarli bir xil rangda bo'lib, kod bloki bubble ichida
+   "yo'qolib" ko'rinardi. Shu sababli bubble ichida har doim yarim
+   shaffof QORA parda ishlatamiz — bubble rangi (ko'k "mine" yoki
+   kulrang "theirs") qanday bo'lishidan qat'i nazar, kod bloki doim
+   aniq-ravshan quyuqroq/farqli ko'rinadi. Selektor ikkita klassdan
+   iborat bo'lgani uchun .md-codeblock'ning umumiy qoidasidan avtomatik
+   ustun turadi (!important shart emas). ── */
+.chat-bubble .md-codeblock,
+.chat-bubble .md-code {
+  background: rgba(0, 0, 0, .22);
+  border-color: rgba(255, 255, 255, .14);
+}
+.chat-msg.mine .chat-bubble .md-codeblock,
+.chat-msg.mine .chat-bubble .md-code {
+  background: rgba(0, 0, 0, .28);
+  border-color: rgba(255, 255, 255, .18);
+}
+
+/* .chat-thread-input-row / .chat-thread-input / .chat-attach-btn skins
+ * now live only in the "CLEAN CHAT REDESIGN" section further down —
+ * this used to duplicate (and fight, with a stray top hairline that
+ * contradicted that section's borderless intent) those same rules. */
+
+/* ── Voice button — hover/press feedback ── */
+.chat-voice-btn:hover {
+  transform: scale(1.04);
+}
+.chat-voice-btn:active { transform: scale(0.94); }
+/* .chat-voice-btn base look + .recording pulse now live only in the
+ * "VOICE BTN — amplitude-based smooth pulse" section further down. */
+
+/* ── Audio message bubble ── */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.chats-hdr {
+  background: transparent !important;
+  position: relative;
+}
+
+
+/* ── Openable file name (zip/pdf) — clickable link ── */
+a.cfm-name--link {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: #77777B;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+a.cfm-name--link:hover {
+  opacity: 1;
+  text-decoration-color: #DADADB;
+}
+.chat-msg.theirs a.cfm-name--link {
+  color: var(--blue);
+  text-decoration-color: #2D4477;
+}
+.chat-msg.theirs a.cfm-name--link:hover {
+  text-decoration-color: var(--blue);
+}
+
+/* ── Inline image / video preview ── */
+.cfm-media-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 260px;
+}
+
+.cfm-img-link {
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  line-height: 0;
+  transition: opacity 0.2s;
+}
+.cfm-img-link:hover { opacity: 1; }
+
+.cfm-img-preview {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 14px;
+  background: #17171E;
+}
+
+.cfm-video-preview {
+  display: block;
+  width: 100%;
+  max-width: 260px;
+  max-height: 300px;
+  border-radius: 14px;
+  background: #000;
+  outline: none;
+}
+
+.cfm-media-meta {
+  font-size: 10.5px;
+  color: #909093;
+  padding: 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.chat-msg.theirs .cfm-media-meta {
+  color: var(--text3);
+}
+
+/* mine bubble — rasmlar uchun padding olib tashlanadi */
+.chat-msg.mine .chat-bubble:has(.cfm-media-wrap) {
+  padding: 4px 4px 6px;
+}
+.chat-msg.theirs .chat-bubble:has(.cfm-media-wrap) {
+  padding: 4px 4px 6px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   VOICE BTN — amplitude-based smooth pulse (no modal)
+   ═══════════════════════════════════════════════════════════════════════ */
+.chat-voice-btn.recording {
+  background: #0ea5e9 !important;
+  border: 0.5px solid #5F5F63 !important;
+  animation: none !important;
+  /* scale va glow CSS variable orqali JS dan boshqariladi */
+  transform: scale(var(--rec-scale, 1.0)) !important;
+  box-shadow:
+    inset 0 1px 0 #525257,
+    0 0 0 calc((var(--rec-scale, 1.0) - 1) * 28px) #0A283B,
+    0 0 calc(var(--rec-glow, 0) * 0.4px) #1B516C,
+    0 4px 16px #0A4462 !important;
+  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PENDING UPLOAD BUBBLE
+   ═══════════════════════════════════════════════════════════════════════ */
+.cpb-wrap { margin-bottom: 4px; }
+
+.cpb-bubble {
+  min-width: 200px;
+  max-width: 280px;
+  padding: 12px 14px 10px !important;
+}
+
+.cpb-voice,
+.cpb-file {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.cpb-mic-icon {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #35353B;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+  border: 0.5px solid #4D4D52;
+}
+
+.cpb-file-icon svg {
+  width: 36px; height: 36px;
+}
+
+.cpb-info { flex: 1; min-width: 0; }
+
+.cpb-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cpb-size {
+  font-size: 11px;
+  color: #9C9C9F;
+  margin-top: 1px;
+}
+
+/* Progress bar */
+.cpb-progress-bar {
+  height: 4px;
+  background: #35353B;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.cpb-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #fff;
+  border-radius: 4px;
+  transition: width 0.2s ease-out;
+  box-shadow: 0 0 8px #848487;
+}
+
+.cpb-pct {
+  font-size: 11px;
+  font-weight: 700;
+  color: #C1C1C3;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CALL MODALS — SOLID UI
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Incoming call — true edge-to-edge fullscreen (Telegram-style), no card box */
+#incomingCallModal {
+  background:
+    radial-gradient(circle at 50% 0%, #16362a 0%, #05060F 55%),
+    #05060F !important;
+}
+
+/* .incoming-call-inner intentionally left un-boxed — it already spans
+   100% width/height via the base rule above; no background/border/
+   radius here so it reads as a real fullscreen call screen, not a dialog. */
+
+/* Ring animation — green glass rings */
+.incoming-call-ring-anim span {
+  border: 1.5px solid #145D33 !important;
+  box-shadow: 0 0 12px #0E2E1F !important;
+}
+
+/* Avatar glass border */
+.incoming-call-avi {
+  border: 2.5px solid #1A8C46 !important;
+  box-shadow:
+    inset 0 1px 0 #3A3A3F,
+    0 0 0 4px #0C1F19,
+    0 0 32px #0E3221,
+    0 8px 24px #06060A !important;
+}
+
+/* Buttons — glass */
+.inc-call-btn {
+  border: 0.5px solid #3F3F44 !important;
+  box-shadow: inset 0 1px 0 #4D4D52, 0 6px 24px #05050A !important;
+  transition: transform 0.2s, box-shadow 0.2s, filter 0.2s !important;
+}
+.inc-call-btn.reject {
+  background: #CC3B3C !important;
+  box-shadow: inset 0 1px 0 #3F3F44, 0 6px 24px #652024 !important;
+}
+.inc-call-btn.accept {
+  background: #1EA852 !important;
+  box-shadow: inset 0 1px 0 #3F3F44, 0 6px 24px #13542F !important;
+}
+.inc-call-btn:hover { transform: scale(1.06) !important; }
+.inc-call-btn:active { transform: scale(0.93) !important; }
+
+/* Active call modal — deep space glass */
+#callActiveModal {
+  background: #040811 !important;
+}
+#callActiveModal::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    #111626,
+    #0A1213;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Voice avatar — glass sphere */
+.call-voice-avi {
+  border: 2px solid #35353B !important;
+  box-shadow:
+    inset 0 2px 0 #35353B,
+    0 0 0 8px #0F1322,
+    0 0 60px #172039,
+    0 16px 48px #040408 !important;
+  background: #17171E !important;
+}
+
+/* ── Control buttons — consolidated into single definition above ── */
+
+/* Video mode — controls glass bar */
+#callActiveModal.video-mode .call-active-btns {
+  background: #050509 !important;
+  border: 0.5px solid #26262C !important;
+  box-shadow:
+    inset 0 1px 0 #2B2B31,
+    0 4px 24px #050509 !important;
+  border-radius: 60px !important;
+}
+
+
+/* ── Message sender avatar (DM & Group) ────────────────────────────────── */
+.msg-avi-btn {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 6px;
+  margin-top: auto;           /* pinned to bottom of message row */
+  border: none;
+  padding: 0;
+  background: var(--bg3, #2a2a3a);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  position: relative;
+  align-self: flex-end;
+}
+.msg-avi-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 50%;
+}
+.msg-avi-btn:hover {
+  transform: scale(1.10);
+  box-shadow: 0 2px 12px #1F3F77;
+  opacity: 1;
+}
+.msg-avi-btn:active {
+  transform: scale(0.96);
+}
+
+/* "theirs" bubble — avatar yo'q, to'g'ridan boshlanadi */
+.chat-msg.theirs {
+  align-items: flex-end;
+  gap: 0;
+}
+.chat-msg.mine .msg-avi-btn {
+  display: none;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   ANIMATIONS PACK
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Xabar bubble — spring pop-in ── */
+@keyframes msgBubbleIn {
+  0%   { opacity:0; transform: scale(0.72) translateY(12px); }
+  60%  { opacity:1; transform: scale(1.04) translateY(-2px); }
+  80%  { transform: scale(0.97) translateY(1px); }
+  100% { transform: scale(1)   translateY(0); }
+}
+.chat-msg.anim-in {
+  animation: msgBubbleIn 0.38s var(--ease-back) both;
+}
+/* Mine xabarlari o'ngdan, theirs chapdan */
+.chat-msg.mine.anim-in  { transform-origin: bottom right; }
+.chat-msg.theirs.anim-in{ transform-origin: bottom left;  }
+
+/* ── 2. Yangi xabar yuborilganda send-btn bounce ── */
+@keyframes sendBounce {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(0.78) rotate(-8deg); }
+  65%  { transform: scale(1.22) rotate(4deg);  }
+  85%  { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+.send-bounce { animation: sendBounce 0.42s var(--ease-back) both; }
+
+/* ── 3. Emoji / reaksiya — heart fly up ── */
+@keyframes heartFly {
+  0%   { opacity: 1; transform: scale(0.9) translateY(0); }
+  100% { opacity: 0; transform: scale(1) translateY(-56px); }
+}
+.emoji-fly {
+  position: fixed;
+  pointer-events: none;
+  font-size: 22px;
+  z-index: 9999999;
+  animation: heartFly 0.6s ease-out forwards;
+}
+
+/* ── 4. Call modal — scale+blur in ── */
+@keyframes callModalIn {
+  0%   { opacity:0; transform: scale(0.88); }
+  60%  { opacity:1; }
+  80%  { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+#callActiveModal.show {
+  animation: callModalIn 0.42s var(--ease-back) both;
+}
+
+/* ── 5. Incoming call modal — slide up ── */
+@keyframes incomingSlideUp {
+  0%   { opacity:0; transform: translateY(40px) scale(0.92); }
+  70%  { opacity:1; }
+  85%  { transform: translateY(-4px) scale(1.01); }
+  100% { transform: translateY(0) scale(1); }
+}
+#incomingCallModal.show .incoming-call-inner {
+  animation: incomingSlideUp 0.46s var(--ease-back) both;
+}
+
+/* ── 6. Incoming call — avatar pulsing rings (kattaroq, ko'proq) ── */
+@keyframes incRingPulse {
+  0%   { transform: scale(1);   opacity: 0.85; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+.incoming-call-ring-anim span {
+  animation: incRingPulse 2.0s ease-out infinite !important;
+  border: 2.5px solid #18793E !important;
+}
+.incoming-call-ring-anim span:nth-child(2) { animation-delay: 0.65s !important; }
+.incoming-call-ring-anim span:nth-child(3) { animation-delay: 1.3s  !important; }
+
+/* ── 7. Online dot pulse ── */
+@keyframes onlinePulse {
+  0%,100% { transform: scale(1);   box-shadow: 0 0 0 0 #156737; }
+  50%      { transform: scale(1.2); box-shadow: 0 0 0 4px #0e1621; }
+}
+.online-dot, .status-dot.online, [class*="online-indicator"] {
+  animation: onlinePulse 2.4s ease-in-out infinite;
+}
+
+/* ── 8. Tab switch — view fade+slide ── */
+@keyframes viewSlideIn {
+  0%   { opacity:0; transform: translateY(14px) scale(0.98); }
+  100% { opacity:1; transform: translateY(0)    scale(1); }
+}
+.view.on { animation: viewSlideIn 0.32s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* ── 9. Rasm lazy-load blur → clear ── */
+.cfm-img-preview {
+  transition: filter 0.2s ease;
+}
+.cfm-img-preview.loaded { }
+
+/* ── 10. Xabar o'chirilganda collapse ── */
+@keyframes msgCollapse {
+  0%   { opacity:1; transform: scaleY(1);   max-height: 200px; }
+  40%  { opacity:0; transform: scaleY(0.6); }
+  100% { opacity:0; transform: scaleY(0);   max-height: 0; padding:0; margin:0; }
+}
+.chat-msg.removing {
+  animation: msgCollapse 0.35s cubic-bezier(0.4,0,0.6,1) forwards;
+  overflow: hidden;
+  transform-origin: top;
+}
+
+/* ── 11. Typing indicator — wave bounce ── */
+@keyframes typingDot {
+  0%,60%,100% { transform: translateY(0); opacity:0.5; }
+  30%         { transform: translateY(-6px); opacity:1; }
+}
+.typing-dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--blue, #3b82f6);
+  animation: typingDot 1.2s ease-in-out infinite;
+  margin: 0 2px;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.18s; }
+.typing-dot:nth-child(3) { animation-delay: 0.36s; }
+
+/* ── 12b. Voice message play button — buffering/loading spinner ── */
+.cvm-spin { animation: cvm-spin-rotate 0.8s linear infinite; }
+@keyframes cvm-spin-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ── 12. Voice waveform — bar balandliklari endi HAQIQIY audio
+ * amplitudasidan olinadi (bar sun'iy ravishda o'ynab turmaydi).
+ * Ijro paytida faqat played/unplayed rangi (fade) o'zgaradi —
+ * pastroqdagi .cvm-bar.played qoidalariga qarang. */
+
+/* ════════════════════════════════════════════════════════════════════
+   CHAT EFFECTS PACK v2
+   ════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Context menu — spring scale-in ── */
+@keyframes ctxMenuIn {
+  0%   { opacity:0; transform: scale(0.82) translateY(-8px); }
+  65%  { opacity:1; }
+  80%  { transform: scale(1.03) translateY(1px); }
+  100% { transform: scale(1) translateY(0); }
+}
+#chatContextMenu.show {
+  display: block;
+  animation: ctxMenuIn 0.28s var(--ease-back) both;
+  transform-origin: top left;
+}
+.ctx-item {
+  transition: background 0.2s, transform 0.2s, color 0.2s !important;
+}
+.ctx-item:hover  { transform: translateX(3px) !important; }
+.ctx-item:active { transform: scale(0.95) !important; }
+.ctx-item.danger:hover { background: #200E15 !important; }
+
+/* ── 2. Message swipe-to-reply hint ── */
+@keyframes swipeHint {
+  0%   { transform: translateX(0);    opacity:1; }
+  40%  { transform: translateX(18px); opacity:0.6; }
+  70%  { transform: translateX(-4px); opacity:1; }
+  100% { transform: translateX(0);    opacity:1; }
+}
+.chat-msg.swipe-hint { animation: swipeHint 0.45s var(--ease-back) both; }
+
+/* ── 3. Reply bar slide-down ── */
+@keyframes replyBarIn {
+  0%   { opacity:0; transform: translateY(-10px); max-height:0; }
+  100% { opacity:1; transform: translateY(0);     max-height:80px; }
+}
+.chat-reply-bar.active {
+  animation: replyBarIn 0.28s var(--ease-back) both;
+}
+
+/* ── 4. Xabar highlight — pulse glow (reply ga bosganda) ── */
+@keyframes msgGlowPulse {
+  0%   { box-shadow: 0 0 0 0 #224583; background: #101B32; }
+  40%  { box-shadow: 0 0 0 8px #0e1621; }
+  100% { box-shadow: 0 0 0 0 #0e1621;   background: transparent; }
+}
+.chat-msg.reply-highlight .chat-bubble {
+  animation: msgGlowPulse 1.0s ease-out both !important;
+}
+
+/* ── 5. Send tugmasi — morphing mic↔send ── */
+@keyframes iconMorph {
+  0%   { transform: scale(1) rotate(0deg);   opacity:1; }
+  45%  { transform: scale(0) rotate(-90deg); opacity:0; }
+  55%  { transform: scale(0) rotate(90deg);  opacity:0; }
+  100% { transform: scale(1) rotate(0deg);   opacity:1; }
+}
+.voice-btn-morph svg { animation: iconMorph 0.3s var(--ease-back) both; }
+
+/* ── 6. Attach button ripple ── */
+@keyframes attachRipple {
+  0%   { box-shadow: 0 0 0 0 #313275; }
+  100% { box-shadow: 0 0 0 14px #0e1621; }
+}
+.attach-ripple { animation: attachRipple 0.45s ease-out forwards; }
+
+/* ── 7. Yangi xabar notification badge bounce ── */
+@keyframes badgePop {
+  0%   { transform: scale(0) rotate(-15deg); }
+  55%  { transform: scale(1.3) rotate(5deg); }
+  75%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+.chat-unread-badge { animation: badgePop 0.4s var(--ease-back) both; }
+
+/* ── 8. File preview — shimmer loading skeleton ── */
+@keyframes shimmerSlide {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.cfm-skeleton {
+  background: var(--bg3, #17171E);
+  background-size: 400px 100%;
+  animation: shimmerSlide 1.4s infinite linear;
+  border-radius: 12px;
+  min-height: 120px;
+}
+
+/* ── 9. Long-press ripple on bubble ── */
+@keyframes bubbleRipple {
+  0%   { transform: scale(0.3); opacity:0.6; }
+  100% { transform: scale(2.5); opacity:0; }
+}
+.bubble-ripple-dot {
+  position:absolute; width:40px; height:40px;
+  border-radius:50%; background:#35353B;
+  pointer-events:none; z-index:10;
+  transform-origin:center;
+  animation: bubbleRipple 0.55s ease-out forwards;
+}
+
+/* ── 10. Scroll-to-bottom glow button ── */
+@keyframes scrollBtnIn {
+  0%   { opacity:0; transform: translateY(12px) scale(0.8); }
+  100% { opacity:1; transform: translateY(0)    scale(1);   }
+}
+#chatScrollDownBtn {
+  position: absolute;
+  bottom: 72px; right: 14px;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--blue, #3b82f6);
+  border: none; cursor: pointer;
+  display: none;
+  align-items: center; justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 16px #224583;
+  z-index: 100;
+  animation: scrollBtnIn 0.3s var(--ease-back) both;
+}
+#chatScrollDownBtn.visible { display: flex; }
+#chatScrollDownBtn:hover  { transform: scale(1.1); box-shadow: 0 6px 24px #2957A5; transition: all 0.2s; }
+#chatScrollDownBtn:active { transform: scale(0.92); }
+
+/* ── 11. Emoji picker — bounce in ── */
+@keyframes emojiPickerIn {
+  0%   { opacity:0; transform: scale(0.75) translateY(20px); }
+  65%  { }
+  80%  { transform: scale(1.03) translateY(-3px); }
+  100% { opacity:1; transform: scale(1) translateY(0); }
+}
+.emoji-picker.show {
+  animation: emojiPickerIn 0.35s var(--ease-back) both !important;
+}
+
+/* ── 12. Input area focus glow ── */
+#chatThreadInput {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+#chatThreadInput:focus {
+  box-shadow: 0 0 0 3px #142342 !important;
+  border-color: #244B8E !important;
+  outline: none;
+}
+
+/* ── 14. Reaction emoji float on bubble ── */
+.msg-reaction-wrap {
+  display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px;
+}
+.msg-reaction {
+  font-size: 16px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: #212127;
+  cursor: pointer;
+  transition: transform 0.2s var(--ease-back), background 0.2s;
+  display: inline-flex; align-items: center; gap: 3px;
+  font-size: 14px;
+  border: 1px solid #1C1C23;
+}
+.msg-reaction:hover  { transform: scale(1.25); background: #35353B; }
+.msg-reaction:active { transform: scale(0.9); }
+@keyframes reactionPop {
+  0%   { transform: scale(0) rotate(-20deg); opacity:0; }
+  60%  { transform: scale(1.3) rotate(5deg); opacity:1; }
+  80%  { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+.msg-reaction.new { animation: reactionPop 0.38s var(--ease-back) both; }
+
+/* ═══════════════════════════════════════════
+   CLEAN CHAT REDESIGN — Telegram/Instagram style
+   Chegrasiz, minimal, toza
+   ═══════════════════════════════════════════ */
+
+/* #chatThreadModal foni → CSS/chat-dark-redesign.css'da belgilangan
+   (bir xil selector, o'sha fayl keyinroq yuklanadi va g'olib chiqadi —
+   bu yerdagi qator o'lik edi) */
+
+/* ── Messages container ──
+   padding/background → CSS/chat-dark-redesign.css'da belgilangan
+   (bu yerdagi eski qatorlar o'lik edi). gap shu yerda qoladi. */
+.chat-thread-messages {
+  gap: 2px !important;
+  background: transparent !important;
+}
+
+/* ── Message row ── */
+/* ── Bubble — chegrasiz
+   (padding/border-radius/font-size/line-height → o'chirildi, chunki
+   CSS/chat-dark-redesign.css'dagi #chatThreadModal .chat-bubble ID
+   selektori bular ustidan har doim g'olib chiqadi — o'lik kod edi.
+   border/box-shadow shu yerda qoladi, chunki dark-redesign ularni
+   umuman belgilamaydi.) ── */
+.chat-bubble {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* mine — background/color/border-bottom-right-radius o'chirildi
+   (o'lik edi, CSS/chat-dark-redesign.css g'olib chiqadi) */
+.chat-msg.mine .chat-bubble {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* theirs — background/color/border-bottom-left-radius o'chirildi
+   (o'lik edi, CSS/chat-dark-redesign.css g'olib chiqadi) */
+.chat-msg.theirs .chat-bubble {
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ── Time & ticks ── */
+/* .chat-msg-time rangi → CSS/chat-dark-redesign.css'da belgilangan
+   (bu yerdagi eski qator o'lik edi, hamisha yengilardi) */
+
+/* ── Voice message — clean ── */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .cfm-name / .cfm-size ranglari → CSS/chat-dark-redesign.css'da
+   belgilangan (bu yerdagi qatorlar o'lik edi) */
+
+/* ── Image bubble — chegrasiz ── */
+.chat-img-msg {
+  border-radius: 14px !important;
+  overflow: hidden !important;
+  box-shadow: none !important;
+}
+.chat-msg.mine .chat-bubble:has(.chat-img-msg),
+.chat-msg.theirs .chat-bubble:has(.chat-img-msg) {
+  padding: 3px !important;
+  border-radius: 16px !important;
+}
+
+/* ── Input row — clean, chegrasiz ── */
+.chat-thread-input-row {
+  background: var(--bg);
+  border-top: none;
+  box-shadow: none;
+  padding: 8px 10px;
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  gap: 6px;
+}
+
+.chat-thread-input {
+  background: var(--bg3);
+  border: none;
+  border-radius: 22px;
+  padding: 10px 16px;
+  font-size: 14px;
+  color: var(--text);
+}
+.chat-thread-input:focus { outline: none; }
+
+/* ── Attach & voice buttons — clean ── */
+.chat-attach-btn {
+  background: transparent;
+  border: none;
+  color: var(--text2);
+  box-shadow: none;
+}
+.chat-attach-btn:hover { background: transparent; color: var(--text); }
+
+.chat-voice-btn {
+  background: #2563eb;
+  border: none;
+  box-shadow: none;
+  width: 36px; height: 36px;
+}
+
+/* ── Reply preview — clean ── */
+.chat-reply-preview {
+  border-left: 3px solid var(--blue) !important;
+  background: rgba(255,255,255,0.08) !important;
+  border-radius: 0 8px 8px 0 !important;
+  margin-bottom: 4px !important;
+  padding: 4px 8px !important;
+}
+.chat-msg.theirs .chat-reply-preview {
+  background: rgba(0,0,0,0.1) !important;
+}
+
+/* ── msg-avi-btn — completely hidden in 1v1 ── */
+.msg-avi-btn { display: none !important; }
+
+/* ═══════════════════════════════════════════
+   VOICE MESSAGE — Final Clean Style
+   mine: ko'k bubble, oq elementlar
+   theirs: kulrang bubble, to'q elementlar
+   ═══════════════════════════════════════════ */
+
+/* Base structure */
+.chat-voice-msg {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 200px;
+  max-width: 240px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* ── "MRgram AI" matn javobi ostidagi kichik TTS pleer ── */
+.chat-voice-msg--ai {
+  margin-top: 8px;
+  min-width: 160px;
+  max-width: 210px;
+  transform: scale(0.92);
+  transform-origin: left center;
+}
+
+/* ── MINE — ko'k bubble ichida oq elementlar ── */
+.chat-msg.mine .cvm-play {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.28) !important;
+  color: #fff !important;
+}
+.chat-msg.mine .cvm-play:hover {
+  background: rgba(255,255,255,0.42) !important;
+}
+.chat-msg.mine .cvm-waveform {
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+  display: flex; align-items: center;
+  gap: 1.5px; cursor: pointer;
+  overflow: hidden;
+}
+.chat-msg.mine .cvm-bar {
+  display: block;
+  width: 1.5px; border-radius: 10px;
+  background: rgba(255,255,255,0.42) !important;
+  transition: height 0.25s ease, background 0.2s linear, opacity 0.2s linear;
+}
+/* Eshitilmagan qism — muted (past intensivlik); eshitilgan qism —
+ * to'liq yorqin oq bilan ajralib turadi (Telegram progress mantig'i) */
+.chat-msg.mine .cvm-bar.played {
+  background: rgba(255,255,255,0.95) !important;
+}
+.chat-msg.mine .cvm-dur {
+  font-size: 11px; white-space: nowrap; flex-shrink: 0;
+  color: rgba(255,255,255,0.72) !important;
+}
+
+/* ── THEIRS — kulrang bubble ichida to'q elementlar ── */
+.chat-msg.theirs .cvm-play {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: #2563eb !important;
+  color: #fff !important;
+}
+.chat-msg.theirs .cvm-play:hover {
+  background: #1d4ed8 !important;
+}
+.chat-msg.theirs .cvm-waveform {
+  flex: 1;
+  min-width: 0;
+  height: 28px;
+  display: flex; align-items: center;
+  gap: 1.5px; cursor: pointer;
+  overflow: hidden;
+}
+.chat-msg.theirs .cvm-bar {
+  display: block;
+  width: 1.5px; border-radius: 10px;
+  background: var(--text3) !important;
+  opacity: 0.5;
+  transition: height 0.25s ease, background 0.2s linear, opacity 0.2s linear;
+}
+/* Eshitilgan qism — Telegram Primary Blue (#5288c1) bilan to'liq
+ * to'ldiriladi, eshitilmagan qism muted kulrang holida qoladi. */
+.chat-msg.theirs .cvm-bar.played {
+  background: var(--blue) !important; /* #5288c1 — Telegram Primary Blue */
+  opacity: 1;
+}
+.chat-msg.theirs .cvm-dur {
+  font-size: 11px; white-space: nowrap; flex-shrink: 0;
+  color: var(--text3) !important;
+}
+
+/* Bar balandliklari real audio ma'lumotidan kelgani uchun qo'shimcha
+ * sun'iy animatsiya kerak emas — rang o'zgarishi (played fade) yetarli. */
+
+/* ── "ovoz tayyorlanmoqda…" — MRgram AI matn javobi ostida audio hali
+   fon rejimida yasalayotganda ko'rinadigan vaqtinchalik indikator.
+   Audio tayyor bo'lishi bilan bu o'rniga .chat-voice-msg--ai pleeri
+   chiziladi (paintMessages qayta chizadi). ── */
+.chat-voice-pending {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  opacity: 0.72;
+}
+.chat-voice-pending .cvp-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--text3, currentColor);
+  animation: cvpBlink 1.1s ease-in-out infinite;
+}
+.chat-voice-pending .cvp-dot:nth-child(2) { animation-delay: 0.18s; }
+.chat-voice-pending .cvp-dot:nth-child(3) { animation-delay: 0.36s; }
+.chat-voice-pending .cvp-label {
+  font-size: 11px;
+  color: var(--text3);
+}
+.chat-msg.mine .chat-voice-pending .cvp-dot { background: rgba(255,255,255,0.7); }
+.chat-msg.mine .chat-voice-pending .cvp-label { color: rgba(255,255,255,0.72); }
+@keyframes cvpBlink {
+  0%, 80%, 100% { opacity: 0.25; transform: scale(0.85); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+
+/* ── Voice mini-player — chat almashtirilganda/thread yopilganda ham
+ * ovozli xabar ijrosi davom etayotganini ko'rsatadigan doimiy (fixed)
+ * bar. Telegram/WhatsApp'dagi "ovoz davom etadi" funksiyasiga mos ──── */
+.voice-mini-player {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 60;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  padding-top: calc(8px + env(safe-area-inset-top, 0px));
+  background: var(--bg3, #12141A);
+  border-bottom: 1px solid var(--line, #232428);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+.voice-mini-player.show { display: flex; }
+
+.vmp-play {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: none;
+  flex-shrink: 0;
+  background: #2563eb;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+
+.vmp-info { flex: 1; min-width: 0; }
+.vmp-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text, #e8e8ea);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vmp-progress {
+  margin-top: 4px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.12);
+  overflow: hidden;
+}
+.vmp-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #2563eb;
+  border-radius: 2px;
+}
+
+.vmp-close {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--text2, #9aa0a6);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.vmp-close:hover { background: rgba(255,255,255,0.08); }
