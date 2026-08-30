@@ -168,3 +168,155 @@ yondashuvining natijasi. Tavsiya:
 3. `chat.css` (2531 qator, 95 `!important`) va `chat-dark-redesign.css`
    (2531 emas, 224 qator, lekin 130 `!important` — zichligi eng yuqori)
    — bularni birlashtirish keyingi eng katta ish bo'ladi.
+
+---
+
+## 9. Bosqich C — YANGI SESSIYA (davom etmoqda)
+
+### C0 — Kritik topilma: eskirgan fayl production'ga tushmagan edi
+
+Repo tub papkasida `/chat.css` (CSS/ papkasidan tashqarida) — Bosqich
+B2'da tozalangan versiya edi, lekin u hech qayerdan import qilinmagan
+(`style.css` faqat `./CSS/chat.css`ni chaqiradi). Ya'ni B2 ishi qilingan,
+lekin natija hech qachon ishlatilmagan. **Tuzatildi:** tozalangan nusxa
+`CSS/chat.css`ga ko'chirildi, tub papkadagi eskisi o'chirildi. `{`/`}`
+balansi tekshirilgan (494/494). Hozir `CSS/chat.css`da 79 ta `!important`
+(oldin 95).
+
+**Dars:** fayl joylashuvini har doim `style.css`/`index.html` orqali
+tasdiqlang — repo ichida ishlatilmaydigan "orfan" nusxalar chalkashlik
+keltirib chiqarishi mumkin.
+
+### C1 — Metodologiya tuzatildi: selector-darajasida emas, property-darajasida solishtirish kerak
+
+AUDIT.md'ning oldingi bosqichlarida "bir xil selector ikkinchi faylda
+bor → o'lik" degan yondashuv ishlatilgan edi. Bu **noto'g'ri** bo'lishi
+mumkin: CSS kaskadida g'olib chiqish **property darajasida** hal
+bo'ladi, butun qoida darajasida emas. Masalan `dark-theme-fix.css`daki
+
+```css
+[data-theme="dark"] .bot-nav {
+  background: transparent;
+  border-top: none;
+  box-shadow: none;
+}
+```
+
+`borderless.css`da xuddi shu selector `background`ni qayta belgilaydi,
+lekin `border-top` va `box-shadow`ni umuman belgilamaydi — demak faqat
+`background` o'lik, qolgan ikkitasi **tirik**. Butun qoidani o'chirish
+vizual regressiya bo'lardi.
+
+**Yangi tekshirish skripti** (`/home/claude/dead_check2.py` — sessiya
+konteynerida, repo ichida emas) har bir faylni parse qilib, selector +
+property darajasida solishtiradi, faqat ikkala faylda **bir xil
+property** borligini va keyinroq yuklanadigan faylda `!important` yo'q
+ekanligini tasdiqlagandan keyin "o'lik" deb belgilaydi.
+
+### C2 — `dark-theme-fix.css` vs `borderless.css` — BAJARILDI ✅
+
+8 ta qoidada faqat o'lik property'lar olib tashlandi (izoh bilan, qaysi
+faylda tirik ekanligi ko'rsatilgan):
+
+| Selector | O'lik (o'chirildi) | Tirik (qoldi) |
+|---|---|---|
+| `.bot-nav` | background | border-top, box-shadow |
+| `.grid-cell:hover` | box-shadow | opacity |
+| `.file-card:hover` | box-shadow | background, border-color, transform |
+| `.msg-out .msg-bubble` | box-shadow | background, color, border |
+| `.msg-in .msg-bubble` | border, box-shadow | background, color |
+| `.splash-bar` | border | background, border-radius, overflow |
+| `.splash-fill` | box-shadow | background |
+| `.admin-card:hover` | box-shadow | border-color |
+
+`{`/`}` balansi tekshirildi (98/98, o'zgarmadi — faqat property qatorlar
+izohga aylantirildi).
+
+### C3 — To'liq takrorlanish xaritasi (3+ faylda uchraydigan selectorlar)
+
+Dasturiy audit (`/home/claude/extract_selectors2.py`) 2,659 ta noyob
+top-level selector orasidan **55 tasini** 3 yoki undan ko'p faylda
+topdi. Eng katta klasterlar:
+
+- **`[data-theme="dark"]` guruhi — 17 ta selector**, quyidagi fayllarga
+  tarqalgan: `borderless.css`, `dark-theme-fix.css`, `theme.css`,
+  `feed.css`, `profile.css`. Bu — `.post`/`.file-card` kabi
+  komponentlardan **alohida, kattaroq muammo**: dark-theme
+  override'lari bitta joyda emas, kamida 5 faylda parallel yashaydi.
+- Komponent duplikatsiyasi (AUDIT.md §3'dan hali qolgan): `.post`,
+  `.file-card`, `.field`, `#userProfileModal`, `.bot-nav`,
+  `.btn-primary` — hali `borderless.css`/`feed.css`/`nav.css`/
+  `ui-improvements.css`da takrorlangan.
+- Kichikroq klasterlar: `.skeleton-post`/`.skel-*` (loading skeleton,
+  4 faylda), `#toast`, `.nav-btn*`, `#detailModal`/`#detailContent`,
+  `#grpInfoOverlay`, `.theme-btn`.
+
+### C4 — Keyingi qadamlar (hali qilinmagan)
+
+1. `dark-theme-fix.css` qolgan 89 qoidasini `theme.css`/tegishli
+   komponent fayliga ko'chirish va faylni butunlay yo'q qilish —
+   chunki "dark theme" alohida fayl bo'lishi shart emas, har bir
+   komponent o'z dark-holatini o'z faylida saqlashi kerak edi.
+2. `.post`/`.file-card`/`.field`/`#userProfileModal` — property
+   darajasida C1 metodologiyasi bilan qayta tekshirish (avvalgi
+   Bosqich A/B ham selector-darajasida qilingan bo'lishi mumkin,
+   qayta tasdiqlash kerak).
+3. `profile.css` (47 `!important`) va `ui-improvements.css` (50
+   `!important`) — hali tegilmagan, eng zich fayllar.
+
+### C5 — `dark-theme-fix.css` klasteri to'liq tugatildi ✅
+
+C2'da boshlangan ish davom ettirildi va **butunlay tugatildi**. Cascade-aware
+skript (`dead_check3.py`) `dark-theme-fix.css`ni **hamma** boshqa faylga
+(oldin/keyin yuklanadigan, `!important` hisobga olingan holda) solishtirdi.
+
+**Natija — quyidagi fayllarda o'lik `[data-theme="dark"]` qatorlar/qoidalar
+topildi va faqat aniq o'lik property'lar olib tashlandi (tirik property'lar
+har doim saqlab qolindi):**
+
+| Fayl | Nima o'chirildi | Nima qoldi (tirik) |
+|---|---|---|
+| `theme.css` | Root blokdagi 17 ta glass/shadow custom property (`--glass*`, `--specular*`, `--liquid-shadow*`, `--shadow-*`) + `body`/`.app`/`.bot-nav`/`.sheet`/`.modal-content` qoidalari to'liq | `--glass-refract/tint/frost/inner-glow` (dtf bunlarni belgilamaydi — tirik), `.post` qoidasi (bu boshqa fayllar bilan, `dark-theme-fix.css` bilan emas, ziddiyatda — keyingi bosqich) |
+| `feed.css` | `.reel` background, `.reel-avi` border, `.file-card:hover` (to'liq), `.search-overlay-box` (to'liq), `.skeleton-post` background | `.skeleton-post` border-color |
+| `loading.css` | `#authWrap` background, `.auth-card` (to'liq), `.auth-brand` (to'liq), `#toast` (to'liq) | `#authWrap` background-color |
+| `nav.css` | `.nav-btn.on` background | `.nav-btn.on` border-color |
+| `splash.css` | `#splash` background, `.splash-wordmark` (to'liq) | `#splash` background-color |
+| `profile.css` | `.profile-hdr` (to'liq), `.profile-avi` (to'liq), `.profile-avi:hover` (to'liq), `.profile-grid-tab` (to'liq), `.profile-grid-tab.active` color+border-bottom-color | `.profile-grid-tab.active` background |
+
+Har bir faylda `{`/`}` balansi alohida tekshirildi — hammasi to'g'ri.
+Butun `CSS/` papkasi bo'ylab yakuniy tekshiruv: **hech qanday mos kelmaslik
+yo'q**.
+
+**Muhim:** custom property (`--glass`, `--specular-top` va h.k.)larni
+o'chirish xavfsiz, chunki ular **element darajasida kaskad orqali** hal
+bo'ladi — `var(--glass)` qayerda ishlatilgan bo'lishidan qat'iy nazar,
+render vaqtida haqiqiy g'olib qiymatni oladi, fayl ichidagi joylashuvga
+bog'liq emas.
+
+**Endi `dark-theme-fix.css` klasteri 100% toza** — `dead_check3.py`
+qayta ishga tushirilganda hech qanday o'lik qator topilmaydi (0/0/0).
+
+### C6 — Joriy `!important` holati (C5'dan keyin)
+
+| Fayl | !important |
+|---|---|
+| `profile.css` | 47 |
+| `ui-improvements.css` | 50 |
+| `chat.css` | 79 |
+| `nav.css` | 20 |
+| `auth-ig-style.css` | 19 |
+| `feed.css` | 17 |
+| `local-utility.css` | 8 |
+| `groups.css` | 5 |
+| `chat-dark-redesign.css` | 3 |
+| `dark-theme-fix.css` | 3 |
+| `00-components.core.css` / `loading.css` | 1 |
+| qolganlari | 0 |
+
+### C7 — Keyingi navbat
+
+`.post`/`.file-card`/`.field`/`#userProfileModal`/`.bot-nav`/`.btn-primary`
+klasterlari (§C3) — bular `dark-theme-fix.css` bilan emas, balki
+`borderless.css`/`feed.css`/`nav.css`/`ui-improvements.css`/`theme.css`
+o'rtasida, C1 metodologiyasi (property-darajasida) bilan tekshirilishi
+kerak.

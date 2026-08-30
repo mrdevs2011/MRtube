@@ -745,13 +745,8 @@ body:has(.search-overlay.open) .app-hdr {
    ═══════════════════════════════════════════ */
 
 /* Dark mode reels */
-[data-theme="dark"] .reel {
-  background: #182533;
-}
-
-[data-theme="dark"] .reel-avi {
-  border: 2px solid #2b3d4f;
-}
+/* [data-theme="dark"] .reel background, .reel-avi border → CSS/dark-theme-fix.css'da
+   qayta belgilangan (keyinroq yuklanadi, g'olib chiqadi) — bu yerdagi qatorlar o'lik edi */
 
 [data-theme="dark"] .reel-avi:hover {
   border-color: #848487;
@@ -1217,10 +1212,8 @@ body:has(.search-overlay.open) .app-hdr {
 }
 
 /* File card hover - theme aware */
-[data-theme="dark"] .file-card:hover {
-  background: var(--bg4);
-  transform: translateY(-1px);
-}
+/* [data-theme="dark"] .file-card:hover → CSS/dark-theme-fix.css'da qayta
+   belgilangan (keyinroq yuklanadi, g'olib chiqadi) — bu yerdagi qoida o'lik edi */
 
 [data-theme="light"] .file-card:hover {
   background: var(--bg4);
@@ -1240,9 +1233,8 @@ body:has(.search-overlay.open) .app-hdr {
 }
 
 /* Search overlay - theme aware */
-[data-theme="dark"] .search-overlay-box {
-  box-shadow: 0 8px 32px #050509;
-}
+/* [data-theme="dark"] .search-overlay-box → CSS/dark-theme-fix.css'da qayta
+   belgilangan (keyinroq yuklanadi, g'olib chiqadi) — bu yerdagi qoida o'lik edi */
 
 [data-theme="light"] .search-overlay-box {
   box-shadow: 0 8px 32px #B9B9BD;
@@ -1322,7 +1314,7 @@ body:has(.search-overlay.open) .app-hdr {
 }
 
 [data-theme="dark"] .skeleton-post {
-  background: var(--bg4);
+  /* background → CSS/dark-theme-fix.css'da belgilangan (keyinroq yuklanadi, g'olib chiqadi) */
   border-color: #1C1C23;
 }
 

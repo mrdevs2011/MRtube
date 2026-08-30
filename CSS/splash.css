@@ -56,13 +56,12 @@
    ═══════════════════════════════════════════ */
 
 [data-theme="dark"] #splash {
-  background: #182533;
+  /* background → CSS/dark-theme-fix.css'da belgilangan (keyinroq yuklanadi, g'olib chiqadi) */
   background-color: #101f2e;
 }
 
-[data-theme="dark"] .splash-wordmark {
-  color: #ffffff;
-}
+/* [data-theme="dark"] .splash-wordmark → CSS/dark-theme-fix.css'da qayta
+   belgilangan (keyinroq yuklanadi) — bu yerdagi qoida o'lik edi */
 
 [data-theme="light"] #splash {
   background: #F5F4EF;

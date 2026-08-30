@@ -1387,7 +1387,7 @@
 
 /* ── Theme-aware overrides ── */
 [data-theme="dark"] .nav-btn.on {
-  background: #16283a;
+  /* background → CSS/dark-theme-fix.css'da belgilangan (keyinroq yuklanadi, g'olib chiqadi) */
   border-color: #1c2f42;
 }
 

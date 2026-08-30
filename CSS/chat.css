@@ -2173,51 +2173,47 @@ a.cfm-name--link:hover {
    Chegrasiz, minimal, toza
    ═══════════════════════════════════════════ */
 
-/* ── Thread background ── */
-#chatThreadModal {
-  background: var(--bg) !important;
-}
+/* #chatThreadModal foni → CSS/chat-dark-redesign.css'da belgilangan
+   (bir xil selector, o'sha fayl keyinroq yuklanadi va g'olib chiqadi —
+   bu yerdagi qator o'lik edi) */
 
-
-/* ── Messages container ── */
+/* ── Messages container ──
+   padding/background → CSS/chat-dark-redesign.css'da belgilangan
+   (bu yerdagi eski qatorlar o'lik edi). gap shu yerda qoladi. */
 .chat-thread-messages {
-  padding: 8px 10px 4px !important;
   gap: 2px !important;
   background: transparent !important;
 }
 
 /* ── Message row ── */
-/* ── Bubble — chegrasiz ── */
+/* ── Bubble — chegrasiz
+   (padding/border-radius/font-size/line-height → o'chirildi, chunki
+   CSS/chat-dark-redesign.css'dagi #chatThreadModal .chat-bubble ID
+   selektori bular ustidan har doim g'olib chiqadi — o'lik kod edi.
+   border/box-shadow shu yerda qoladi, chunki dark-redesign ularni
+   umuman belgilamaydi.) ── */
 .chat-bubble {
-  padding: 8px 12px !important;
-  border-radius: 18px !important;
   border: none !important;
   box-shadow: none !important;
-  font-size: 14px !important;
-  line-height: 1.45 !important;
 }
 
-/* mine — ko'k, o'ng pastki burchagi kichik */
+/* mine — background/color/border-bottom-right-radius o'chirildi
+   (o'lik edi, CSS/chat-dark-redesign.css g'olib chiqadi) */
 .chat-msg.mine .chat-bubble {
-  background: #2563eb !important;
-  color: #fff !important;
-  border-bottom-right-radius: 4px !important;
   box-shadow: none !important;
   border: none !important;
 }
 
-/* theirs — kulrang, chap pastki burchagi kichik */
+/* theirs — background/color/border-bottom-left-radius o'chirildi
+   (o'lik edi, CSS/chat-dark-redesign.css g'olib chiqadi) */
 .chat-msg.theirs .chat-bubble {
-  background: var(--bg3) !important;
-  color: var(--text) !important;
-  border-bottom-left-radius: 4px !important;
   box-shadow: none !important;
   border: none !important;
 }
 
 /* ── Time & ticks ── */
-.chat-msg.mine .chat-msg-time   { color: rgba(255,255,255,0.65) !important; }
-.chat-msg.theirs .chat-msg-time { color: var(--text3) !important; }
+/* .chat-msg-time rangi → CSS/chat-dark-redesign.css'da belgilangan
+   (bu yerdagi eski qator o'lik edi, hamisha yengilardi) */
 
 /* ── Voice message — clean ── */
 
@@ -2256,9 +2252,8 @@ a.cfm-name--link:hover {
 
 
 
-/* cfm-dl theirs override moved to main block above */
-.chat-msg.theirs .cfm-name { color: var(--text) !important; }
-.chat-msg.theirs .cfm-size { color: var(--text3) !important; }
+/* .cfm-name / .cfm-size ranglari → CSS/chat-dark-redesign.css'da
+   belgilangan (bu yerdagi qatorlar o'lik edi) */
 
 /* ── Image bubble — chegrasiz ── */
 .chat-img-msg {

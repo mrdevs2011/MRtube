@@ -305,19 +305,12 @@
 
 /* Dark mode auth */
 [data-theme="dark"] #authWrap {
-  background: #182533;
+  /* background → CSS/dark-theme-fix.css'da belgilangan (keyinroq yuklanadi, g'olib chiqadi) */
   background-color: #0e1621;
 }
 
-[data-theme="dark"] .auth-card {
-  background: #24303f;
-  border: 1px solid #1A1A20;
-  box-shadow: 0 20px 50px #05050A;
-}
-
-[data-theme="dark"] .auth-brand {
-  background: var(--blue2);
-}
+/* [data-theme="dark"] .auth-card, .auth-brand → to'liq CSS/dark-theme-fix.css'da
+   qayta belgilangan (keyinroq yuklanadi) — bu yerdagi qoidalar o'lik edi */
 
 /* Light mode auth */
 [data-theme="light"] #authWrap {
@@ -336,11 +329,8 @@
 }
 
 /* Toast theme aware */
-[data-theme="dark"] #toast {
-  background: #09090A;
-  border: 1px solid #24303f;
-  box-shadow: 0 8px 32px #050509;
-}
+/* [data-theme="dark"] #toast → to'liq CSS/dark-theme-fix.css'da qayta
+   belgilangan (keyinroq yuklanadi) — bu yerdagi qoida o'lik edi */
 
 [data-theme="light"] #toast {
   background: #FEFEFE;

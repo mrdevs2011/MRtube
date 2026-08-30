@@ -738,20 +738,9 @@
    ═══════════════════════════════════════════ */
 
 /* Dark mode profile */
-[data-theme="dark"] .profile-hdr {
-  background: var(--bg);
-  border-bottom: 1px solid #17212b;
-}
-
-[data-theme="dark"] .profile-avi {
-  border: 2px solid #24303f;
-  box-shadow: 0 4px 16px #06060B;
-}
-
-[data-theme="dark"] .profile-avi:hover {
-  border-color: var(--blue);
-  box-shadow: 0 4px 20px #19233D;
-}
+/* [data-theme="dark"] .profile-hdr/.profile-avi/.profile-avi:hover → to'liq
+   CSS/dark-theme-fix.css'da qayta belgilangan (keyinroq yuklanadi) —
+   bu yerdagi qoidalar o'lik edi */
 
 [data-theme="dark"] .profile-stat {
   background: #0e1621;
@@ -790,13 +779,11 @@
 }
 
 /* Profile grid tabs */
-[data-theme="dark"] .profile-grid-tab {
-  color: var(--text3);
-}
+/* [data-theme="dark"] .profile-grid-tab (color) → CSS/dark-theme-fix.css'da
+   qayta belgilangan — bu yerdagi qoida o'lik edi */
 
 [data-theme="dark"] .profile-grid-tab.active {
-  color: var(--blue);
-  border-bottom-color: var(--blue);
+  /* color, border-bottom-color → CSS/dark-theme-fix.css'da belgilangan (keyinroq yuklanadi, g'olib chiqadi) */
   background: #101f2e;
 }
 
