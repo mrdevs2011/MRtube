@@ -392,7 +392,7 @@
 /* Skeleton post cards */
 .skeleton-post {
   background: var(--bg2);
-  border: 1px solid var(--line);
+  /* border → CSS/borderless.css'da 'none' bilan yengiladi */
   border-radius: 18px;
   padding: 16px;
   margin-bottom: 12px;
@@ -445,22 +445,10 @@
    POST CARD — Microinteractions
    ═══════════════════════════════════════════ */
 
-.post {
-  transition:
-    transform 0.2s var(--ease),
-    box-shadow 0.2s var(--ease),
-    border-color 0.2s var(--ease);
-}
-
-.post:hover {
-  border-color: var(--line2);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px #07070E;
-}
-
-[data-theme="light"] .post:hover {
-  box-shadow: 0 8px 24px #D5D5DA;
-}
+/* POST CARD — Microinteractions o'chirildi:
+   .post transition / .post:hover lift / box-shadow — barchasi
+   CSS/00-components.core.css va borderless.css tomonidan 'none'
+   bilan yengilar edi, ya'ni hech qachon render bo'lmagan (o'lik) */
 
 /* Like button hover animation */
 .like-btn:hover svg {
@@ -545,7 +533,7 @@
 
 /* Danger button glow on hover */
 .btn-danger:hover {
-  box-shadow: 0 4px 16px #371420;
+  /* box-shadow → CSS/borderless.css'da 'none' bilan yengiladi */
   transform: translateY(-1px);
 }
 
@@ -1457,7 +1445,7 @@
   left: 50%;
   transform: translateX(-50%) translateY(20px);
   background: var(--bg2);
-  border: 1px solid var(--line2);
+  /* border/box-shadow → CSS/borderless.css'da 'none' bilan yengiladi */
   border-radius: 50px;
   padding: 12px 24px;
   font-size: 13px;
@@ -1467,7 +1455,6 @@
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s var(--ease-back);
-  box-shadow: 0 8px 32px #07070C;
 }
 
 #toast.show {
@@ -1627,7 +1614,7 @@
 /* Comment hover */
 .cmt-body:hover {
   border-color: var(--line2);
-  transform: translateX(2px);
+  /* transform → pastda !important bilan qaytadan belgilanadi */
 }
 
 /* Send button pulse */
@@ -1675,10 +1662,7 @@
   transform: scale(1.05);
 }
 
-.up-follow-btn {
-  position: relative;
-  overflow: hidden;
-}
+/* .up-follow-btn { position/overflow } → yuqorida (510-qator) aynan nusxa, o'chirildi */
 
 .up-follow-btn.is-following::before {
   content: '';
@@ -1906,7 +1890,7 @@
   transform: scale(1.10);
   background: var(--glass-mid);
   border: 0.5px solid var(--glass-border);
-  box-shadow: var(--specular-top), var(--liquid-shadow-sm);
+  /* box-shadow → CSS/borderless.css'da 'none' bilan yengiladi */
 }
 .nav-btn.on {
   transform: scale(1.04) !important;
@@ -2062,13 +2046,10 @@
   transform: scale(1.12) translateY(-4px) !important;
 }
 
-/* ── 19. @prefers-reduced-motion — animate respectfully ── */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.18s !important;
-  }
-}
+/* ── 19. @prefers-reduced-motion — ikkinchi blok o'chirildi, chunki
+   transition-duration'ni 0.18s'ga qaytarib, birinchi blokning
+   (yuqorida, "reduce" bo'limi) reduced-motion sozlamasini bekor
+   qilib qo'ygan edi — accessibility bug, 2026-08-30 tuzatildi */
 
 /* ── 20. Global focus ring ── */
 :focus-visible {
