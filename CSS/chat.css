@@ -188,8 +188,14 @@
 /* ── Message layout ── */
 .chat-msg {
   display: flex;
+  position: relative;
   max-width: 72%;
+  margin: 0;
 }
+.chat-msg + .chat-msg { margin-top: 2px; }
+.chat-msg.mine  + .chat-msg.theirs,
+.chat-msg.theirs + .chat-msg.mine  { margin-top: 8px; }
+
 .chat-msg.mine   {
   align-self: flex-end;
   justify-content: flex-end;
@@ -197,6 +203,7 @@
 .chat-msg.theirs {
   align-self: flex-start;
   align-items: flex-end;
+  gap: 0;
 }
 
 /* ── Bubble — Telegram compact style ── */
@@ -735,8 +742,6 @@
   flex-wrap: nowrap;
 }
 .emoji-picker.show { display: flex; }
-
-.chat-msg { position: relative; }
 
 .emoji-pick-btn {
   background: none;
@@ -2276,18 +2281,6 @@ a.cfm-name--link:hover {
 }
 
 /* ── Message row ── */
-.chat-msg {
-  max-width: 72% !important;
-  margin: 0 !important;
-}
-.chat-msg.mine   { align-self: flex-end !important; justify-content: flex-end !important; }
-.chat-msg.theirs { align-self: flex-start !important; align-items: flex-end !important; gap: 0 !important; }
-
-/* ── Consecutive message spacing ── */
-.chat-msg + .chat-msg { margin-top: 2px !important; }
-.chat-msg.mine  + .chat-msg.theirs,
-.chat-msg.theirs + .chat-msg.mine  { margin-top: 8px !important; }
-
 /* ── Bubble — chegrasiz ── */
 .chat-bubble {
   padding: 8px 12px !important;
