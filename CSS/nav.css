@@ -3,24 +3,18 @@
    MRgram — Komponent Stillari
    ═══════════════════════════════════════════ */
 
-/* ── Fields — Input ── */
+/* ── Fields — Input ──
+ * background/border-radius/color/transition (bazaviy) va border-color/
+ * background/box-shadow (:focus) → CSS/00-components.core.css'da (yagona
+ * manba) qayta ta'riflanadi va g'olib chiqadi, shu yerda o'lik edi,
+ * o'chirildi. width/padding/margin-bottom/font-family/outline — u yerda
+ * umuman belgilanmagan, shuning uchun TIRIK, saqlab qolindi. */
 .field {
   width: 100%;
   padding: 13px 16px;
-  background: var(--glass);
-  /* border/box-shadow → borderless.css:262 guruhida 'none' bilan yengiladi, o'lik */
-  border-radius: 14px;
-  color: var(--text);
   font-family: var(--font);
   outline: none;
   margin-bottom: 10px;
-  transition: all 0.2s var(--ease);
-}
-
-.field:focus {
-  border-color: #324B82;
-  background: var(--glass-mid);
-  box-shadow: var(--specular-top), 0 0 0 3px #12182B;
 }
 
 .field::placeholder { color: var(--text3); }
@@ -113,13 +107,13 @@
   cursor: pointer;
   padding: 8px 16px;
   border-radius: 14px;
-  transition: all 0.2s var(--ease-spring);
+  transition: background 0.15s ease; /* ui-improvements.css yagona manba, shu yerdagi qiymat o'lik edi */
   -webkit-tap-highlight-color: transparent;
 }
 
-.nav-btn:hover {
-  background: var(--glass);
-}
+/* .nav-btn:hover { background: var(--glass); } — butunlay o'chirildi:
+   ui-improvements.css 'var(--glass-mid)' bilan qayta ta'riflaydi va
+   g'olib chiqadi, shu yerdagi qoida hech qachon ko'rinmagan */
 
 .nav-btn:active {
   transform: scale(0.88);
@@ -140,7 +134,8 @@
 .nav-btn.on {
   background: var(--glass-mid);
   border: 0.5px solid var(--glass-border);
-  box-shadow: var(--specular-top), var(--liquid-shadow-sm);
+  /* box-shadow (specular/liquid glow) → borderless.css 'none' bilan
+     yengadi, o'lik edi, o'chirildi (flat maqsadga mos) */
 }
 
 .nav-btn.on svg {
@@ -163,7 +158,7 @@
   justify-content: center;
   cursor: pointer;
   margin-bottom: 8px;
-  transition: all 0.2s var(--ease-spring);
+  transition: background 0.15s ease; /* ui-improvements.css yagona manba, shu yerdagi qiymat o'lik edi */
   position: relative;
   overflow: hidden;
   box-shadow:
@@ -245,12 +240,11 @@
   padding: 8px 20px max(28px, env(safe-area-inset-bottom));
   max-height: 90dvh;
   overflow-y: auto;
-  animation: sheetUp 0.48s var(--ease-spring) both;
+  /* animation → ui-improvements.css 'sheetUpBounce 0.32s var(--ease-back)'
+     bilan qayta ta'riflaydi va g'olib chiqadi, shu yerdagi 'sheetUp 0.48s
+     var(--ease-spring)' o'lik edi, o'chirildi */
   position: relative;
-  box-shadow:
-    inset 0 1px 0 var(--glass-border-top),
-    0 -8px 48px #06060C,
-    0 -2px 16px #07070D;
+  /* box-shadow (glass glow) → borderless.css 'none' bilan yengadi, o'lik edi, o'chirildi (flat maqsadga mos) */
 }
 
 /* Top specular shimmer */
